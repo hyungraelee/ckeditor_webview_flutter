@@ -87,6 +87,35 @@ receives a retry callback, or null for a disposed controller. Navigation outside
 the local editor document is blocked; `onNavigationBlocked` lets your app
 delegate a URL to an external browser if desired.
 
+## Toolbar
+
+Set `toolbarItems` to choose buttons, order them, and separate groups:
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  toolbarItems: const [
+    'heading', '|', 'bold', 'italic', '|', 'sourceEditing',
+  ],
+)
+```
+
+Null (the default) keeps the existing package toolbar; `const []` shows no
+buttons. Supported names are `heading`, `sourceEditing`, `bold`, `italic`,
+`underline`, `strikethrough`, `fontFamily`, `fontSize`, `fontColor`,
+`fontBackgroundColor`, `highlight`, `subscript`, `superscript`, `horizontalLine`,
+`showBlocks`, `specialCharacters`, `alignment`, `outdent`, `indent`, `undo`,
+`redo`, and the `|` group separator. The `toolbarItems` API documentation
+describes each item. Names are case-sensitive; unsupported names report
+`invalid_toolbar_items` through `onError`.
+
+Toolbar buttons still group into the overflow menu on narrow screens. Images,
+tables, custom buttons, and the `-` line break are not available in this API.
+Hiding buttons does not remove plugins or strip their supported HTML. The
+option is applied when the editor is created, including recreation/retry.
+Changes after initialization take effect on the next editor creation. Treat
+supplied lists as immutable.
+
 ## UI language
 
 On initialization, the editor reads the device's system locale from Flutter's
