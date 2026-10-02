@@ -1,0 +1,16 @@
+.git/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+pubspec.lock
+**/node_modules/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+AGENTS.md
+agents.md
+.env*

@@ -1,0 +1,464 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+import 'ckeditor_controller.dart';
+import 'ckeditor_error.dart';
+
+/// A local CKEditor DOM inside a native WebView, separate from Flutter's tree.
+/// In a scrolling form set height (e.g. 360). In a full-screen SafeArea or
+/// Expanded, omit height to fill the available space. Unbounded height uses 360.
+/// For autoHeight, place the widget in a Flutter scroll view with unbounded
+/// vertical constraints so it can grow beyond the visible screen.
+class CkEditorWebView extends StatefulWidget {
+  const CkEditorWebView({
+    super.key,
+    required this.controller,
+    this.initialHtml = '',
+    this.readOnly = false,
+    this.height,
+    this.autoHeight = false,
+    this.minHeight = 300,
+    this.changeDebounce = const Duration(milliseconds: 300),
+    this.onReady,
+    this.onChanged,
+    this.onFocus,
+    this.onBlur,
+    this.onError,
+    this.onNavigationBlocked,
+    this.loadingBuilder,
+    this.errorBuilder,
+  }) : assert(height == null || height > 0),
+       assert(minHeight > 0 && minHeight < double.infinity),
+       assert(changeDebounce >= Duration.zero);
+
+  final CkEditorController controller;
+
+  /// Initial seed only. Later content changes must use controller.setHtml().
+  /// Remounting the same controller restores its cachedHtml instead of this seed.
+  final String initialHtml;
+  final bool readOnly;
+  final double? height;
+  final bool autoHeight;
+
+  /// Minimum total editor height (toolbar included) when autoHeight is enabled.
+  final double minHeight;
+
+  /// Applied when the local editor is created (including recreation/retry).
+  final Duration changeDebounce;
+  final VoidCallback? onReady;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onFocus;
+  final VoidCallback? onBlur;
+  final ValueChanged<CkEditorError>? onError;
+
+  /// Navigation stays blocked; the caller may choose to open an external browser.
+  final ValueChanged<Uri>? onNavigationBlocked;
+
+  /// Replaces the loading overlay while the local editor initializes.
+  final WidgetBuilder? loadingBuilder;
+
+  /// Replaces the error view. Retry is null when the controller is disposed.
+  final Widget Function(
+    BuildContext context,
+    CkEditorError error,
+    VoidCallback? retry,
+  )?
+  errorBuilder;
+
+  @override
+  State<CkEditorWebView> createState() => _CkEditorWebViewState();
+}
+
+class _CkEditorWebViewState extends State<CkEditorWebView>
+    with WidgetsBindingObserver {
+  static const _assetKey =
+      'packages/ckeditor_webview_flutter/assets/editor/index.html';
+  static const _assetSuffix = '/flutter_assets/$_assetKey';
+  WebViewController? _webView;
+  CkEditorError? _setupError;
+  Object? _owner;
+  CkEditorController? _attachedController;
+  Uri? _documentUrl;
+  bool _pageStarted = false;
+  bool _bridgeStarted = false;
+  CkEditorLayout? _layout;
+  bool _caretRevealPending = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    unawaited(_open());
+  }
+
+  bool _isCurrent(Object owner) => mounted && identical(_owner, owner);
+
+  Future<void> _open() async {
+    final owner = Object();
+    final controller = widget.controller;
+    _owner = owner;
+    _documentUrl = null;
+    _pageStarted = false;
+    _bridgeStarted = false;
+    _layout = null;
+    try {
+      final webView = WebViewController();
+      controller.attach(
+        owner: owner,
+        execute: webView.runJavaScriptReturningResult,
+        initialHtml: widget.initialHtml,
+        onReady: () {
+          if (_isCurrent(owner)) widget.onReady?.call();
+        },
+        onChanged: (html) {
+          if (_isCurrent(owner)) widget.onChanged?.call(html);
+        },
+        onFocus: () {
+          if (_isCurrent(owner)) widget.onFocus?.call();
+        },
+        onBlur: () {
+          if (_isCurrent(owner)) widget.onBlur?.call();
+        },
+        onError: (error) {
+          if (_isCurrent(owner)) widget.onError?.call(error);
+        },
+        onLayoutChanged: (layout) {
+          if (!_isCurrent(owner) || !widget.autoHeight) return;
+          final needsBuild =
+              _layout?.height != layout.height ||
+              _layout?.captureGestures != layout.captureGestures;
+          _layout = layout;
+          if (needsBuild) setState(() {});
+          _scheduleCaretReveal();
+        },
+      );
+      _attachedController = controller;
+      _webView = webView;
+      await webView.setJavaScriptMode(JavaScriptMode.unrestricted);
+      if (!_isCurrent(owner)) return;
+      await webView.setBackgroundColor(Colors.white);
+      if (!_isCurrent(owner)) return;
+      await webView.addJavaScriptChannel(
+        'CkEditorChannel',
+        onMessageReceived: (message) {
+          if (_isCurrent(owner)) {
+            controller.handleMessage(owner, message.message);
+          }
+        },
+      );
+      if (!_isCurrent(owner)) return;
+      await webView.setNavigationDelegate(
+        NavigationDelegate(
+          onNavigationRequest: (request) {
+            if (!_isCurrent(owner)) return NavigationDecision.prevent;
+            final uri = Uri.tryParse(request.url);
+            if (uri != null &&
+                _isEditorDocument(uri) &&
+                (_documentUrl == null ||
+                    uri.replace(fragment: '') == _documentUrl)) {
+              return NavigationDecision.navigate;
+            }
+            if (uri != null) widget.onNavigationBlocked?.call(uri);
+            return NavigationDecision.prevent;
+          },
+          onPageStarted: (url) {
+            if (!_isCurrent(owner)) return;
+            final uri = Uri.tryParse(url);
+            if (uri == null || !_isEditorDocument(uri)) {
+              controller.reportError(
+                owner,
+                const CkEditorError(
+                  code: 'navigation_blocked',
+                  message: '허용되지 않은 에디터 페이지입니다.',
+                ),
+                fatal: true,
+              );
+              return;
+            }
+            if (_pageStarted) {
+              controller.reportError(
+                owner,
+                const CkEditorError(
+                  code: 'webview_reloaded',
+                  message: '에디터 페이지가 변경되었습니다. 다시 시도해주세요.',
+                ),
+                fatal: true,
+              );
+              return;
+            }
+            _pageStarted = true;
+            _documentUrl = uri.replace(fragment: '');
+          },
+          onPageFinished: (url) {
+            if (!_isCurrent(owner) || _bridgeStarted) return;
+            final uri = Uri.tryParse(url);
+            if (uri == null || !_isEditorDocument(uri)) return;
+            _bridgeStarted = true;
+            unawaited(
+              controller.initialize(
+                owner,
+                readOnly: widget.readOnly,
+                changeDebounce: widget.changeDebounce,
+                autoHeight: widget.autoHeight,
+                minHeight: widget.minHeight,
+              ),
+            );
+          },
+          onWebResourceError: (error) {
+            if (!_isCurrent(owner) || error.isForMainFrame == false) return;
+            controller.reportError(
+              owner,
+              CkEditorError(
+                code: 'webview_load_failed',
+                message: '에디터 페이지를 불러오지 못했습니다.',
+                cause: error,
+              ),
+              fatal: true,
+            );
+          },
+        ),
+      );
+      if (!_isCurrent(owner)) return;
+      await webView.loadFlutterAsset(_assetKey);
+    } catch (error) {
+      if (!_isCurrent(owner)) return;
+      final editorError = error is CkEditorError
+          ? error
+          : CkEditorError(
+              code: 'webview_load_failed',
+              message: '로컬 에디터를 불러오지 못했습니다.',
+              cause: error,
+            );
+      if (identical(_attachedController, controller)) {
+        controller.reportError(owner, editorError, fatal: true);
+      } else {
+        setState(() => _setupError = editorError);
+        widget.onError?.call(editorError);
+      }
+    }
+  }
+
+  static bool _isEditorDocument(Uri uri) =>
+      uri.scheme == 'file' &&
+      uri.host.isEmpty &&
+      !uri.hasQuery &&
+      uri.normalizePath().path.endsWith(_assetSuffix);
+
+  @override
+  void didUpdateWidget(CkEditorWebView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!identical(oldWidget.controller, widget.controller) ||
+        oldWidget.autoHeight != widget.autoHeight ||
+        oldWidget.minHeight != widget.minHeight) {
+      _close();
+      _setupError = null;
+      unawaited(_open());
+    } else if (oldWidget.readOnly != widget.readOnly &&
+        _attachedController != null) {
+      unawaited(_updateReadOnly());
+    }
+  }
+
+  @override
+  void didChangeMetrics() {
+    _scheduleCaretReveal();
+  }
+
+  void _scheduleCaretReveal() {
+    if (!widget.autoHeight ||
+        _layout?.caretBottom == null ||
+        _caretRevealPending) {
+      return;
+    }
+    _caretRevealPending = true;
+    final owner = _owner;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _caretRevealPending = false;
+      if (owner == null || !_isCurrent(owner) || _layout?.caretBottom == null) {
+        return;
+      }
+      final scrollable = Scrollable.maybeOf(context);
+      final editorBox = context.findRenderObject();
+      final viewport = scrollable?.context.findRenderObject();
+      if (scrollable == null ||
+          editorBox is! RenderBox ||
+          viewport is! RenderBox ||
+          !editorBox.hasSize ||
+          !viewport.hasSize ||
+          scrollable.axisDirection != AxisDirection.down) {
+        return;
+      }
+      final position = scrollable.position;
+      if (!position.hasContentDimensions ||
+          position.isScrollingNotifier.value) {
+        return;
+      }
+      final origin = editorBox.localToGlobal(Offset.zero).dy;
+      final viewportTop = viewport.localToGlobal(Offset.zero).dy;
+      final viewportBottom = viewportTop + viewport.size.height;
+      final media = MediaQuery.of(context);
+      final keyboardTop = media.size.height - media.viewInsets.bottom;
+      final visibleBottom = viewportBottom < keyboardTop
+          ? viewportBottom
+          : keyboardTop;
+      final caretTop = origin + _layout!.caretTop!;
+      final caretBottom = origin + _layout!.caretBottom!;
+      final delta = caretBottom > visibleBottom - 20
+          ? caretBottom - visibleBottom + 20
+          : caretTop < viewportTop + 20
+          ? caretTop - viewportTop - 20
+          : 0.0;
+      if (delta.abs() < 1) return;
+      final target = (position.pixels + delta)
+          .clamp(position.minScrollExtent, position.maxScrollExtent)
+          .toDouble();
+      if ((target - position.pixels).abs() >= 1) position.jumpTo(target);
+    });
+    WidgetsBinding.instance.ensureVisualUpdate();
+  }
+
+  Future<void> _updateReadOnly() async {
+    try {
+      await widget.controller.setReadOnly(widget.readOnly);
+    } on CkEditorError {
+      // The controller has already forwarded the error to onError.
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive &&
+        _attachedController?.isReady == true) {
+      unawaited(_snapshot(_attachedController!));
+    }
+  }
+
+  Future<void> _snapshot(CkEditorController controller) async {
+    try {
+      await controller.getHtml();
+    } on CkEditorError {
+      // A background snapshot is best-effort; save explicitly before leaving.
+    }
+  }
+
+  void _close() {
+    final owner = _owner;
+    _owner = null;
+    if (owner != null) _attachedController?.detach(owner);
+    _attachedController = null;
+    _webView = null;
+  }
+
+  void _retry() {
+    _close();
+    setState(() => _setupError = null);
+    unawaited(_open());
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _close();
+    // Controller ownership belongs to the using screen, allowing remounts.
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) => SizedBox(
+      height: widget.autoHeight
+          ? (_layout?.height ?? widget.minHeight).clamp(
+              widget.minHeight,
+              double.infinity,
+            )
+          : widget.height ?? (constraints.hasBoundedHeight ? null : 360),
+      child: ListenableBuilder(
+        listenable: widget.controller,
+        builder: (context, child) {
+          final controller = widget.controller;
+          final error =
+              _setupError ??
+              (controller.state == CkEditorState.error
+                  ? controller.error
+                  : null);
+          if (error != null || controller.state == CkEditorState.disposed) {
+            final displayedError =
+                error ??
+                const CkEditorError(
+                  code: 'disposed',
+                  message: 'The editor controller is disposed.',
+                );
+            final retry = controller.state == CkEditorState.disposed
+                ? null
+                : _retry;
+            return widget.errorBuilder?.call(context, displayedError, retry) ??
+                ColoredBox(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              displayedError.message,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        if (retry != null)
+                          FilledButton(
+                            onPressed: retry,
+                            child: const Text('Retry'),
+                          ),
+                      ],
+                    ),
+                  ),
+                );
+          }
+          return Stack(
+            fit: StackFit.expand,
+            children: [
+              if (_webView != null)
+                IgnorePointer(
+                  ignoring: !controller.isReady,
+                  child: WebViewWidget(
+                    key: ObjectKey(_webView),
+                    controller: _webView!,
+                    // In autoHeight mode vertical swipes scroll the Flutter
+                    // form. Native selection and open menus retain gestures.
+                    gestureRecognizers:
+                        widget.autoHeight &&
+                            !(_layout?.captureGestures ?? false)
+                        ? {
+                            Factory<OneSequenceGestureRecognizer>(
+                              () => LongPressGestureRecognizer(),
+                            ),
+                          }
+                        : {
+                            Factory<OneSequenceGestureRecognizer>(
+                              () => EagerGestureRecognizer(),
+                            ),
+                          },
+                  ),
+                ),
+              if (!controller.isReady)
+                ColoredBox(
+                  color: Colors.white,
+                  child:
+                      widget.loadingBuilder?.call(context) ??
+                      const Center(child: CircularProgressIndicator()),
+                ),
+            ],
+          );
+        },
+      ),
+    ),
+  );
+}

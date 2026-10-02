@@ -1,0 +1,68 @@
+/* Only the editor viewport is styled here. Content styles come from CKEditor. */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+#editor-container,
+#editor-container > .ck-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+#editor-container .ck-editor__top {
+  flex: none;
+}
+
+#editor-container .ck-editor__main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#editor-container .ck-editor__editable,
+#editor-container .ck-source-editing-area {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+#editor-container .ck-source-editing-area textarea {
+  overflow: auto;
+}
+
+/* Natural document height must not depend on the current WebView viewport.
+   Otherwise a Flutter resize would trigger another, ever-growing measurement. */
+html.editor-auto-height,
+html.editor-auto-height body,
+.editor-auto-height #editor-container,
+.editor-auto-height #editor-container > .ck-editor {
+  height: auto;
+}
+
+.editor-auto-height #editor-container .ck-editor__main {
+  display: block;
+  flex: none;
+}
+
+.editor-auto-height #editor-container .ck-editor__editable,
+.editor-auto-height #editor-container .ck-source-editing-area {
+  flex: none;
+  height: auto;
+  min-height: calc(var(--editor-min-height) - var(--editor-toolbar-height, 0px));
+  max-height: none;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.editor-auto-height #editor-container .ck-source-editing-area textarea {
+  overflow: hidden;
+}
