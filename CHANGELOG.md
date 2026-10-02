@@ -6,3 +6,4 @@
 - Preserve readiness handling, lifecycle snapshots, error handling, and navigation restrictions.
 - Support fixed height and automatic content height with caret visibility handling.
 - Replace application-specific logging and widgets with callbacks and Flutter UI.
+- Add an Android/iOS example app for height modes, HTML loading/retrieval, and read-only mode.
