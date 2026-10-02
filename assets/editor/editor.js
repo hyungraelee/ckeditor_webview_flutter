@@ -32,6 +32,7 @@
     'horizontalLine', 'showBlocks', 'specialCharacters', '|',
     'alignment', 'outdent', 'indent'
   ]);
+  const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo']);
 
   let editor = null;
   let state = 'notInitialized';
@@ -141,6 +142,20 @@
     return editor;
   }
 
+  function getToolbarItems(items) {
+    if (items == null) return [...TOOLBAR];
+    if (!Array.isArray(items)) {
+      throw bridgeError('invalid_toolbar_items', 'toolbarItems must be an array or null.');
+    }
+    const unsupported = items.filter(item =>
+      typeof item !== 'string' || !SUPPORTED_TOOLBAR_ITEMS.has(item));
+    if (unsupported.length) {
+      throw bridgeError('invalid_toolbar_items',
+        `Unsupported toolbar items: ${JSON.stringify(unsupported)}.`);
+    }
+    return [...items];
+  }
+
   function cancelChange() {
     clearTimeout(changeTimer);
     changeTimer = null;
@@ -213,6 +228,7 @@
       const expand = options.autoHeight ?? false;
       const minHeight = options.minHeight ?? 300;
       const uiLanguage = options.uiLanguage ?? 'en';
+      const toolbarItems = getToolbarItems(options.toolbarItems);
       if (typeof initialHtml !== 'string' || typeof readOnly !== 'boolean' ||
           !Number.isInteger(debounceMs) || debounceMs < 0 ||
           typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0 ||
@@ -229,7 +245,7 @@
         initialData: initialHtml,
         language: { ui: uiLanguage, content: 'en' },
         plugins: PLUGINS.map(name => bundle[name]),
-        toolbar: { items: [...TOOLBAR], shouldNotGroupWhenFull: false }
+        toolbar: { items: toolbarItems, shouldNotGroupWhenFull: false }
       };
       // 41.x does not require the licenseKey initialization option added in 44.x.
       const instance = await bundle.ClassicEditor.create(

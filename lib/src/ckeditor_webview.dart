@@ -23,6 +23,7 @@ class CkEditorWebView extends StatefulWidget {
     required this.controller,
     this.initialHtml = '',
     this.readOnly = false,
+    this.toolbarItems,
     this.height,
     this.autoHeight = false,
     this.minHeight = 300,
@@ -45,6 +46,37 @@ class CkEditorWebView extends StatefulWidget {
   /// Remounting the same controller restores its cachedHtml instead of this seed.
   final String initialHtml;
   final bool readOnly;
+
+  /// Toolbar buttons in display order, with `'|'` as a group separator.
+  ///
+  /// Supported item names (case-sensitive):
+  /// - `'heading'`: paragraph and heading dropdown.
+  /// - `'sourceEditing'`: HTML source editing.
+  /// - `'bold'`, `'italic'`, `'underline'`, `'strikethrough'`: text styles.
+  /// - `'fontFamily'`, `'fontSize'`: font dropdowns.
+  /// - `'fontColor'`, `'fontBackgroundColor'`: text and background colors.
+  /// - `'highlight'`: text highlight dropdown.
+  /// - `'subscript'`, `'superscript'`: subscript and superscript styles.
+  /// - `'horizontalLine'`: insert a horizontal line.
+  /// - `'showBlocks'`: show block outlines.
+  /// - `'specialCharacters'`: insert special characters.
+  /// - `'alignment'`: text alignment dropdown.
+  /// - `'outdent'`, `'indent'`: decrease and increase indentation.
+  /// - `'undo'`, `'redo'`: undo and redo editing commands.
+  /// - `'|'`: group separator; CKEditor cleans up redundant separators.
+  ///
+  /// For example: `const ['heading', '|', 'bold', 'italic', '|', 'sourceEditing']`.
+  /// Null uses the package's default toolbar; an empty list shows no buttons.
+  /// Items that overflow a narrow screen remain in CKEditor's grouping menu.
+  /// Images, tables, custom buttons, and the `'-'` line break are not supported.
+  /// Invalid names are reported through [onError].
+  ///
+  /// Hiding a button keeps its plugin enabled, preserving supported HTML.
+  /// Applied when the local editor is created, including recreation/retry.
+  /// Changes after initialization take effect on the next editor creation.
+  /// Treat the list as immutable.
+  final List<String>? toolbarItems;
+
   final double? height;
   final bool autoHeight;
 
@@ -276,6 +308,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
       autoHeight: widget.autoHeight,
       minHeight: widget.minHeight,
       uiLanguage: uiLanguage,
+      toolbarItems: widget.toolbarItems,
     );
   }
 

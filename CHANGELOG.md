@@ -4,6 +4,7 @@
 - Bundle CKEditor 5 41.4.1 with English UI and default feature configuration.
 - Fetch official 41.4.1 UI translations for the system locale, with a three-second network timeout and offline English fallback.
 - Support HTML commands, debounced events, read-only mode, and source editing.
+- Add configurable toolbar items, order, and group separators with documented supported names.
 - Preserve readiness handling, lifecycle snapshots, error handling, and navigation restrictions.
 - Support fixed height and automatic content height with caret visibility handling.
 - Replace application-specific logging and widgets with callbacks and Flutter UI.
