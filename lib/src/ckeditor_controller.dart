@@ -3,7 +3,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart'
+    show ChangeNotifier, ValueChanged, VoidCallback;
+import 'package:meta/meta.dart' show internal;
 
 import 'ckeditor_error.dart';
 
@@ -160,6 +162,7 @@ class CkEditorController extends ChangeNotifier {
     required Duration changeDebounce,
     required bool autoHeight,
     required double minHeight,
+    String uiLanguage = 'en',
   }) async {
     final session = _session;
     if (session == null ||
@@ -174,6 +177,7 @@ class CkEditorController extends ChangeNotifier {
         'changeDebounceMs': changeDebounce.inMilliseconds,
         'autoHeight': autoHeight,
         'minHeight': minHeight,
+        'uiLanguage': uiLanguage,
       });
       // Return a boolean, not a Promise (native WebViews do not await it).
       final result = await _execute(
