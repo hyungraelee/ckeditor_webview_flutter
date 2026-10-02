@@ -212,9 +212,11 @@
       const debounceMs = options.changeDebounceMs ?? DEFAULT_CHANGE_DEBOUNCE_MS;
       const expand = options.autoHeight ?? false;
       const minHeight = options.minHeight ?? 300;
+      const uiLanguage = options.uiLanguage ?? 'en';
       if (typeof initialHtml !== 'string' || typeof readOnly !== 'boolean' ||
           !Number.isInteger(debounceMs) || debounceMs < 0 ||
-          typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0) {
+          typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0 ||
+          typeof uiLanguage !== 'string') {
         throw bridgeError('invalid_argument', 'Invalid editor initialization options.');
       }
       changeDebounceMs = debounceMs;
@@ -225,7 +227,7 @@
       // HTML goes through the CKEditor model; never assign it to innerHTML.
       const config = {
         initialData: initialHtml,
-        language: 'ko',
+        language: { ui: uiLanguage, content: 'en' },
         plugins: PLUGINS.map(name => bundle[name]),
         toolbar: { items: [...TOOLBAR], shouldNotGroupWhenFull: false }
       };

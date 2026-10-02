@@ -1,17 +1,18 @@
 # ckeditor_webview_flutter
 
 CKEditor 5 inside a Flutter WebView, with HTML, JavaScript, CSS, and the editor
-bundle shipped as local package assets. No hosted editor page or runtime CDN is
-required. The package uses `webview_flutter` and targets Android and iOS.
+bundle shipped as local package assets. The editor works offline in English;
+only optional UI translations are fetched from CKEditor's official CDN.
+The package uses `webview_flutter` and targets Android and iOS.
 
-The bundled editor is **CKEditor 5 41.4.1**, with Korean UI. Heading, font,
-color, highlight, alignment, and special-character settings use CKEditor
+The bundled editor is **CKEditor 5 41.4.1**, with English UI as the fallback.
+Heading, font, color, highlight, alignment, and special-character settings use CKEditor
 defaults. Toolbar overflow uses CKEditor's grouping menu.
 
 ## Usage
 
 An Android/iOS app is included in [`example/`](example/README.md). It demonstrates
-fixed and automatic height, loading/retrieving HTML, and read-only mode. Open
+fixed and automatic height, sample content, and inline HTML output. Open
 `example/` as a Flutter project to run it with an IDE debugger.
 
 Add this package as a dependency. Its assets are registered by the package;
@@ -86,6 +87,26 @@ receives a retry callback, or null for a disposed controller. Navigation outside
 the local editor document is blocked; `onNavigationBlocked` lets your app
 delegate a URL to an external browser if desired.
 
+## UI language
+
+On initialization, the editor reads the device's system locale from Flutter's
+`PlatformDispatcher.locale`. English starts directly from local assets. For
+other languages, it downloads the matching legacy translation script from
+`https://cdn.ckeditor.com/ckeditor5/41.4.1/super-build/translations/<language>.js`
+and registers it before creating the editor. The super-build translation file
+covers the locally enabled features; no remote editor bundle is loaded.
+
+The network request has a three-second timeout. Offline connections, unavailable
+translations, HTTP errors, and script registration failures fall back to English.
+Translations are not persisted; each new editor session checks again. The system
+language is read when initializing or retrying; changing it does not recreate an
+open document. UI language does not change the document's content language or
+convert the stored HTML.
+
+See CKEditor's [UI language guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/ui-language.html).
+This package uses the legacy 41.4.1 translation format rather than the current
+CDN format shown for newer editor versions.
+
 ## HTML and editing
 
 CKEditor runs in the WebView's DOM, separately from Flutter's widget tree.
@@ -112,8 +133,16 @@ required; formatting after CKEditor normalization is what matters.
 
 ## Platform and release validation
 
-Follow `webview_flutter`'s platform requirements. Local assets do not require
-adding an Internet permission or an iOS transport-security exception. Keep your
+Follow `webview_flutter`'s platform requirements. On Android, add the following
+permission to the app's `android/app/src/main/AndroidManifest.xml` to enable
+online UI translations in release builds:
+
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+
+The local English editor still works without network access. The translation
+endpoint uses HTTPS and needs no iOS transport-security exception. Keep your
 screen in a `SafeArea` and allow keyboard resizing. On Android, check the
 activity's `windowSoftInputMode="adjustResize"` when input is covered.
 

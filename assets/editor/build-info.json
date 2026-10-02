@@ -1,6 +1,6 @@
 {
   "version": "41.4.1",
-  "language": "ko",
+  "language": "en",
   "packages": {
     "@ckeditor/ckeditor5-alignment": "41.4.1",
     "@ckeditor/ckeditor5-basic-styles": "41.4.1",
@@ -18,7 +18,7 @@
     "@ckeditor/ckeditor5-theme-lark": "41.4.1"
   },
   "sha256": {
-    "ckeditor.js": "b655ab04e590946d9ee289fc496348a4192fb2e617008e652f039b88e640cf2d",
+    "ckeditor.js": "1b348eb5c6d2f6b417314526a03ba2df378d9b5fa7eeadb4fb0ed21807a9650d",
     "ckeditor.css": "c06e50254acc3e3a52195265c7071f5fb0f598c99425548ae5101fec4be40864"
   }
 }

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -9,6 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'ckeditor_controller.dart';
 import 'ckeditor_error.dart';
+import 'ckeditor_translation_loader.dart';
 
 /// A local CKEditor DOM inside a native WebView, separate from Flutter's tree.
 /// In a scrolling form set height (e.g. 360). In a full-screen SafeArea or
@@ -201,13 +203,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
             if (uri == null || !_isEditorDocument(uri)) return;
             _bridgeStarted = true;
             unawaited(
-              controller.initialize(
-                owner,
-                readOnly: widget.readOnly,
-                changeDebounce: widget.changeDebounce,
-                autoHeight: widget.autoHeight,
-                minHeight: widget.minHeight,
-              ),
+              _initializeEditor(owner, controller, webView),
             );
           },
           onWebResourceError: (error) {
@@ -249,6 +245,39 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
       uri.host.isEmpty &&
       !uri.hasQuery &&
       uri.normalizePath().path.endsWith(_assetSuffix);
+
+  Future<void> _initializeEditor(
+    Object owner,
+    CkEditorController controller,
+    WebViewController webView,
+  ) async {
+    final translation = await loadCkEditorTranslation(
+      WidgetsBinding.instance.platformDispatcher.locale,
+    );
+    if (!_isCurrent(owner)) return;
+    var uiLanguage = 'en';
+    if (translation.script != null) {
+      try {
+        final registered = await webView.runJavaScriptReturningResult(
+          '(() => { ${translation.script}\n'
+          'return !!window.CKEDITOR_TRANSLATIONS?.'
+          '[${jsonEncode(translation.language)}]?.dictionary; })()',
+        );
+        if (registered == true) uiLanguage = translation.language;
+      } catch (_) {
+        // A failed translation must not prevent the local English editor.
+      }
+    }
+    if (!_isCurrent(owner)) return;
+    await controller.initialize(
+      owner,
+      readOnly: widget.readOnly,
+      changeDebounce: widget.changeDebounce,
+      autoHeight: widget.autoHeight,
+      minHeight: widget.minHeight,
+      uiLanguage: uiLanguage,
+    );
+  }
 
   @override
   void didUpdateWidget(CkEditorWebView oldWidget) {

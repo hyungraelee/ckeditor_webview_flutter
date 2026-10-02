@@ -25,7 +25,7 @@ for (const name of ['ckeditor.js', 'ckeditor.css']) {
 }
 fs.writeFileSync(path.join(assetPath, 'build-info.json'), JSON.stringify({
   version,
-  language: 'ko',
+  language: 'en',
   packages: packageInfo.dependencies,
   sha256
 }, null, 2) + '\n');
