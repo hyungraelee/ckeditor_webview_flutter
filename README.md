@@ -10,6 +10,10 @@ defaults. Toolbar overflow uses CKEditor's grouping menu.
 
 ## Usage
 
+An Android/iOS app is included in [`example/`](example/README.md). It demonstrates
+fixed and automatic height, loading/retrieving HTML, and read-only mode. Open
+`example/` as a Flutter project to run it with an IDE debugger.
+
 Add this package as a dependency. Its assets are registered by the package;
 the consuming app does not need to copy the editor files or register them again.
 
