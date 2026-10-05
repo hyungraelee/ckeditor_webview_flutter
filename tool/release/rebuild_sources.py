@@ -9,6 +9,8 @@ import subprocess
 import tarfile
 import tempfile
 
+from audit_source_notices import build_report
+
 
 def safe_extract(source, destination, strip_root=False):
     with tarfile.open(source) as archive:
@@ -85,6 +87,13 @@ def main():
                                 selected.extractfile(member).read()).hexdigest() != entry['sha256']:
                             raise ValueError('Selected upstream file checksum differs')
             safe_extract(source, inside(work / 'upstream', item['id']), strip_root=True)
+    if (work / 'package/tool/release/notice-review.json').exists():
+        report = build_report(manifest, lambda name: inside(work, name).read_bytes(),
+                              lambda name: inside(work / 'package', name).read_bytes())
+        if report != json.loads((work / 'SOURCE_NOTICE_REPORT.json').read_text()):
+            raise ValueError('Notice report differs from the preserved evidence')
+        if report['summary']['byStatus'].get('unreviewed-missing-notice'):
+            raise ValueError('New missing notices require review')
     for install in manifest['installations']:
         recipe = inside(work / 'package', install['recipe'])
         lockfile = recipe / 'package-lock.json'

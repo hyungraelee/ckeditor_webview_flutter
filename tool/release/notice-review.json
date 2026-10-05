@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "status": "notice evidence reviewed; publication approval pending",
+  "reviewedInputs": [
+    {
+      "name": "@tootallnate/once",
+      "version": "1.1.2",
+      "url": "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz",
+      "integrity": "sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==",
+      "status": "upstream-notice",
+      "upstreamId": "tootallnate-once-license",
+      "path": "LICENSE",
+      "sha256": "737a723fe0ef2b0e337e330b9f42f6b9f50d13d9b1087c2b2c6fc2486b68f8c2"
+    },
+    {
+      "name": "acorn-import-assertions",
+      "version": "1.9.0",
+      "url": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+      "integrity": "sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==",
+      "status": "declaration-only",
+      "reason": "Pinned npm input declares its license but contains no complete license/copyright notice; inspected matching upstream also lacks a complete notice.",
+      "upstreamId": "acorn-import-assertions"
+    },
+    {
+      "name": "agent-base",
+      "version": "6.0.2",
+      "url": "https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz",
+      "integrity": "sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "f1425c3b72330fe4fb2aa5a2fb152e939bdf534692a32b5f0b38f74147b98556"
+    },
+    {
+      "name": "blurhash",
+      "version": "2.0.5",
+      "url": "https://registry.npmjs.org/blurhash/-/blurhash-2.0.5.tgz",
+      "integrity": "sha512-cRygWd7kGBQO3VEhPiTgq4Wc43ctsM+o46urrmPOiuAe+07fzlSB9OJVdpgDL0jPqXUVQ9ht7aq7kxOeJHRK+w==",
+      "status": "upstream-notice",
+      "upstreamId": "blurhash",
+      "path": "License.md",
+      "sha256": "e2066f9b0007ff98f6ab4677b2e2016a5cb183fe9d43d02570b56f4cb6fa76f0"
+    },
+    {
+      "name": "boolbase",
+      "version": "1.0.0",
+      "url": "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz",
+      "integrity": "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==",
+      "status": "declaration-only",
+      "reason": "Pinned npm input and inspected 1.0.0 upstream sources declare ISC but provide no complete notice; historical npm gitHead is unavailable."
+    },
+    {
+      "name": "esrecurse",
+      "version": "4.3.0",
+      "url": "https://registry.npmjs.org/esrecurse/-/esrecurse-4.3.0.tgz",
+      "integrity": "sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==",
+      "status": "embedded-notice",
+      "path": "package/esrecurse.js",
+      "sha256": "aa99847033c240a621fe987f0e06b754f388f22abd11a05bdf9cdd00794b7350"
+    },
+    {
+      "name": "glob-to-regexp",
+      "version": "0.4.1",
+      "url": "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz",
+      "integrity": "sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "18a53184b61f21e9f39035c106e5e6bf885353ce4177d18e15fcb18980cb1ee2"
+    },
+    {
+      "name": "http-proxy-agent",
+      "version": "4.0.1",
+      "url": "https://registry.npmjs.org/http-proxy-agent/-/http-proxy-agent-4.0.1.tgz",
+      "integrity": "sha512-k0zdNgqWTGA6aeIRVpvfVob4fL52dTfaehylg0Y4UvSySvOq/Y+BOyPrgpUrA7HylqvU8vIZGsRuXmspskV0Tg==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "ca0b65367e78e9c255a1c9883eb7ec30aae491d76e1c6815b865563106d21dff"
+    },
+    {
+      "name": "https-proxy-agent",
+      "version": "5.0.1",
+      "url": "https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz",
+      "integrity": "sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "32f0856d2c43df7d05cca960fdee84e1e38ab545bd7b2186433dfa41aa90a712"
+    },
+    {
+      "name": "imurmurhash",
+      "version": "0.1.4",
+      "url": "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz",
+      "integrity": "sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "4491517f7deb68d0b2a3bb590e785e276a60f12448447a9650d0bd50161a101c"
+    },
+    {
+      "name": "saxes",
+      "version": "5.0.1",
+      "url": "https://registry.npmjs.org/saxes/-/saxes-5.0.1.tgz",
+      "integrity": "sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==",
+      "status": "upstream-notice",
+      "upstreamId": "saxes",
+      "path": "LICENSE",
+      "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e"
+    }
+  ],
+  "copiedCodeNotices": [
+    {
+      "name": "react-colorful",
+      "upstreamId": "react-colorful-reference",
+      "path": "LICENSE",
+      "sha256": "f23e00b31b9d88bf16e445d423936272ef5c7245782970f3092765aa8160cb31",
+      "packagePath": "tool/release/notices/react-colorful-LICENSE.txt",
+      "provenance": "reference only; exact copied revision unresolved"
+    },
+    {
+      "name": "color-fns",
+      "upstreamId": "color-fns-reference",
+      "path": "LICENSE",
+      "sha256": "b09da81ff7efa56d6d65a7dc1a27da6e2b61b76872941fffe6e03c51c3841c43",
+      "packagePath": "tool/release/notices/color-fns-LICENSE.txt",
+      "provenance": "reference only; exact copied revision unresolved"
+    }
+  ],
+  "sourceComparisons": [
+    {
+      "kind": "npm-source-map",
+      "npmUrl": "https://registry.npmjs.org/blurhash/-/blurhash-2.0.5.tgz",
+      "sourceMapPath": "package/dist/index.js.map",
+      "upstreamId": "blurhash",
+      "files": [
+        {
+          "sourceMapName": "../src/index.ts",
+          "upstreamPath": "TypeScript/src/index.ts"
+        },
+        {
+          "sourceMapName": "../src/base83.ts",
+          "upstreamPath": "TypeScript/src/base83.ts"
+        },
+        {
+          "sourceMapName": "../src/utils.ts",
+          "upstreamPath": "TypeScript/src/utils.ts"
+        },
+        {
+          "sourceMapName": "../src/error.ts",
+          "upstreamPath": "TypeScript/src/error.ts"
+        },
+        {
+          "sourceMapName": "../src/decode.ts",
+          "upstreamPath": "TypeScript/src/decode.ts"
+        },
+        {
+          "sourceMapName": "../src/encode.ts",
+          "upstreamPath": "TypeScript/src/encode.ts"
+        }
+      ]
+    },
+    {
+      "kind": "upstream-equality",
+      "leftId": "lodash-tag-source",
+      "leftPath": "lodash.js",
+      "rightId": "lodash",
+      "rightPath": "lodash.js"
+    },
+    {
+      "kind": "upstream-equality",
+      "leftId": "tootallnate-once-license",
+      "leftPath": "src/index.ts",
+      "rightId": "tootallnate-once",
+      "rightPath": "src/index.ts"
+    }
+  ]
+}
