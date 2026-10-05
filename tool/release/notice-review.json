@@ -169,5 +169,95 @@
       "rightId": "tootallnate-once",
       "rightPath": "src/index.ts"
     }
+  ],
+  "copiedCodeSourceFiles": [
+    {
+      "id": "react-convert",
+      "upstreamId": "react-colorful-reference",
+      "path": "src/utils/convert.ts",
+      "sha256": "3160c0b09e30fa4450dacff4cb3aedf406024c30d5963fdef4c5a49366abedcd"
+    },
+    {
+      "id": "react-license",
+      "upstreamId": "react-colorful-reference",
+      "path": "LICENSE",
+      "sha256": "f23e00b31b9d88bf16e445d423936272ef5c7245782970f3092765aa8160cb31"
+    },
+    {
+      "id": "react-acknowledgments",
+      "upstreamId": "react-colorful-reference",
+      "path": "ACKNOWLEDGMENTS",
+      "sha256": "9f9c0959e8d2ebe2ed205179cd7347cc5b9f610c0eb496387b2a054280407ff9"
+    },
+    {
+      "id": "early-vanilla-convert",
+      "upstreamId": "vanilla-colorful-port-source",
+      "path": "src/lib/utils/convert.ts",
+      "sha256": "ed479f4c95b9c046bac06a76e90953820639e5235eecfd7ef7d93fa63ab13fc4"
+    },
+    {
+      "id": "early-vanilla-license",
+      "upstreamId": "vanilla-colorful-port-source",
+      "path": "LICENSE",
+      "sha256": "d54c0da8c6d862403dcd92136bd75e446b351613bfc14a4032995221d6f3bc90"
+    },
+    {
+      "id": "early-vanilla-acknowledgments",
+      "upstreamId": "vanilla-colorful-port-source",
+      "path": "ACKNOWLEDGMENTS",
+      "sha256": "f533a3ccec5057bfcffebbe4a7d7780a2f3b6b9022ab84dae755a740d069ac35"
+    },
+    {
+      "id": "color-fns-hex",
+      "upstreamId": "color-fns-reference",
+      "path": "src/hex2rgb.js",
+      "sha256": "1c36092db224d90dc25963c82e77936f3a4c3490a8e515a02bf93f6fdf801d39"
+    },
+    {
+      "id": "color-fns-rgb",
+      "upstreamId": "color-fns-reference",
+      "path": "src/rgb2hex.js",
+      "sha256": "e802d6718eb3e71362eb164bfeed3eb1de296a2dd574837dba5fa731ddaff6bd"
+    },
+    {
+      "id": "color-fns-license",
+      "upstreamId": "color-fns-reference",
+      "path": "LICENSE",
+      "sha256": "b09da81ff7efa56d6d65a7dc1a27da6e2b61b76872941fffe6e03c51c3841c43"
+    },
+    {
+      "id": "released-vanilla-convert",
+      "upstreamId": "vanilla-colorful",
+      "path": "src/lib/utils/convert.ts",
+      "sha256": "521fe58c54a249043560144f9ca79b193f8e38c56fa9027f95e234e88334db3a"
+    },
+    {
+      "id": "released-vanilla-acknowledgments",
+      "upstreamId": "vanilla-colorful",
+      "path": "ACKNOWLEDGMENTS",
+      "sha256": "11422f1b449e88e5a0bcbce7d12b9628d1f612f75bb8c1ea81a5bddcb61348ef"
+    }
+  ],
+  "copiedCodeComparisons": [
+    {
+      "kind": "transpiled-initializer-structure",
+      "left": "react-convert",
+      "right": "early-vanilla-convert",
+      "names": [
+        "hexToHsv",
+        "hexToRgb",
+        "hslStringToHsv",
+        "hslToHsv",
+        "hsvToHex",
+        "hsvToHsl",
+        "hsvToHslString",
+        "hsvToRgb",
+        "hsvToRgbString",
+        "rgbStringToHsv",
+        "format",
+        "rgbToHex",
+        "rgbToHsv"
+      ]
+    }
   ]
 }

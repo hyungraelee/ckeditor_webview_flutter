@@ -114,6 +114,8 @@ def main():
     package = work / 'package'
     asset_dir = package / 'assets/editor'
     expected = {p.name: sha256(p) for p in asset_dir.iterdir() if p.is_file()}
+    if (package / 'tool/release/verify_color_sources.cjs').exists():
+        run(['node', 'tool/release/verify_color_sources.cjs', str(work)], package)
     run(['node', 'tool/release/rebuild-source-inputs.cjs', str(work)], package)
     run(['npm', 'run', 'build'], package / 'tool/ckeditor_build')
     for name in ['ckeditor.js', 'ckeditor.css', 'ckeditor.js.LICENSE.txt', 'CKEDITOR-LICENSE.txt',

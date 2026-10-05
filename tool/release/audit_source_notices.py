@@ -104,6 +104,12 @@ def build_report(manifest, input_bytes, package_bytes):
             raise ValueError(f'Copied-code notice differs from pinned source: {entry["name"]}')
         copied.append({**entry, 'url': source['url']})
     comparisons = []
+    copied_sources = []
+    for entry in review.get('copiedCodeSourceFiles', []):
+        source, files = upstream[entry['upstreamId']]
+        if digest(files[entry['path']]) != entry['sha256']:
+            raise ValueError(f'Reviewed copied-code source differs: {entry["id"]}')
+        copied_sources.append({**entry, 'url': source['url']})
     npm_files = {record['url']: files for record, files in npm}
     for entry in review.get('sourceComparisons', []):
         if entry['kind'] == 'npm-source-map':
@@ -123,11 +129,14 @@ def build_report(manifest, input_bytes, package_bytes):
             comparisons.append({**entry, 'sha256': digest(data)})
         else:
             raise ValueError('Unknown source comparison kind')
-    return {'schemaVersion': 1, 'status': 'notice inventory; final publication review pending',
+    report = {'schemaVersion': 1, 'status': 'notice inventory; final publication review pending',
             'summary': {'npmInputs': len(packages), 'byStatus': statuses},
             'packages': sorted(packages, key=lambda entry: (entry['name'], entry['version'])),
             'copiedCodeNotices': copied, 'sourceComparisons': comparisons,
             'remainingReview': manifest['unresolved']}
+    if 'copiedCodeSourceFiles' in review:
+        report['copiedCodeSourceFiles'] = copied_sources
+    return report
 
 
 def main():

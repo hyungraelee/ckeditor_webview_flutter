@@ -110,16 +110,16 @@
     {
       "id": "react-colorful-reference",
       "repository": "omgovich/react-colorful",
-      "commit": "df7d7bc7fbcad7fb5faab1c2aa28c004307b2cab",
-      "url": "https://codeload.github.com/omgovich/react-colorful/tar.gz/df7d7bc7fbcad7fb5faab1c2aa28c004307b2cab",
-      "sha256": "2230f1b8bcdb87b3dbf36c0444049c56b42354917eaf3bbd08ccb673604ea19f",
-      "size": 406133,
-      "provenance": "reference release 4.0.2; exact copied revision unresolved",
+      "commit": "7dd80f931f914f8bea09b38ef98298d364786cb2",
+      "url": "https://codeload.github.com/omgovich/react-colorful/tar.gz/7dd80f931f914f8bea09b38ef98298d364786cb2",
+      "sha256": "cf27febbf8c07f941079a0afa348384324b4c091cec2e852401551f797b42a2e",
+      "size": 261466,
+      "provenance": "TypeScript conversion commit with initializers matching early vanilla-colorful; exact historical selected copy commit not established",
       "excludeDirectories": [
         "demo",
         "tests"
       ],
-      "version": "4.0.2"
+      "version": "2.2.1"
     },
     {
       "id": "lodash-tag-source",
@@ -160,11 +160,25 @@
       "excludeDirectories": [
         "test"
       ]
+    },
+    {
+      "id": "vanilla-colorful-port-source",
+      "repository": "web-padawan/vanilla-colorful",
+      "commit": "261e1c227b8dc04753e8cc04640b934d433c2d91",
+      "url": "https://codeload.github.com/web-padawan/vanilla-colorful/tar.gz/261e1c227b8dc04753e8cc04640b934d433c2d91",
+      "sha256": "6d41a1f63a7d06d695e2c32c1bba598422f91c7c19ee2f47fd06f9f7c7f7ed77",
+      "size": 116854,
+      "version": "0.0.0",
+      "provenance": "early port at original MIT license addition; conversion initializers compared with React TypeScript source",
+      "excludeDirectories": [
+        "test",
+        "demo"
+      ]
     }
   ],
   "unresolved": [
     "The verified Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent, so complete historical npm release reproduction remains unverified.",
-    "Exact react-colorful/color-fns copied revisions and HSV conversion permission remain unresolved; additional reference MIT notices are preserved.",
+    "Thirteen early vanilla-colorful/react-colorful conversion initializers match after documented normalization; color-fns source lineage is retained. Exact selected copying commits and original HSV permission remain unresolved.",
     "Complete notices for acorn-import-assertions 1.9.0 and boolbase 1.0.0 require upstream clarification.",
     "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
     "Public source download access has not been provided."
