@@ -1,5 +1,10 @@
 ## 0.1.0
 
+- Add opt-in Node.js/npm engine builds through a Flutter asset transformer, with version-aware legacy/modern toolchains, persistent npm locks, cached local HTML assets, and explicit updates.
+- Add an `init --version` command that creates the editor input asset and registers the transformer while preserving unrelated pubspec settings and comments.
+- Add optional `editorAsset` and `licenseKey` widget options with bundled-editor and GPL defaults, runtime key overrides, and version-matched UI translations; default bundled use still requires no Node.js/npm.
+- Validate required license keys and version generated assets to prevent outdated assets from ignoring runtime key overrides.
+
 - Extract the standalone Flutter controller and local WebView editor.
 - Bundle CKEditor 5 41.4.1 with English UI and default feature configuration.
 - Fetch official 41.4.1 UI translations for the system locale, with a three-second network timeout and offline English fallback.
