@@ -6,8 +6,9 @@ only optional UI translations are fetched from CKEditor's official CDN.
 The package uses `webview_flutter` and targets Android and iOS.
 
 The bundled editor is **CKEditor 5 41.4.1**, with English UI as the fallback.
-Heading, font, color, highlight, alignment, and special-character settings use CKEditor
-defaults. Toolbar overflow uses CKEditor's grouping menu.
+Heading, font, color, highlight, alignment, and special-character settings use
+CKEditor defaults unless overridden with `config`. Toolbar overflow uses
+CKEditor's grouping menu.
 
 Applications can optionally request a CKEditor version with a Node.js/npm-based
 build tool. There is no major-version whitelist: legacy source builds and modern
@@ -121,6 +122,89 @@ Hiding buttons does not remove plugins or strip their supported HTML. The
 option is applied when the editor is created, including recreation/retry.
 Changes after initialization take effect on the next editor creation. Treat
 supplied lists as immutable.
+
+## Feature configuration
+
+Pass CKEditor feature settings through the optional `config` map. CKEditor
+option names and nested structures are preserved; no engine rebuild is needed
+for the bundled editor.
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  config: const {
+    'placeholder': 'Write here...',
+    'fontFamily': {
+      'options': ['default', 'Arial, Helvetica, sans-serif', 'Georgia, serif'],
+      'supportAllValues': true,
+    },
+    'fontSize': {
+      'options': [12, 16, 20, 24, 'default'],
+      'supportAllValues': true,
+    },
+    'fontColor': {
+      'colors': [
+        {'color': '#000000', 'label': 'Black'},
+        {'color': '#D32F2F', 'label': 'Red'},
+        {'color': '#1976D2', 'label': 'Blue'},
+      ],
+      'columns': 3,
+    },
+  },
+)
+```
+
+Supported top-level keys:
+
+| Key | Configures |
+| --- | --- |
+| `heading` | Available headings, HTML views, menu titles, and classes |
+| `fontFamily` | Font choices and `supportAllValues` |
+| `fontSize` | Size choices and `supportAllValues` |
+| `fontColor`, `fontBackgroundColor` | Color palettes, columns, and picker settings |
+| `highlight` | Marker/pen choices |
+| `alignment` | Available text alignments |
+| `indentBlock` | Indentation offset/unit or configured classes |
+| `specialCharacters` | Order of included character groups |
+| `placeholder` | Empty-editor placeholder text |
+
+Null or an empty map retains defaults. Omitted settings remain at CKEditor
+defaults. Feature sections are passed directly to CKEditor, which handles their
+nested defaults and schema; check the documentation for the selected engine
+version. See the official [configuration guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/configuration.html)
+and [font options](https://ckeditor.com/docs/ckeditor5/latest/features/font.html).
+
+Only JSON values are supported: null, booleans, strings, finite numbers, lists,
+and maps with string keys. Functions, plugin classes, custom objects, cyclic
+containers, dotted keys, and JavaScript prototype keys (`__proto__`,
+`prototype`, `constructor`) are rejected. Unsupported top-level keys or invalid
+JSON values report `invalid_editor_config` through `onError`. Other malformed
+feature options may fail during CKEditor creation or be ignored by that engine.
+
+Use `toolbarItems`, `initialHtml`, and `licenseKey` for those settings. Plugins,
+language, translations, layout, and lifecycle remain managed by the package.
+This map does not install plugins, bundle fonts, or inject visual CSS. A font
+choice works only if that font is available on the device. Class-based heading,
+highlight, or indentation choices may need matching content CSS in the editor
+and on the publishing website; CSS injection is not provided by this API.
+
+Settings apply on creation/retry. Updating `config` does not recreate an active
+editor or change its current document. Treat the map and all nested containers
+as immutable, as with `toolbarItems`.
+
+For generated `editorAsset` builds, update to this package version, run
+`flutter clean`, and rebuild. Generated metadata includes `supportsConfig: true`;
+older generated assets are rejected with `invalid_editor_bundle` when a
+non-empty config is requested, so settings cannot be silently ignored. They
+remain usable without custom configuration.
+
+Configuration can affect HTML preservation: limiting headings, font choices,
+or sizes may remove imported formatting. The example uses `supportAllValues`
+for font family and numeric sizes to accept values beyond menu choices;
+`fontSize.supportAllValues` requires numeric size options (the `default` reset
+option can also be included). This does not enable arbitrary HTML support or
+guarantee compatibility with a web custom build. Validate repeated HTML round
+trips using matching features and settings.
 
 ## UI language
 

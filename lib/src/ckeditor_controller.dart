@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart'
@@ -164,6 +165,7 @@ class CkEditorController extends ChangeNotifier {
     required double minHeight,
     String uiLanguage = 'en',
     List<String>? toolbarItems,
+    Map<String, Object?>? config,
     String? licenseKey,
   }) async {
     final session = _session;
@@ -173,6 +175,7 @@ class CkEditorController extends ChangeNotifier {
       return;
     }
     try {
+      _validateConfigValue(config, HashSet<Object>.identity());
       final options = jsonEncode({
         'initialHtml': _cachedHtml ?? '',
         'readOnly': readOnly,
@@ -181,6 +184,7 @@ class CkEditorController extends ChangeNotifier {
         'minHeight': minHeight,
         'uiLanguage': uiLanguage,
         'toolbarItems': toolbarItems,
+        'config': config,
         'licenseKey': licenseKey,
       });
       // Return a boolean, not a Promise (native WebViews do not await it).
@@ -513,6 +517,43 @@ class CkEditorController extends ChangeNotifier {
     );
     _state = CkEditorState.disposed;
     super.dispose();
+  }
+}
+
+// Validate before JSON encoding, which can otherwise invoke arbitrary toJson
+// methods or report generic serialization errors instead of a config error.
+void _validateConfigValue(Object? value, Set<Object> ancestors) {
+  if (value == null || value is bool || value is String) return;
+  if (value is num && value.isFinite) return;
+  if ((value is! Map && value is! List) || !ancestors.add(value)) {
+    throw const CkEditorError(
+      code: 'invalid_editor_config',
+      message:
+          'Config must contain only acyclic JSON values and finite numbers.',
+    );
+  }
+  try {
+    if (value is Map) {
+      for (final entry in value.entries) {
+        final key = entry.key;
+        if (key is! String ||
+            key.contains('.') ||
+            const {'__proto__', 'prototype', 'constructor'}.contains(key)) {
+          throw const CkEditorError(
+            code: 'invalid_editor_config',
+            message:
+                'Config keys must be strings without dots or prototype keys.',
+          );
+        }
+        _validateConfigValue(entry.value, ancestors);
+      }
+    } else {
+      for (final item in value as List) {
+        _validateConfigValue(item, ancestors);
+      }
+    }
+  } finally {
+    ancestors.remove(value);
   }
 }
 
