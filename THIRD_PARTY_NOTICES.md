@@ -40,7 +40,7 @@ engine and npm dependencies. These generated records must not be treated as
 completion of corresponding-source distribution for that app release.
 
 The editor entry point, build configuration, and exact dependency lockfile are
-included in `tool/ckeditor_build/`. See the README for rebuild instructions.
+included in `tool/ckeditor_build/`. See [CONTRIBUTING.md](CONTRIBUTING.md) for rebuild instructions.
 Those build recipes and upstream links do not by themselves replace any GPL
 obligation to provide complete corresponding source when distributing a
 compiled bundle. Arrange the corresponding-source distribution for the actual
