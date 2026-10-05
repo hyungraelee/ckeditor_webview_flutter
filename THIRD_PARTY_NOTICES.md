@@ -30,6 +30,20 @@ Its original copyright and license notices are preserved in
 
 Source: https://github.com/lodash/lodash
 
+## Color UI dependencies
+
+The bundled editor also includes these MIT-licensed components:
+
+- `vanilla-colorful` 0.7.2: https://github.com/web-padawan/vanilla-colorful
+- `color-parse` 1.4.2: https://github.com/colorjs/color-parse
+- `color-convert` 2.0.1: https://github.com/Qix-/color-convert
+- `color-name` 1.1.4: https://github.com/colorjs/color-name
+
+Their original license texts and vanilla-colorful's upstream acknowledgments
+are preserved in `assets/editor/THIRD_PARTY_LICENSES.txt`. Keep this file with
+the bundled distribution. The acknowledgments identify additional copied-code
+origins; review them when preparing the corresponding-source archive.
+
 ## Source distribution
 
 The optional builder in `tool/ckeditor_builder/` resolves requested CKEditor versions in the
@@ -45,3 +59,8 @@ Those build recipes and upstream links do not by themselves replace any GPL
 obligation to provide complete corresponding source when distributing a
 compiled bundle. Arrange the corresponding-source distribution for the actual
 release before publishing it.
+
+The bundled-editor inventory, inspected source provenance, and outstanding
+release work are documented in
+[the release source audit](tool/release/README.md). The inventory is not a
+source archive, and no release source-download location has been published yet.
