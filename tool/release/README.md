@@ -172,6 +172,12 @@ with a pinned 4.17.21 generator and reconstructs all 191 audited ES modules
 from the preserved development source. See [LODASH_GENERATION.md](LODASH_GENERATION.md)
 for exact inputs, comparison scope, and remaining publication differences.
 
+The copied-code follow-up preserves the historical React TypeScript conversion
+and early MIT-licensed vanilla port, records exact source/notice digests, and
+compares thirteen conversion initializers during offline rebuilding. The original
+HSV permission remains unresolved. See [COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md)
+for the evidence and limits.
+
 A dry-run does not upload a package or verify corresponding-source availability,
 third-party license completeness, native device behavior, or HTML compatibility.
 Android/iOS example checks, actual packaged-file consumption, SDK compatibility,

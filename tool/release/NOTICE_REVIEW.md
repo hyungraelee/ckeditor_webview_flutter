@@ -67,12 +67,15 @@ Vanilla-colorful's original ACKNOWLEDGMENTS names react-colorful, color-fns,
 and an HSV conversion implementation. In addition to the existing notices,
 the bundled notice file and its writer now preserve original MIT texts for:
 
-- react-colorful's 4.0.2 reference commit, copyright Vlad Shilov.
+- react-colorful's original MIT notice, copyright Vlad Shilov.
 - color-fns's existing reference commit, copyright pqx Limited.
 
 The original texts are in [notices/](notices/); their exact upstream digests and
-package-file copies are checked by the audit. These references do not establish
-the exact historical copied revisions. Vanilla-colorful's own license text
+package-file copies are checked by the audit. The source follow-up now
+preserves the earlier React TypeScript conversion and MIT-licensed port. Thirteen
+conversion initializers match after documented normalization; see
+[COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md). The exact historical selected
+copying commits are not established. Vanilla-colorful's own license text
 and acknowledgments remain verbatim, and the editor JS/CSS remain unchanged.
 
 The cited [HSV conversion page](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c)
@@ -106,7 +109,7 @@ verify the source rebuild, then publish and verify persistent anonymous source
 download access. Device/SDK/package-consumption and HTML round trips remain
 separate checks. No source artifact or pub.dev package is uploaded by these tools.
 
-## Validation
+## Initial notice-review validation
 
 On the documented macOS environment, the offline candidate contains 497 pinned
 inputs. The recomputed notice inventory reports 474 npm inputs with notice files,
