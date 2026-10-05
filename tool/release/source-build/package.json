@@ -1,0 +1,12 @@
+{
+  "name": "ckeditor-bundled-source-build",
+  "version": "1.0.0",
+  "private": true,
+  "license": "GPL-2.0-or-later",
+  "dependencies": {
+    "csso": "5.0.5",
+    "glob": "8.0.3",
+    "typescript": "5.0.4",
+    "typescript-vanilla": "npm:typescript@4.8.4"
+  }
+}
