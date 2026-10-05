@@ -14,6 +14,24 @@ const ids = JSON.parse(fs.readFileSync(path.join(packageRoot, 'tool/release/bund
 const ckSource = path.join(workspace, 'upstream/ckeditor5');
 const vanillaSource = path.join(workspace, 'upstream/vanilla-colorful');
 const counts = { ckeditor: 0, vanillaColorful: 0, lodashEs: 0, ckeditorResources: 0 };
+const lodashRoot = path.join(packageRoot, 'tool/release/lodash-build/node_modules');
+const lodashSource = path.join(workspace, 'upstream/lodash-tag-source/lodash.js');
+const lodashInstalled = path.join(lodashRoot, 'lodash/lodash.js');
+const lodashGenerated = path.join(workspace, 'generated/lodash-es');
+
+// Supply the preferred modification source to the pinned generator. The
+// generator's own manifest pins 4.17.20; this scoped recipe uses 4.17.21.
+if (!fs.readFileSync(lodashSource).equals(fs.readFileSync(lodashInstalled))) {
+  throw new Error('Lodash development source differs from the pinned npm source');
+}
+fs.writeFileSync(lodashInstalled, fs.readFileSync(lodashSource));
+const lodashBuild = spawnSync(process.execPath, [
+  path.join(workspace, 'upstream/lodash-cli-generator/bin/lodash'),
+  'modularize', 'exports=es', '-o', lodashGenerated
+], { stdio: 'inherit', env: { ...process.env, NODE_PATH: lodashRoot } });
+if (lodashBuild.error || lodashBuild.status !== 0) {
+  throw lodashBuild.error || new Error('Lodash ES generation failed');
+}
 
 function filesIn(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
@@ -68,10 +86,14 @@ for (const id of ids) {
     options = vanillaOptions;
     count = 'vanillaColorful';
   } else if (id.startsWith('node_modules/lodash-es/')) {
-    source = path.join(workspace, 'upstream/lodash-es', id.slice('node_modules/lodash-es/'.length));
+    const relative = id.slice('node_modules/lodash-es/'.length);
+    source = path.join(lodashGenerated, relative);
     const data = fs.readFileSync(source);
     const destination = path.join(buildRoot, id);
-    if (!data.equals(fs.readFileSync(destination))) throw new Error(`Upstream ES module differs: ${id}`);
+    if (!data.equals(fs.readFileSync(path.join(workspace, 'upstream/lodash-es', relative))) ||
+        !data.equals(fs.readFileSync(destination))) {
+      throw new Error(`Regenerated ES module differs: ${id}`);
+    }
     fs.writeFileSync(destination, data);
     counts.lodashEs++;
     continue;
@@ -91,8 +113,24 @@ for (const id of ids) {
   fs.writeFileSync(destination, result.outputText);
   counts[count]++;
 }
-if (counts.ckeditor !== 438 || counts.vanillaColorful !== 12 || counts.lodashEs === 0) {
+if (counts.ckeditor !== 438 || counts.vanillaColorful !== 12 || counts.lodashEs !== 191) {
   throw new Error('Source coverage differs from the audited bundle; repeat the inventory audit');
 }
+// Report the rest of the publication too, without claiming a full npm rebuild.
+const published = fs.readdirSync(path.join(workspace, 'upstream/lodash-es'))
+  .filter(name => name.endsWith('.js')).sort();
+const unmatched = published.filter(name => {
+  const generated = path.join(lodashGenerated, name);
+  return !fs.existsSync(generated) || !fs.readFileSync(generated).equals(
+    fs.readFileSync(path.join(workspace, 'upstream/lodash-es', name)));
+});
+fs.writeFileSync(path.join(workspace, 'LODASH_GENERATION_REPORT.json'), JSON.stringify({
+  source: 'lodash-tag-source/lodash.js', generator: 'lodash-cli-generator/bin/lodash',
+  installedVersion: require(path.join(lodashRoot, 'lodash/package.json')).version,
+  generatedModules: fs.readdirSync(lodashGenerated).filter(name => name.endsWith('.js')).length,
+  auditedMatchedModules: counts.lodashEs, publishedModules: published.length,
+  unmatchedPublicationModules: unmatched,
+  scope: 'audited bundle inputs; complete historical npm release not reproduced'
+}, null, 2) + '\n');
 fs.writeFileSync(path.join(workspace, 'SOURCE_GENERATION_REPORT.json'), JSON.stringify(counts, null, 2) + '\n');
 console.log(JSON.stringify(counts));

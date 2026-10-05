@@ -167,6 +167,11 @@ The notice-review snapshot dry-run passed with zero warnings and an approximatel
 the expanded notice file and all other generated outputs; the separate source
 candidate remains approximately 60 MiB.
 
+The next source-generation step replaces the older Lodash generator reference
+with a pinned 4.17.21 generator and reconstructs all 191 audited ES modules
+from the preserved development source. See [LODASH_GENERATION.md](LODASH_GENERATION.md)
+for exact inputs, comparison scope, and remaining publication differences.
+
 A dry-run does not upload a package or verify corresponding-source availability,
 third-party license completeness, native device behavior, or HTML compatibility.
 Android/iOS example checks, actual packaged-file consumption, SDK compatibility,

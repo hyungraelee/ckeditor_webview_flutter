@@ -22,10 +22,11 @@ and acknowledgment files are retained even inside excluded directories. Addition
 review sources use explicit exclusions for unrelated demos, tests, and languages;
 the original vanilla-colorful, published Lodash, and color-fns archives remain intact.
 Exact non-optional npm tarballs preserve the
-build inputs and their original package contents. Lodash's exact ES and main publication commits,
-a generator reference, and a color-fns reference archive are also included.
-Reference inputs are explicitly marked; they do not establish a copied revision
-or the exact historical generator recipe.
+build inputs and their original package contents. Lodash's exact ES and main publication commits, development-tag source,
+a verified generator commit, and copied-code reference archives are also included.
+Copied-code references do not establish an exact copied revision. The Lodash
+recipe reproduces the audited ES inputs, rather than the complete npm release;
+see [LODASH_GENERATION.md](LODASH_GENERATION.md).
 
 The default output is `.dart_tool/release/source-candidate.tar.gz`, accompanied
 by a SHA-256 sidecar. Cache and outputs are ignored by Git and publishing and
@@ -41,7 +42,7 @@ Offline mode requires previously verified cached inputs and rejects missing or
 corrupt ones. Without offline mode, invalid cache entries are downloaded again
 and verified. Initial downloads may take time and use substantial disk space.
 The notice-reviewed candidate is approximately 60 MiB compressed, reduced from
-the 201 MiB full-input candidate. It contains 497 pinned inputs and omits 22 optional
+the 201 MiB full-input candidate. It contains 500 pinned inputs and omits 22 optional
 platform-specific npm inputs. The fresh rebuild below verifies that those inputs
 are unnecessary for this audited build. Required compiler/tool tarballs are kept
 intact; the remaining size is primarily npm build dependencies. It is a separate
@@ -67,7 +68,7 @@ The archive contains:
   file paths/digests/sizes, excluded file count, and selected archive SHA-256/size.
   Omitted optional npm inputs are listed separately; original lockfiles remain
   unchanged in `package/`.
-- `SOURCE_NOTICE_REPORT.json`: recomputable evidence for the 485 npm inputs,
+- `SOURCE_NOTICE_REPORT.json`: recomputable evidence for the 487 npm inputs,
   targeted embedded/upstream notices, copied-code reference notices, source
   comparisons, and remaining review. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
 
@@ -102,7 +103,9 @@ The source regeneration step:
    and upstream compiler options.
 3. Runs vanilla-colorful's upstream CSS generation script, then generates its
    12 audited JavaScript inputs with TypeScript 4.8.4 and upstream options.
-4. Restores the 191 audited Lodash ES modules from its exact publication commit.
+4. Generates the 191 audited Lodash ES modules from the 4.17.21 development
+   source using the pinned generator and verifies them against the exact
+   publication commit and installed npm inputs.
 5. Requires every restored/generated input to equal the locked npm input,
    rebuilds with the package's webpack recipe, and compares the seven generated
    bundle/CSS/notice/metadata files to the supplied assets.
@@ -117,7 +120,8 @@ are locked in `source-build/package-lock.json` and add no Flutter runtime
 dependency. Generated assets stay in the extraction; repository assets are never
 overwritten.
 
-The workspace retains `SOURCE_GENERATION_REPORT.json` and `REBUILD_REPORT.json`
+The workspace retains `SOURCE_GENERATION_REPORT.json`,
+`LODASH_GENERATION_REPORT.json`, and `REBUILD_REPORT.json`
 with generation counts, environment, asset hashes, archive checksum, and
 remaining review items. Treat a failed comparison as a release preparation
 failure; do not replace the distributed bundle merely to obtain matching hashes.
@@ -132,9 +136,9 @@ all redistribution or corresponding-source obligations. Before publication:
   and additional reference MIT notices are included. The cited
   [HSV conversion page](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c)
   is a repost and does not establish an explicit license for the copied code.
-- Review the historical Lodash ES generator chain. The exact published ES
-  modules are verified; the generator reference is not proof of the upstream
-  release process.
+- The verified Lodash generator reproduces all audited ES inputs. Six other
+  publication modules differ or are absent; do not claim a complete historical
+  npm release rebuild. See [the scoped comparison](LODASH_GENERATION.md).
 - Review notices and source forms of included build tools and dependency files.
   Of the eleven retained inputs without standalone notice filenames, six have
   complete embedded notices and three now have pinned upstream notices preserved.

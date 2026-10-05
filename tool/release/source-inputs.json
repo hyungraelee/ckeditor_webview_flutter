@@ -147,22 +147,26 @@
       "size": 4240,
       "provenance": "upstream license-addition commit; source compared with npm gitHead",
       "version": "1.1.2"
+    },
+    {
+      "id": "lodash-cli-generator",
+      "repository": "bnjmnt4n/lodash-cli",
+      "version": "4.17.21",
+      "commit": "37d28f589749c53ac838f1e53126c9f13d815acd",
+      "url": "https://codeload.github.com/bnjmnt4n/lodash-cli/tar.gz/37d28f589749c53ac838f1e53126c9f13d815acd",
+      "sha256": "063eec1f959bd64f72d79a3fbde247de3cc1f0118355d5dd2dd93019ad5b3a8c",
+      "size": 84883,
+      "provenance": "4.17.21 generator; audited ES modules reproduced from development-tag lodash.js",
+      "excludeDirectories": [
+        "test"
+      ]
     }
   ],
   "unresolved": [
-    "Historical Lodash ES generator recipe/version remains unverified; development-tag sources and npm publication sources are preserved.",
+    "The verified Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent, so complete historical npm release reproduction remains unverified.",
     "Exact react-colorful/color-fns copied revisions and HSV conversion permission remain unresolved; additional reference MIT notices are preserved.",
     "Complete notices for acorn-import-assertions 1.9.0 and boolbase 1.0.0 require upstream clarification.",
     "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
     "Public source download access has not been provided."
-  ],
-  "extraNpmInputs": [
-    {
-      "id": "lodash-cli-reference",
-      "version": "4.17.5",
-      "url": "https://registry.npmjs.org/lodash-cli/-/lodash-cli-4.17.5.tgz",
-      "integrity": "sha512-eeQi+oVS76ofP791g4wEGs4B4nyc4fiHboUCc0BzM8qCkLAzqbroewOt98A8ISoY1HH2di00pENNErXf0MWxiw==",
-      "provenance": "generator reference; exact 4.17.21 release generation not verified"
-    }
   ]
 }
