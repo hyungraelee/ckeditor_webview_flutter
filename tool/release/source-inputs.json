@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "status": "source candidate; not approved for publication",
+  "upstreamArchives": [
+    {
+      "id": "ckeditor5",
+      "tag": "v41.4.1",
+      "commit": "c3319030d8d3d0291b794f24d40c0970c99c9628",
+      "url": "https://codeload.github.com/ckeditor/ckeditor5/tar.gz/c3319030d8d3d0291b794f24d40c0970c99c9628",
+      "sha256": "d1ee0711f14ee6a7684d45fe48e3e430d0a5cd8c587c6d7876b4be369ba38f13",
+      "size": 73563874,
+      "provenance": "exact release commit",
+      "excludeDirectories": [
+        "docs",
+        "tests",
+        "packages/*/build",
+        "packages/*/docs",
+        "packages/*/tests",
+        "packages/*/sample"
+      ]
+    },
+    {
+      "id": "vanilla-colorful",
+      "version": "0.7.2",
+      "commit": "d227133e466cc0be720ae0fda775a0d3a927679e",
+      "url": "https://codeload.github.com/web-padawan/vanilla-colorful/tar.gz/d227133e466cc0be720ae0fda775a0d3a927679e",
+      "sha256": "43a12e5913e15b92f5170d34bb9bc4949171a2a9b04206db890ebdc2bfd32e78",
+      "size": 528899,
+      "provenance": "exact release commit"
+    },
+    {
+      "id": "lodash-es",
+      "repository": "lodash/lodash",
+      "commit": "11eb817cdfacf56c02d7005cbe520ffbeb0fe59a",
+      "url": "https://codeload.github.com/lodash/lodash/tar.gz/11eb817cdfacf56c02d7005cbe520ffbeb0fe59a",
+      "sha256": "c496d6585d13f61adb4469e7cab6b2022ce4526d776d05e10734449c7d5f0639",
+      "size": 151599,
+      "provenance": "exact npm gitHead"
+    },
+    {
+      "id": "lodash",
+      "repository": "lodash/lodash",
+      "commit": "c6e281b878b315c7a10d90f9c2af4cdb112d9625",
+      "url": "https://codeload.github.com/lodash/lodash/tar.gz/c6e281b878b315c7a10d90f9c2af4cdb112d9625",
+      "sha256": "7392a9b96a7333e2b2e750fe285b026c4a2c8d128cefb67714c7e63b85ebddc6",
+      "size": 312377,
+      "provenance": "exact npm gitHead"
+    },
+    {
+      "id": "color-fns-reference",
+      "repository": "swiftcarrot/color-fns",
+      "commit": "57ade16e13411abdc16b43926fa144e73332b1e4",
+      "url": "https://codeload.github.com/swiftcarrot/color-fns/tar.gz/57ade16e13411abdc16b43926fa144e73332b1e4",
+      "sha256": "37ecbb6bab476a3f511ad394f8e054d24fec1592a53fa46b5e71511c628001d9",
+      "size": 87794,
+      "provenance": "reference only; copied revision unresolved"
+    }
+  ],
+  "unresolved": [
+    "Historical lodash-cli generation recipe/version for the 4.17.21 ES release is not verified.",
+    "Copied color-fns revision and HSV conversion permissions require final review.",
+    "Included build-tool package notices and preferred-source forms require final release review.",
+    "Public source download access has not been provided."
+  ],
+  "extraNpmInputs": [
+    {
+      "id": "lodash-cli-reference",
+      "version": "4.17.5",
+      "url": "https://registry.npmjs.org/lodash-cli/-/lodash-cli-4.17.5.tgz",
+      "integrity": "sha512-eeQi+oVS76ofP791g4wEGs4B4nyc4fiHboUCc0BzM8qCkLAzqbroewOt98A8ISoY1HH2di00pENNErXf0MWxiw==",
+      "provenance": "generator reference; exact 4.17.21 release generation not verified"
+    }
+  ]
+}

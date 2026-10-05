@@ -14,3 +14,4 @@ pubspec.lock
 AGENTS.md
 agents.md
 .env*
+**/__pycache__/

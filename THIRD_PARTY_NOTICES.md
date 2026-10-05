@@ -63,4 +63,6 @@ release before publishing it.
 The bundled-editor inventory, inspected source provenance, and outstanding
 release work are documented in
 [the release source audit](tool/release/README.md). The inventory is not a
-source archive, and no release source-download location has been published yet.
+source archive. Local source candidates can be prepared and rebuilt with
+[the maintainer source tools](tool/release/SOURCE_ARCHIVE.md); final review and a
+public release source-download location remain pending.

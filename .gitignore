@@ -110,3 +110,6 @@ agents.md
 .vscode/
 *.iml
 .DS_Store
+
+# Maintainer source archive tooling.
+**/__pycache__/

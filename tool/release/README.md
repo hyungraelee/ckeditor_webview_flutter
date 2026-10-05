@@ -2,8 +2,10 @@
 
 This is a maintainer record for the initial 0.1.0 release candidate. It covers
 only the bundled CKEditor 41.4.1 editor. It is not a complete corresponding-source
-archive or a certification of GPL compliance. Source assembly, source-level
-rebuild verification, and a public release download location are still pending.
+archive or a certification of GPL compliance. A local source candidate and a
+scoped source-to-bundle rebuild are now available; final provenance/notice review
+and a public release download location remain pending. See
+[SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) for preparation commands and limits.
 
 ## Verified build provenance
 
@@ -66,16 +68,24 @@ provides TypeScript sources and the style generation/build scripts; the npm
 package provides generated JavaScript and source maps.
 
 The downloaded archives' commit URLs, SHA-256 digests, and byte sizes are in the
-inventory. These were local audit inputs, not published project release assets.
-The CKEditor archive is approximately 70 MiB compressed; do not add it to Flutter
-runtime assets. Keep source distribution separate from the editor loaded in the
-WebView.
+inventory. The source preparation tools verify these originals, then select
+CKEditor sources without unused documentation, tests, samples, or generated
+demo builds. Notices and build/modification inputs are preserved, and the source
+manifest records the selection and original provenance. No project source
+release has been published. The compact full candidate is approximately 59 MiB,
+including npm build inputs; do not add it to Flutter runtime assets. Keep source
+distribution separate from the editor loaded in the WebView.
 
-The following provenance checks remain open:
+The initial audit identified the following checks. The source archive follow-up
+now verifies the audited TypeScript/CSS generation and the published Lodash ES
+modules; historical generator and copied-code review remains open. See
+[SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) for the current status:
 
 - Confirm and document the TypeScript/style build path to the exact npm-level
   inputs used in the matched bundle. The npm-to-bundle rebuild was verified;
-  rebuilding those npm inputs from TypeScript was not.
+  the follow-up verifies 438 CKEditor and 12 vanilla-colorful JavaScript inputs
+  with upstream TypeScript options, without a complete upstream type-checking
+  release build.
 - Resolve Lodash ES module generation inputs and preserve the appropriate
   modification sources and generator scripts. An ES module tarball or upstream
   repository link alone does not establish this chain.
@@ -137,6 +147,12 @@ with zero warnings and a 366 KB compressed archive. The working-checkout
 dry-run reported only the expected uncommitted-file warning. New license and
 audit files were included; local instructions, dependencies, caches, and the
 large upstream audit downloads were absent. No upload was performed.
+
+After adding source preparation/rebuild tools and compact source selection, a
+package snapshot dry-run passed with zero warnings and a 378 KB compressed
+archive. The separate source candidate was reduced from 201 MiB to 59 MiB;
+its fresh offline rebuild reproduced all seven generated editor assets byte for
+byte. Runtime Dart, editor assets, and the original build recipe were unchanged.
 
 A dry-run does not upload a package or verify corresponding-source availability,
 third-party license completeness, native device behavior, or HTML compatibility.
