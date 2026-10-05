@@ -1,5 +1,8 @@
 ## 0.1.0
 
+- Add optional `customCss` for editor UI and content appearance, with text-based stylesheet insertion, lifecycle cleanup, and generated-asset capability checks.
+- Demonstrate custom toolbar colors, borders, and content typography/spacing in the automatic-height example; document that these styles are not included in saved HTML.
+
 - Add optional JSON-based `config` for included editor features, documented settings, protected package options, validation errors, and capability checks for generated assets.
 - Demonstrate custom font sizes, font families, and a color palette in the automatic-height example while retaining defaults in fixed-height mode.
 

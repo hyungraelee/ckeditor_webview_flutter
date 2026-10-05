@@ -166,6 +166,7 @@ class CkEditorController extends ChangeNotifier {
     String uiLanguage = 'en',
     List<String>? toolbarItems,
     Map<String, Object?>? config,
+    String? customCss,
     String? licenseKey,
   }) async {
     final session = _session;
@@ -185,6 +186,7 @@ class CkEditorController extends ChangeNotifier {
         'uiLanguage': uiLanguage,
         'toolbarItems': toolbarItems,
         'config': config,
+        'customCss': customCss,
         'licenseKey': licenseKey,
       });
       // Return a boolean, not a Promise (native WebViews do not await it).

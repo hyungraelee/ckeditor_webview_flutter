@@ -51,6 +51,10 @@ device signing.
   text palette through `config`. This configuration is independent of height
   mode; either mode can use it in an application. Font family/size options use
   `supportAllValues` to preserve imported values beyond the menu choices.
+- Automatic height also uses `customCss` for a pale indigo toolbar, rounded
+  borders, a warm content background, and custom default font/line height/padding.
+  Fixed height keeps the original appearance. CSS customization works with
+  either height mode; it is not written into the HTML output.
 - Edit the sample document and use **Get HTML** below the editor to read
   `getHtml()`. Selectable HTML appears below the button, including source-editing
   data. Scroll the page to view the full output.
@@ -78,6 +82,9 @@ These checks require manual execution on Android/iOS:
 - Selection, formatting, toolbar overflow, and source editing work.
 - Automatic height shows the configured font menus and palette. Choose a size
   and color, then read HTML to check that the selected formatting is included.
+- Automatic height shows the custom toolbar/content appearance. Check menus,
+  selection, source editing, long-content growth, and caret visibility after
+  styling. HTML output must not contain the custom stylesheet or wrapper UI.
 - HTML retrieval includes the latest edits, including source-editing changes.
 - Fixed height scrolls inside the editor; automatic height grows and the parent
   page scrolls. Add paragraphs and edit near the bottom with the keyboard open
