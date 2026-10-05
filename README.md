@@ -11,8 +11,7 @@ CKEditor defaults unless overridden with `config`. Toolbar overflow uses
 CKEditor's grouping menu.
 
 Applications can optionally request a CKEditor version with a Node.js/npm-based
-build tool. There is no major-version whitelist: legacy source builds and modern
-npm builds use separate toolchains. Default usage requires no Node installation.
+build tool. Default usage requires no Node installation.
 Requested versions must provide the package's plugins and compatible build/API
 layout; build success does not guarantee device or HTML round-trip compatibility.
 
@@ -193,10 +192,9 @@ editor or change its current document. Treat the map and all nested containers
 as immutable, as with `toolbarItems`.
 
 For generated `editorAsset` builds, update to this package version, run
-`flutter clean`, and rebuild. Generated metadata includes `supportsConfig: true`;
-older generated assets are rejected with `invalid_editor_bundle` when a
-non-empty config is requested, so settings cannot be silently ignored. They
-remain usable without custom configuration.
+`flutter clean`, and rebuild before using custom configuration. Older generated
+assets report `invalid_editor_bundle` when a non-empty config is requested;
+they remain usable without custom configuration.
 
 Configuration can affect HTML preservation: limiting headings, font choices,
 or sizes may remove imported formatting. The example uses `supportAllValues`
@@ -232,11 +230,10 @@ CkEditorWebView(
 )
 ```
 
-Null or an empty string preserves existing styles. CSS is transferred as a
-JSON-encoded string and assigned to a dedicated style element's `textContent`
-after the bundled styles, before editor creation. Supply CSS rules without
-HTML `style` tags. Normal cascade, specificity, and inline-style precedence
-apply; invalid declarations are handled by the WebView's CSS parser.
+Null or an empty string preserves existing styles. Custom CSS applies after
+the bundled styles. Supply CSS rules without HTML `style` tags. Normal cascade,
+specificity, and inline-style precedence apply; invalid declarations are
+handled by the WebView's CSS parser.
 
 | Target | Examples |
 | --- | --- |
@@ -267,19 +264,15 @@ network access. The example CSS needs no external resources.
 
 Styles apply on creation/retry, like `config`. Updating `customCss` alone does
 not recreate an active document. For generated `editorAsset` builds, update
-the package, run `flutter clean`, and rebuild. Current generated assets advertise
-`supportsCustomCss: true`; older assets report `invalid_editor_bundle` when
-non-empty CSS is requested rather than silently ignoring it. Assets without CSS
-customization remain usable with the existing compatible protocol.
+the package, run `flutter clean`, and rebuild before using custom styles. Older
+assets report `invalid_editor_bundle` when non-empty CSS is requested; they
+remain usable without CSS customization.
 
 ## UI language
 
-On initialization, the editor reads the device's system locale from Flutter's
-`PlatformDispatcher.locale`. English starts directly from local assets. For
-other languages, it downloads the matching legacy translation script from
-`https://cdn.ckeditor.com/ckeditor5/41.4.1/super-build/translations/<language>.js`
-and registers it before creating the editor. The super-build translation file
-covers the locally enabled features; no remote editor bundle is loaded.
+On initialization, the editor uses the device's system language. English starts
+directly from local assets. Other UI translations are downloaded from CKEditor's
+official CDN for the selected engine version. The editor bundle stays local.
 
 The network request has a three-second timeout. Offline connections, unavailable
 translations, HTTP errors, and script registration failures fall back to English.
@@ -289,13 +282,6 @@ open document. UI language does not change the document's content language or
 convert the stored HTML.
 
 See CKEditor's [UI language guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/ui-language.html).
-This package uses the legacy 41.4.1 translation format rather than the current
-CDN format shown for newer editor versions.
-
-Opt-in generated assets use their actual resolved version. Modern installations
-use the official `translations/<language>.umd.js` endpoint and pass its object to
-the editor configuration; legacy installations use the matching super-build
-translation endpoint. The same timeout and English fallback apply.
 
 ## Optional engine version builds
 
@@ -321,8 +307,7 @@ storage contract or add unsupported features to the existing toolbar.
 
 Accept exact, caret/tilde, and numeric wildcard requests such as `41.4.1`,
 `^43.0.0`, `~44.0.0`, or `48.x`. Tags, URLs, prereleases, and compound ranges are
-not accepted. Versions before 42 use the legacy webpack recipe; newer versions
-use esbuild. Generated engines from version 44 receive the widget's `licenseKey`
+not accepted. Generated engines from version 44 receive the widget's `licenseKey`
 at initialization, as described in the
 [official self-hosted installation guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/installation/self-hosted/quick-start.html).
 
@@ -344,24 +329,20 @@ CkEditorWebView(
 ```
 
 The consuming app can use `--dart-define=CKEDITOR_LICENSE_KEY=...` or supply a
-value through its own configuration. Key values are passed through the bridge
-and are not written into generated HTML, npm locks, or cache metadata. App
-configuration does not provide secret storage for a value shipped on devices.
+value through its own configuration. App configuration does not provide
+secret storage for a value shipped on devices.
 Changing `licenseKey` recreates the WebView. Empty/whitespace keys report
 `invalid_license_key` when the selected engine requires one; other activation
 failures are reported by CKEditor through `onError`.
 
 After updating the builder package, run `flutter clean` and rebuild generated
-assets. Asset protocol 2 prevents older assets with hard-coded GPL activation
-from silently ignoring a widget override.
+assets so they support the current widget options.
 
 ## HTML and editing
 
-CKEditor runs in the WebView's DOM, separately from Flutter's widget tree.
-`setData()` converts HTML into CKEditor's model; `getData()` serializes that
-model back into HTML. The package saves that result directly. JSON encoding
-protects Flutter/JavaScript string transfer, and JavaScriptChannel sends events
-back to Flutter.
+`setHtml()` imports HTML into CKEditor's model; `getHtml()` returns the HTML
+produced by `editor.getData()`, including current source edits. The package does
+not convert it to Markdown, Delta, or a custom document format.
 
 Included features: paragraph, heading, source editing, bold, italic, underline,
 strikethrough, font family/size/color/background, highlight, subscript,
@@ -369,17 +350,15 @@ superscript, horizontal line, show blocks, special characters, alignment, and
 block indentation. Images, uploads, and General HTML Support are not enabled.
 Unsupported tags or attributes can be normalized or removed by the model.
 
-`onChanged` delivers the complete HTML after debounce. This version still
-serializes debounced changes when the callback is omitted. A dirty-only bridge
-would be a separate extension for large documents. Always read `getHtml()` at
-save time so the latest changes and source edits are included.
+`onChanged` delivers the complete HTML after debounce. Always read `getHtml()`
+at save time so the latest changes and source edits are included.
 
 Using the same CKEditor version, plugins, and configuration helps preserve
 formatting, but compatibility with a particular web custom build must still be
 verified by repeated Web → App → Web round trips. String identity is not
 required; formatting after CKEditor normalization is what matters.
 
-## Platform and release validation
+## Platform setup
 
 Follow `webview_flutter`'s platform requirements. On Android, add the following
 permission to the app's `android/app/src/main/AndroidManifest.xml` to enable
@@ -393,29 +372,6 @@ The local English editor still works without network access. The translation
 endpoint uses HTTPS and needs no iOS transport-security exception. Keep your
 screen in a `SafeArea` and allow keyboard resizing. On Android, check the
 activity's `windowSoftInputMode="adjustResize"` when input is covered.
-
-This package was extracted from an application where auto-height and caret
-visibility were manually checked. The standalone package's asset loading,
-keyboard, selection, source editing, dropdown gestures, navigation, and
-push/pop behavior still need Android/iOS device checks. A complete comparison
-with the web service's custom build has not been performed.
-
-## Rebuilding the bundled editor
-
-End users do not need Node.js. Maintainers can rebuild with:
-
-```sh
-cd tool/ckeditor_build
-npm ci
-npm run build
-```
-
-All CKEditor runtime packages are pinned to 41.4.1. The build writes the bundle,
-CSS, vendor license, and version/hash metadata to `assets/editor/`. The bridge's
-plugin and toolbar lists live in `assets/editor/editor.js`. When changing
-plugins, keep those lists aligned with `tool/ckeditor_build/editor-entry.js`.
-Default usage retains CKEditor's feature settings and the package's layout CSS;
-the widget can customize features with `config` and appearance with `customCss`.
 
 ## License
 
