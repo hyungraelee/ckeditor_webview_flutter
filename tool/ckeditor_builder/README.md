@@ -4,6 +4,14 @@ This tool is an opt-in Flutter asset transformer. The default widget still uses
 its bundled CKEditor 41.4.1 and never invokes Node.js/npm. The public default
 engine version can be reassessed independently of this build tool.
 
+The widget's optional `config` map also works with generated engines. Current
+assets advertise `supportsConfig: true` in their metadata. After upgrading this
+package, run `flutter clean` and rebuild to refresh older assets before passing
+non-empty configuration. An older asset without this capability is rejected
+instead of silently ignoring settings. The npm lock keeps the selected engine
+version unchanged. See the package README for supported feature keys and
+initialization behavior.
+
 The builder accepts stable numeric npm requests across major versions:
 `41.4.1`, `^43.0.0`, `~44.0.0`, `48.x`, and `48.5.x`, for example. Tags, URLs,
 prereleases, and compound ranges are not accepted. There is no major-version

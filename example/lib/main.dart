@@ -133,6 +133,31 @@ class _EditorPageState extends State<EditorPage> {
               CkEditorWebView(
                 controller: _controller,
                 initialHtml: sampleHtml,
+                // Fixed height keeps defaults; automatic height shows config.
+                config: widget.autoHeight
+                    ? const {
+                        'fontFamily': {
+                          'options': [
+                            'default',
+                            'Arial, Helvetica, sans-serif',
+                            'Georgia, serif',
+                          ],
+                          'supportAllValues': true,
+                        },
+                        'fontSize': {
+                          'options': [12, 16, 20, 24, 'default'],
+                          'supportAllValues': true,
+                        },
+                        'fontColor': {
+                          'colors': [
+                            {'color': '#000000', 'label': 'Black'},
+                            {'color': '#D32F2F', 'label': 'Red'},
+                            {'color': '#1976D2', 'label': 'Blue'},
+                          ],
+                          'columns': 3,
+                        },
+                      }
+                    : null,
                 height: widget.autoHeight ? null : 360,
                 autoHeight: widget.autoHeight,
                 minHeight: 360,

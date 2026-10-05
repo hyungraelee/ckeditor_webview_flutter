@@ -46,6 +46,11 @@ device signing.
 ## Use
 
 - Choose **Fixed height** or **Automatic height**.
+- Fixed height uses default feature settings. Automatic height also demonstrates
+  custom font families, sizes (12, 16, 20, 24, and default), and a three-color
+  text palette through `config`. This configuration is independent of height
+  mode; either mode can use it in an application. Font family/size options use
+  `supportAllValues` to preserve imported values beyond the menu choices.
 - Edit the sample document and use **Get HTML** below the editor to read
   `getHtml()`. Selectable HTML appears below the button, including source-editing
   data. Scroll the page to view the full output.
@@ -71,6 +76,8 @@ These checks require manual execution on Android/iOS:
 - Offline, a newly opened editor uses English and remains editable. The example
   declares Android INTERNET permission for online translations in release builds.
 - Selection, formatting, toolbar overflow, and source editing work.
+- Automatic height shows the configured font menus and palette. Choose a size
+  and color, then read HTML to check that the selected formatting is included.
 - HTML retrieval includes the latest edits, including source-editing changes.
 - Fixed height scrolls inside the editor; automatic height grows and the parent
   page scrolls. Add paragraphs and edit near the bottom with the keyboard open

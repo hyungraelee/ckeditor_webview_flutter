@@ -172,7 +172,8 @@ async function build() {
   }
   const javascript = fs.readFileSync(path.join(dist, 'ckeditor.js'), 'utf8');
   const stylesheet = fs.readFileSync(path.join(dist, 'ckeditor.css'), 'utf8');
-  const info = { protocol: 2, version, translationFormat: modern ? 'umd' : 'legacy' };
+  const info = { protocol: 2, version, translationFormat: modern ? 'umd' : 'legacy',
+    supportsConfig: true };
   const thirdPartyNotices = notices(lock);
   const html = `<!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">

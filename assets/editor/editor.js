@@ -33,6 +33,45 @@
     'alignment', 'outdent', 'indent'
   ]);
   const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo']);
+  // Only configure features already included in both engine build recipes.
+  const SUPPORTED_CONFIG_KEYS = new Set([
+    'heading', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
+    'highlight', 'alignment', 'indentBlock', 'specialCharacters', 'placeholder'
+  ]);
+
+  function getFeatureConfig(value) {
+    if (value == null) return {};
+    if (typeof value !== 'object' || Array.isArray(value)) {
+      throw bridgeError('invalid_editor_config', 'Config must be a JSON object.');
+    }
+    const unsupported = Object.keys(value).filter(key => !SUPPORTED_CONFIG_KEYS.has(key));
+    if (unsupported.length) {
+      throw bridgeError('invalid_editor_config',
+        `Unsupported config keys: ${unsupported.join(', ')}. Use the widget options for toolbar, initial HTML, and license activation.`);
+    }
+    validateConfigValue(value, new Set());
+    return value;
+  }
+
+  function validateConfigValue(value, ancestors) {
+    if (value === null || typeof value === 'string' || typeof value === 'boolean' ||
+        (typeof value === 'number' && Number.isFinite(value))) return;
+    if (typeof value !== 'object' || ancestors.has(value) ||
+        (!Array.isArray(value) && Object.getPrototypeOf(value) !== Object.prototype)) {
+      throw bridgeError('invalid_editor_config', 'Config must contain only acyclic JSON values and finite numbers.');
+    }
+    ancestors.add(value);
+    try {
+      for (const key of Object.keys(value)) {
+        if (key.includes('.') || ['__proto__', 'prototype', 'constructor'].includes(key)) {
+          throw bridgeError('invalid_editor_config', 'Config keys cannot contain dots or prototype keys.');
+        }
+        validateConfigValue(value[key], ancestors);
+      }
+    } finally {
+      ancestors.delete(value);
+    }
+  }
 
   let editor = null;
   let state = 'notInitialized';
@@ -230,6 +269,7 @@
       const uiLanguage = options.uiLanguage ?? 'en';
       const licenseKey = options.licenseKey;
       const toolbarItems = getToolbarItems(options.toolbarItems);
+      const featureConfig = getFeatureConfig(options.config);
       if (typeof initialHtml !== 'string' || typeof readOnly !== 'boolean' ||
           !Number.isInteger(debounceMs) || debounceMs < 0 ||
           typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0 ||
@@ -244,9 +284,9 @@
       autoHeight = expand;
       document.documentElement.classList.toggle('editor-auto-height', expand);
       document.documentElement.style.setProperty('--editor-min-height', `${minHeight}px`);
-      // Feature options intentionally remain at CKEditor defaults.
       // HTML goes through the CKEditor model; never assign it to innerHTML.
       const config = {
+        ...featureConfig,
         initialData: initialHtml,
         language: { ui: uiLanguage, content: 'en' },
         plugins: PLUGINS.map(name => bundle[name]),

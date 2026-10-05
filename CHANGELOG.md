@@ -1,5 +1,8 @@
 ## 0.1.0
 
+- Add optional JSON-based `config` for included editor features, documented settings, protected package options, validation errors, and capability checks for generated assets.
+- Demonstrate custom font sizes, font families, and a color palette in the automatic-height example while retaining defaults in fixed-height mode.
+
 - Add opt-in Node.js/npm engine builds through a Flutter asset transformer, with version-aware legacy/modern toolchains, persistent npm locks, cached local HTML assets, and explicit updates.
 - Add an `init --version` command that creates the editor input asset and registers the transformer while preserving unrelated pubspec settings and comments.
 - Add optional `editorAsset` and `licenseKey` widget options with bundled-editor and GPL defaults, runtime key overrides, and version-matched UI translations; default bundled use still requires no Node.js/npm.
