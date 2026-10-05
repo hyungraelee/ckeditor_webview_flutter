@@ -1,0 +1,157 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+"""Inventory preserved notices without treating license declarations as approval."""
+
+import argparse
+import hashlib
+import io
+import json
+from pathlib import Path, PurePosixPath
+import tarfile
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def archive_files(data, strip_root=False):
+    files = {}
+    with tarfile.open(fileobj=io.BytesIO(data)) as archive:
+        for member in archive:
+            path = PurePosixPath(member.name)
+            if path.is_absolute() or '..' in path.parts or '\\' in member.name:
+                raise ValueError(f'Unsafe notice input path: {member.name}')
+            if member.isdir():
+                continue
+            if not member.isfile():
+                raise ValueError(f'Unsupported notice input: {member.name}')
+            name = str(PurePosixPath(*path.parts[1:])) if strip_root else member.name
+            if name in files:
+                raise ValueError(f'Duplicate notice input: {name}')
+            files[name] = archive.extractfile(member).read()
+    return files
+
+
+def build_report(manifest, input_bytes, package_bytes):
+    review = json.loads(package_bytes('tool/release/notice-review.json'))
+    if review['schemaVersion'] != 1:
+        raise ValueError('Unsupported notice review version')
+    targeted = {entry['url']: entry for entry in review['reviewedInputs']}
+    if len(targeted) != len(review['reviewedInputs']):
+        raise ValueError('Duplicate targeted notice input')
+    upstream = {}
+    npm = []
+    for record in manifest['inputs']:
+        data = input_bytes(record['file'])
+        if digest(data) != record['sha256']:
+            raise ValueError(f'Notice input checksum mismatch: {record["file"]}')
+        files = archive_files(data, strip_root=record['kind'] == 'upstream')
+        if record['kind'] == 'upstream':
+            upstream[record['id']] = (record, files)
+        else:
+            npm.append((record, files))
+    packages = []
+    seen = set()
+    statuses = {}
+    for record, files in npm:
+        # Older npm tarballs can use the package name instead of "package/".
+        candidates = sorted((name for name in files if PurePosixPath(name).name == 'package.json'),
+                            key=lambda name: (len(PurePosixPath(name).parts), name))
+        if not candidates or (len(candidates) > 1 and len(PurePosixPath(candidates[0]).parts) ==
+                              len(PurePosixPath(candidates[1]).parts)):
+            raise ValueError(f'Ambiguous npm package metadata: {record["url"]}')
+        metadata = json.loads(files[candidates[0]])
+        notice_paths = sorted(name for name in files if PurePosixPath(name).name.lower().startswith(
+            ('license', 'licence', 'copying', 'notice', 'copyright', 'acknowledg')))
+        entry = {'name': metadata['name'], 'version': metadata['version'],
+                 'url': record['url'], 'integrity': record['integrity'],
+                 'declaredLicense': metadata.get('license', metadata.get('licenses')),
+                 'preservedNoticeFiles': [{'path': name, 'sha256': digest(files[name])}
+                                          for name in notice_paths]}
+        if record['url'] in targeted:
+            evidence = targeted[record['url']]
+            seen.add(record['url'])
+            for field in ('name', 'version', 'integrity'):
+                if entry[field] != evidence[field]:
+                    raise ValueError(f'Targeted notice metadata differs: {entry["name"]}')
+            status = evidence['status']
+            if status == 'embedded-notice':
+                content = files[evidence['path']]
+            elif status == 'upstream-notice':
+                source, source_files = upstream[evidence['upstreamId']]
+                content = source_files[evidence['path']]
+                entry['upstreamNoticeSource'] = source['url']
+            elif status == 'declaration-only':
+                if not entry['declaredLicense']:
+                    raise ValueError('Expected license declaration is absent')
+                content = None
+            else:
+                raise ValueError(f'Unknown notice evidence status: {status}')
+            if content is not None and digest(content) != evidence['sha256']:
+                raise ValueError(f'Reviewed notice content differs: {entry["name"]}')
+            entry['reviewEvidence'] = evidence
+        else:
+            status = 'notice-file-present' if notice_paths else 'unreviewed-missing-notice'
+        entry['status'] = status
+        statuses[status] = statuses.get(status, 0) + 1
+        packages.append(entry)
+    if seen != set(targeted):
+        raise ValueError('Targeted notice review contains stale inputs')
+    copied = []
+    for entry in review['copiedCodeNotices']:
+        source, files = upstream[entry['upstreamId']]
+        content = files[entry['path']]
+        if digest(content) != entry['sha256'] or package_bytes(entry['packagePath']) != content:
+            raise ValueError(f'Copied-code notice differs from pinned source: {entry["name"]}')
+        copied.append({**entry, 'url': source['url']})
+    comparisons = []
+    npm_files = {record['url']: files for record, files in npm}
+    for entry in review.get('sourceComparisons', []):
+        if entry['kind'] == 'npm-source-map':
+            mapping = json.loads(npm_files[entry['npmUrl']][entry['sourceMapPath']])
+            content = dict(zip(mapping['sources'], mapping['sourcesContent']))
+            matched = []
+            for pair in entry['files']:
+                data = upstream[entry['upstreamId']][1][pair['upstreamPath']]
+                if content[pair['sourceMapName']].encode() != data:
+                    raise ValueError('Upstream source differs from published source-map content')
+                matched.append({**pair, 'sha256': digest(data)})
+            comparisons.append({**entry, 'matchedFiles': matched})
+        elif entry['kind'] == 'upstream-equality':
+            data = upstream[entry['leftId']][1][entry['leftPath']]
+            if data != upstream[entry['rightId']][1][entry['rightPath']]:
+                raise ValueError('Development source differs from publication source')
+            comparisons.append({**entry, 'sha256': digest(data)})
+        else:
+            raise ValueError('Unknown source comparison kind')
+    return {'schemaVersion': 1, 'status': 'notice inventory; final publication review pending',
+            'summary': {'npmInputs': len(packages), 'byStatus': statuses},
+            'packages': sorted(packages, key=lambda entry: (entry['name'], entry['version'])),
+            'copiedCodeNotices': copied, 'sourceComparisons': comparisons,
+            'remainingReview': manifest['unresolved']}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('archive', type=Path)
+    args = parser.parse_args()
+    data = args.archive.read_bytes()
+    checksum = args.archive.with_suffix(args.archive.suffix + '.sha256')
+    if not checksum.exists() or digest(data) != checksum.read_text().split()[0]:
+        parser.error('Missing checksum sidecar or archive checksum mismatch.')
+    files = archive_files(data)
+    manifest = json.loads(files['SOURCE_MANIFEST.json'])
+    for item in manifest['packageFiles']:
+        if digest(files['package/' + item['path']]) != item['sha256']:
+            raise ValueError('Package source checksum mismatch')
+    report = build_report(manifest, files.__getitem__, lambda name: files['package/' + name])
+    stored = json.loads(files['SOURCE_NOTICE_REPORT.json'])
+    if report != stored:
+        raise ValueError('Stored notice report differs from recomputed evidence')
+    print(json.dumps(report['summary'], indent=2))
+    print(report['status'])
+    if report['summary']['byStatus'].get('unreviewed-missing-notice'):
+        raise ValueError('New missing notices require review before release preparation')
+
+
+if __name__ == '__main__':
+    main()

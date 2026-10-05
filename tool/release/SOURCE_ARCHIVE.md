@@ -18,8 +18,10 @@ npm lockfile integrity or recorded SHA-256 digests before caching them. It keeps
 upstream notices, scripts, styles, icons, translations, and TypeScript sources.
 The CKEditor archive excludes unused documentation, tests, samples, and generated
 demo builds, including their source maps. License, notice, copyright, copying,
-and acknowledgment files are retained even inside excluded directories. Other
-upstream archives remain intact. Exact non-optional npm tarballs preserve the
+and acknowledgment files are retained even inside excluded directories. Additional
+review sources use explicit exclusions for unrelated demos, tests, and languages;
+the original vanilla-colorful, published Lodash, and color-fns archives remain intact.
+Exact non-optional npm tarballs preserve the
 build inputs and their original package contents. Lodash's exact ES and main publication commits,
 a generator reference, and a color-fns reference archive are also included.
 Reference inputs are explicitly marked; they do not establish a copied revision
@@ -38,8 +40,8 @@ python3 tool/release/prepare_sources.py --offline \
 Offline mode requires previously verified cached inputs and rejects missing or
 corrupt ones. Without offline mode, invalid cache entries are downloaded again
 and verified. Initial downloads may take time and use substantial disk space.
-The compact candidate is approximately 59 MiB compressed, reduced from the
-201 MiB full-input candidate. It contains 490 pinned inputs and omits 22 optional
+The notice-reviewed candidate is approximately 60 MiB compressed, reduced from
+the 201 MiB full-input candidate. It contains 497 pinned inputs and omits 22 optional
 platform-specific npm inputs. The fresh rebuild below verifies that those inputs
 are unnecessary for this audited build. Required compiler/tool tarballs are kept
 intact; the remaining size is primarily npm build dependencies. It is a separate
@@ -65,6 +67,9 @@ The archive contains:
   file paths/digests/sizes, excluded file count, and selected archive SHA-256/size.
   Omitted optional npm inputs are listed separately; original lockfiles remain
   unchanged in `package/`.
+- `SOURCE_NOTICE_REPORT.json`: recomputable evidence for the 485 npm inputs,
+  targeted embedded/upstream notices, copied-code reference notices, source
+  comparisons, and remaining review. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
 
 ## Rebuild in a fresh environment
 
@@ -80,8 +85,8 @@ command rejects an existing destination. Verify source scripts before executing
 a candidate received from someone else: checksums detect changes but are not
 signatures or proof that scripts are trustworthy.
 
-The rebuild verifies the archive, selected upstream file lists, and all
-input/package-file digests, rejects
+The rebuild verifies the archive, selected upstream file lists, the notice
+report, and all input/package-file digests, rejects
 unsafe archive paths and link members, and extracts to a new workspace. It
 rewrites npm download locations only in that disposable extraction to the
 preserved local tarballs. Installation uses
@@ -123,17 +128,20 @@ The candidate proves a scoped source-to-bundle rebuild path, not completion of
 all redistribution or corresponding-source obligations. Before publication:
 
 - Complete provenance/notice review for vanilla-colorful's copied color-fns and
-  HSV conversion code. Its upstream acknowledgments are included. The cited
+  react-colorful revisions and HSV conversion code. Its upstream acknowledgments
+  and additional reference MIT notices are included. The cited
   [HSV conversion page](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c)
   is a repost and does not establish an explicit license for the copied code.
 - Review the historical Lodash ES generator chain. The exact published ES
   modules are verified; the generator reference is not proof of the upstream
   release process.
 - Review notices and source forms of included build tools and dependency files.
-  A scan found 11 retained npm tarballs without a standalone license/notice filename;
-  notices may be embedded or inherited and must be checked individually. This
-  scan does not conclude that those packages lack licenses or redistribution
-  rights. No generated candidate is automatically approved for publication.
+  Of the eleven retained inputs without standalone notice filenames, six have
+  complete embedded notices and three now have pinned upstream notices preserved.
+  Two declare a license without a recovered complete notice and need upstream
+  clarification. The inventory does not approve source forms or notice applicability
+  for every included file. See [the targeted review](NOTICE_REVIEW.md).
+  No generated candidate is automatically approved for publication.
 - Regenerate from the approved release checkout, review the actual manifest and
   archive contents, retain checksums, and verify the final source rebuild.
 - Publish the reviewed versioned source artifact at a persistent anonymous

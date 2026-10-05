@@ -54,12 +54,106 @@
       "sha256": "37ecbb6bab476a3f511ad394f8e054d24fec1592a53fa46b5e71511c628001d9",
       "size": 87794,
       "provenance": "reference only; copied revision unresolved"
+    },
+    {
+      "id": "saxes",
+      "repository": "lddubeau/saxes",
+      "commit": "6ef6a275b20f19cb67808daf0d8f64e06aaf5b0e",
+      "url": "https://codeload.github.com/lddubeau/saxes/tar.gz/6ef6a275b20f19cb67808daf0d8f64e06aaf5b0e",
+      "sha256": "ee9f4ac16a5f209a71b0546b286e3c037dcac03ad7fe28e4d36569e8bc476945",
+      "size": 171941,
+      "provenance": "v5.0.1 tag; package version and source review",
+      "excludeDirectories": [
+        "test",
+        "examples"
+      ],
+      "version": "5.0.1"
+    },
+    {
+      "id": "blurhash",
+      "repository": "woltapp/blurhash",
+      "commit": "cb151cab5b7d9cd3eef624e12e30381c6d292f0d",
+      "url": "https://codeload.github.com/woltapp/blurhash/tar.gz/cb151cab5b7d9cd3eef624e12e30381c6d292f0d",
+      "sha256": "9c06a53f30b1f840063fcbe31006fa2e4d6076514db04de08906e8f68dd5c5f4",
+      "size": 10720719,
+      "provenance": "2.0.5 version-bump commit; source-map content comparison",
+      "excludeDirectories": [
+        "C",
+        "Swift",
+        "Kotlin",
+        "Media",
+        "Website",
+        "TypeScript/demo"
+      ],
+      "version": "2.0.5"
+    },
+    {
+      "id": "tootallnate-once",
+      "repository": "TooTallNate/once",
+      "commit": "3948afcb5803013e184861943e0018e37830fcfe",
+      "url": "https://codeload.github.com/TooTallNate/once/tar.gz/3948afcb5803013e184861943e0018e37830fcfe",
+      "sha256": "490fd91d1e4b8dec7502ffe7653a5e9d257be4b862553bc7a403adf96e585d6e",
+      "size": 2777,
+      "provenance": "exact npm gitHead; MIT declaration only",
+      "version": "1.1.2"
+    },
+    {
+      "id": "acorn-import-assertions",
+      "repository": "xtuc/acorn-import-assertions",
+      "commit": "809f1c58c699fd084b6db8096963d916fc69d4c7",
+      "url": "https://codeload.github.com/xtuc/acorn-import-assertions/tar.gz/809f1c58c699fd084b6db8096963d916fc69d4c7",
+      "sha256": "02253ebaccd4df578b6f46c3bd4b10bedf6f89257694cedb7251d081e15591d5",
+      "size": 13465,
+      "provenance": "exact npm gitHead; MIT declaration only",
+      "version": "1.9.0"
+    },
+    {
+      "id": "react-colorful-reference",
+      "repository": "omgovich/react-colorful",
+      "commit": "df7d7bc7fbcad7fb5faab1c2aa28c004307b2cab",
+      "url": "https://codeload.github.com/omgovich/react-colorful/tar.gz/df7d7bc7fbcad7fb5faab1c2aa28c004307b2cab",
+      "sha256": "2230f1b8bcdb87b3dbf36c0444049c56b42354917eaf3bbd08ccb673604ea19f",
+      "size": 406133,
+      "provenance": "reference release 4.0.2; exact copied revision unresolved",
+      "excludeDirectories": [
+        "demo",
+        "tests"
+      ],
+      "version": "4.0.2"
+    },
+    {
+      "id": "lodash-tag-source",
+      "repository": "lodash/lodash",
+      "commit": "f299b52f39486275a9e6483b60a410e06520c538",
+      "url": "https://codeload.github.com/lodash/lodash/tar.gz/f299b52f39486275a9e6483b60a410e06520c538",
+      "sha256": "22c45204816b9d7172f5adf6773598403300d5f62f962c9fc751e868d98c4f75",
+      "size": 919347,
+      "provenance": "v4.17.21 development tag; lodash.js matches npm gitHead",
+      "excludeDirectories": [
+        "doc",
+        "test",
+        "vendor",
+        "dist",
+        "perf"
+      ],
+      "version": "4.17.21"
+    },
+    {
+      "id": "tootallnate-once-license",
+      "repository": "TooTallNate/once",
+      "commit": "de4a704b54936d83c8d6347d28665fe3b66c6de6",
+      "url": "https://codeload.github.com/TooTallNate/once/tar.gz/de4a704b54936d83c8d6347d28665fe3b66c6de6",
+      "sha256": "6c5a419ef2f0ee7268185339527077a64f0a308b33349f80abe02162cc021c0b",
+      "size": 4240,
+      "provenance": "upstream license-addition commit; source compared with npm gitHead",
+      "version": "1.1.2"
     }
   ],
   "unresolved": [
-    "Historical lodash-cli generation recipe/version for the 4.17.21 ES release is not verified.",
-    "Copied color-fns revision and HSV conversion permissions require final review.",
-    "Included build-tool package notices and preferred-source forms require final release review.",
+    "Historical Lodash ES generator recipe/version remains unverified; development-tag sources and npm publication sources are preserved.",
+    "Exact react-colorful/color-fns copied revisions and HSV conversion permission remain unresolved; additional reference MIT notices are preserved.",
+    "Complete notices for acorn-import-assertions 1.9.0 and boolbase 1.0.0 require upstream clarification.",
+    "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
     "Public source download access has not been provided."
   ],
   "extraNpmInputs": [

@@ -41,6 +41,13 @@ for (const name of ['vanilla-colorful', 'color-parse', 'color-convert', 'color-n
       fs.readFileSync(path.join(packagePath, 'ACKNOWLEDGMENTS'), 'utf8'));
   }
 }
+// Preserve the additional MIT notices for acknowledged copied-code origins.
+// These reference licenses do not establish the exact historical copied revision.
+for (const name of ['react-colorful', 'color-fns']) {
+  const separator = '='.repeat(72);
+  notices.push(`\n${separator}\n${name} copied-code origin — MIT (reference notice)\n${separator}\n\n` +
+    fs.readFileSync(path.resolve(__dirname, '../release/notices', `${name}-LICENSE.txt`), 'utf8'));
+}
 fs.writeFileSync(path.join(assetPath, 'THIRD_PARTY_LICENSES.txt'), notices.join(''));
 
 const sha256 = {};

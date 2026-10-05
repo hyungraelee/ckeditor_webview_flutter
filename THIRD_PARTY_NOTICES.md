@@ -42,7 +42,10 @@ The bundled editor also includes these MIT-licensed components:
 Their original license texts and vanilla-colorful's upstream acknowledgments
 are preserved in `assets/editor/THIRD_PARTY_LICENSES.txt`. Keep this file with
 the bundled distribution. The acknowledgments identify additional copied-code
-origins; review them when preparing the corresponding-source archive.
+origins. Additional original MIT reference notices for `react-colorful` and
+`color-fns` are preserved in the same file. Their exact historical copied
+revisions and the acknowledged HSV conversion permission remain under review;
+see [the notice review](tool/release/NOTICE_REVIEW.md).
 
 ## Source distribution
 

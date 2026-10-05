@@ -14,6 +14,8 @@ import subprocess
 import tarfile
 import urllib.request
 
+from audit_source_notices import build_report
+
 ROOT = Path(__file__).resolve().parents[2]
 
 
@@ -188,6 +190,11 @@ def main():
         'installations': installations,
         'packageFiles': [{'path': name, 'sha256': digest(p.read_bytes())} for name, p in files],
     }
+    notice_report = build_report(manifest,
+                                 lambda name: (cache / Path(name).name).read_bytes(),
+                                 lambda name: (ROOT / name).read_bytes())
+    if notice_report['summary']['byStatus'].get('unreviewed-missing-notice'):
+        raise ValueError('New missing notices require review before source preparation')
     # Fixed timestamps and ordering make unchanged candidates reproducible.
     partial = output.with_name(output.name + '.partial')
     if partial.exists():
@@ -195,6 +202,8 @@ def main():
     with partial.open('wb') as handle, gzip.GzipFile(fileobj=handle, mode='wb', filename='', mtime=0) as compressed:
         with tarfile.open(fileobj=compressed, mode='w') as archive:
             add_file(archive, 'SOURCE_MANIFEST.json', (json.dumps(manifest, indent=2) + '\n').encode())
+            add_file(archive, 'SOURCE_NOTICE_REPORT.json',
+                     (json.dumps(notice_report, indent=2) + '\n').encode())
             for name, path in files:
                 add_file(archive, 'package/' + name, path.read_bytes())
             for record in manifest['inputs']:

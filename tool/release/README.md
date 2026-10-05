@@ -6,6 +6,9 @@ archive or a certification of GPL compliance. A local source candidate and a
 scoped source-to-bundle rebuild are now available; final provenance/notice review
 and a public release download location remain pending. See
 [SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) for preparation commands and limits.
+The targeted notice findings and remaining clarifications are in
+[NOTICE_REVIEW.md](NOTICE_REVIEW.md). Source candidates also include a recomputable
+notice inventory tied to pinned tarballs and reference source digests.
 
 ## Verified build provenance
 
@@ -72,7 +75,7 @@ inventory. The source preparation tools verify these originals, then select
 CKEditor sources without unused documentation, tests, samples, or generated
 demo builds. Notices and build/modification inputs are preserved, and the source
 manifest records the selection and original provenance. No project source
-release has been published. The compact full candidate is approximately 59 MiB,
+release has been published. The notice-reviewed candidate is approximately 60 MiB,
 including npm build inputs; do not add it to Flutter runtime assets. Keep source
 distribution separate from the editor loaded in the WebView.
 
@@ -153,6 +156,16 @@ package snapshot dry-run passed with zero warnings and a 378 KB compressed
 archive. The separate source candidate was reduced from 201 MiB to 59 MiB;
 its fresh offline rebuild reproduced all seven generated editor assets byte for
 byte. Runtime Dart, editor assets, and the original build recipe were unchanged.
+
+The notice review adds original MIT reference notices for acknowledged copied
+color UI code; the notice writer retains them during a rebuild. The JS/CSS bundle
+and runtime Dart remain unchanged. Two build inputs still need complete notice
+clarification, and copied-code/historical-generation review remains open. See
+[NOTICE_REVIEW.md](NOTICE_REVIEW.md) for evidence and reproduction commands.
+The notice-review snapshot dry-run passed with zero warnings and an approximately
+388 KB compressed package. Fresh offline source regeneration/rebuild matched
+the expanded notice file and all other generated outputs; the separate source
+candidate remains approximately 60 MiB.
 
 A dry-run does not upload a package or verify corresponding-source availability,
 third-party license completeness, native device behavior, or HTML compatibility.
