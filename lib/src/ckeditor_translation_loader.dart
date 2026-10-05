@@ -12,7 +12,11 @@ const _translationTimeout = Duration(seconds: 3);
 
 typedef CkEditorTranslation = ({String language, String? script});
 
-Future<CkEditorTranslation> loadCkEditorTranslation(Locale locale) async {
+Future<CkEditorTranslation> loadCkEditorTranslation(
+  Locale locale, {
+  String version = _editorVersion,
+  bool modern = false,
+}) async {
   final language = _translationLanguage(locale);
   const fallback = (language: 'en', script: null);
   if (language == 'en') return fallback;
@@ -22,7 +26,9 @@ Future<CkEditorTranslation> loadCkEditorTranslation(Locale locale) async {
     final script = await (() async {
       final uri = Uri.https(
         'cdn.ckeditor.com',
-        '/ckeditor5/$_editorVersion/super-build/translations/$language.js',
+        modern
+            ? '/ckeditor5/$version/translations/$language.umd.js'
+            : '/ckeditor5/$version/super-build/translations/$language.js',
       );
       final request = await client.getUrl(uri);
       request.followRedirects = false;

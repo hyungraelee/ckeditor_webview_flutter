@@ -247,6 +247,14 @@
         plugins: PLUGINS.map(name => bundle[name]),
         toolbar: { items: toolbarItems, shouldNotGroupWhenFull: false }
       };
+      // Modern installations receive translation objects through configuration.
+      // The legacy default bundle continues using its global translation lookup.
+      if (window.CKEDITOR_BUNDLE_INFO?.translationFormat === 'umd' &&
+          window.CKEDITOR_TRANSLATIONS?.[uiLanguage]) {
+        config.translations = {
+          [uiLanguage]: window.CKEDITOR_TRANSLATIONS[uiLanguage]
+        };
+      }
       // 41.x does not require the licenseKey initialization option added in 44.x.
       const instance = await bundle.ClassicEditor.create(
         document.getElementById('editor'), config

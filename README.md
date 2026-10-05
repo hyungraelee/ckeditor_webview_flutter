@@ -9,6 +9,11 @@ The bundled editor is **CKEditor 5 41.4.1**, with English UI as the fallback.
 Heading, font, color, highlight, alignment, and special-character settings use CKEditor
 defaults. Toolbar overflow uses CKEditor's grouping menu.
 
+Applications can optionally select a **42.x** engine with a Node.js/npm-based
+build tool. Default usage requires no Node installation. This first opt-in
+adapter is not a guarantee of device or HTML round-trip compatibility with all
+42.x versions; other major versions are rejected until adapters are reviewed.
+
 ## Usage
 
 An Android/iOS app is included in [`example/`](example/README.md). It demonstrates
@@ -135,6 +140,32 @@ convert the stored HTML.
 See CKEditor's [UI language guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/ui-language.html).
 This package uses the legacy 41.4.1 translation format rather than the current
 CDN format shown for newer editor versions.
+
+Opt-in generated assets use their actual resolved 42.x version and the official
+`translations/<language>.umd.js` endpoint, passing its translation object to
+the editor configuration. The same timeout and English fallback apply.
+
+## Optional engine version builds
+
+Keep the default widget for the bundled editor, or opt into version selection
+using a Flutter asset transformer and `editorAsset`. Only opted-in applications
+need Node.js 20+ and npm on development machines and CI. These tools run while
+building assets, never on the mobile device or during `flutter pub get`.
+
+For setup, see [the optional builder guide](tool/ckeditor_builder/README.md).
+Run `dart run ckeditor_webview_flutter init --version "^42.0.0"` from the
+consuming app root to create the input asset and register the version and
+transformer in `pubspec.yaml`. The command preserves unrelated settings and
+comments. Set `editorAsset: 'assets/ckeditor.html'` on the widget once; the
+command prints this option and does not rewrite application Dart files.
+Flutter run/build then packages a local, self-contained editor document.
+Users do not manually author HTML, JavaScript, or adapters.
+
+Commit the generated `ckeditor_webview_flutter.lock` in the consuming app.
+It freezes the resolved engine and npm dependencies, even for caret/wildcard
+requests. Updates require an explicit command; ordinary runs reuse the selected
+version and cache. Build-time version requests do not change `getHtml()`'s HTML
+storage contract or add unsupported features to the existing toolbar.
 
 ## HTML and editing
 

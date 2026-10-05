@@ -32,6 +32,13 @@ Source: https://github.com/lodash/lodash
 
 ## Source distribution
 
+The optional builder in `tool/ckeditor_builder/` resolves CKEditor 42.x in the
+consuming application's build environment. It preserves installed upstream
+license texts in the generated HTML and `dist/THIRD_PARTY_NOTICES.json` cache
+artifact. The app's `ckeditor_webview_flutter.lock` identifies the resolved
+engine and npm dependencies. These generated records must not be treated as
+completion of corresponding-source distribution for that app release.
+
 The editor entry point, build configuration, and exact dependency lockfile are
 included in `tool/ckeditor_build/`. See the README for rebuild instructions.
 Those build recipes and upstream links do not by themselves replace any GPL
