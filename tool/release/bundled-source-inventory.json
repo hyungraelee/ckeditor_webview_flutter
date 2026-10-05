@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 1,
+  "scope": "Emitted webpack chunk modules for the bundled editor; not a complete corresponding-source archive or a legal compliance certification.",
+  "baselineCommit": "0fd089d",
+  "editorVersion": "41.4.1",
+  "buildEnvironment": {
+    "node": "23.9.0",
+    "npm": "10.9.2",
+    "webpack": "5.91.0",
+    "mode": "production"
+  },
+  "lockfileSha256": "df7f6dea195ade0a4211832bcbebcb5a134c85c901ef82b057863be33255fd48",
+  "matchedAssetsSha256": {
+    "ckeditor.js": "1b348eb5c6d2f6b417314526a03ba2df378d9b5fa7eeadb4fb0ed21807a9650d",
+    "ckeditor.css": "c06e50254acc3e3a52195265c7071f5fb0f598c99425548ae5101fec4be40864",
+    "ckeditor.js.LICENSE.txt": "2316da1cd1fec0fc881039ac84bdf390acaab4478ca309046397e03a5f1dc5fd",
+    "CKEDITOR-LICENSE.txt": "34deaa6bfca4b72db248f84bbe49e4c0e9df269f6c85ecd4803b73db81cc8641",
+    "build-info.json": "a5e58a2051221df04b63ec3c56de77312ffbdf8a7953bb99af6776f20441f874"
+  },
+  "runtimePackages": [
+    {
+      "name": "@ckeditor/ckeditor5-alignment",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-alignment"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-alignment/-/ckeditor5-alignment-41.4.1.tgz",
+      "npmIntegrity": "sha512-WxC/D1kbHcFqNrHUDSqp6o/kTANNp9okd0z11MAa+fAyLFOvoBkt+wuex7K74RLbyvzNvkypaGUM0FqwA1bEWA==",
+      "moduleIdentifierCount": 5
+    },
+    {
+      "name": "@ckeditor/ckeditor5-basic-styles",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-basic-styles"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-basic-styles/-/ckeditor5-basic-styles-41.4.1.tgz",
+      "npmIntegrity": "sha512-AI6WQPNgOPFNGDXSP4dkBn+xyeNlmJE9qVlAE9HhLHEf3fcc/R3lRC3XMnTdupMnccHjf6esIlb3xhkbKJ0NVg==",
+      "moduleIdentifierCount": 25
+    },
+    {
+      "name": "@ckeditor/ckeditor5-clipboard",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-clipboard"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-clipboard/-/ckeditor5-clipboard-41.4.1.tgz",
+      "npmIntegrity": "sha512-YrTHv+nuHTnaeIZr/jVlKIH5Grus6nP/qhbYV0t/qmZ8IPmUG+r06gzrHtoIKCshJeFqMa7Eld2a0o86Ohj1MQ==",
+      "moduleIdentifierCount": 14
+    },
+    {
+      "name": "@ckeditor/ckeditor5-core",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-core"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-core/-/ckeditor5-core-41.4.1.tgz",
+      "npmIntegrity": "sha512-1tL6Wpm7ZaxfJ/tl/OEtkchFqU817IvDfcnOZCASto4FwNghAK6owJRvrK/PTZFxlVvuapJetREUWIAXcc65Bg==",
+      "moduleIdentifierCount": 78
+    },
+    {
+      "name": "@ckeditor/ckeditor5-editor-classic",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-editor-classic"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-editor-classic/-/ckeditor5-editor-classic-41.4.1.tgz",
+      "npmIntegrity": "sha512-j0n8Jeusli4NU1C8kCsbDSqSdHQPuoiz5lU48a2gBH3pWt9G5y/ElcS+xXu9XUjRSe916hlS90aaXxsbP2e/VQ==",
+      "moduleIdentifierCount": 4
+    },
+    {
+      "name": "@ckeditor/ckeditor5-engine",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-engine"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-engine/-/ckeditor5-engine-41.4.1.tgz",
+      "npmIntegrity": "sha512-uIBU7NVhpXI1+xnFu75ADenMhj0U0AfCpuC/wT9iV3588amqhB3+ycYNCKf9HWPX8jy9p8lwS30Q3mR+RAlIuw==",
+      "moduleIdentifierCount": 114
+    },
+    {
+      "name": "@ckeditor/ckeditor5-enter",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-enter"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-enter/-/ckeditor5-enter-41.4.1.tgz",
+      "npmIntegrity": "sha512-USeAB9NYehgugfSyrVPX0h+CfY3J5tPlrdvVPTRo91+wDIx5Eduyh7k1ILVZ/BJ7swzbiKaNJFXnWERPPoW7LA==",
+      "moduleIdentifierCount": 7
+    },
+    {
+      "name": "@ckeditor/ckeditor5-essentials",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-essentials"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-essentials/-/ckeditor5-essentials-41.4.1.tgz",
+      "npmIntegrity": "sha512-ohcZYjzT4HkalgL7ZhTRHmRkHwLYp0RlPKFtD/ptvXugreu9lMK06A5NTEjCS+LkQ7yx1Egr0urv+baxKuukxw==",
+      "moduleIdentifierCount": 1
+    },
+    {
+      "name": "@ckeditor/ckeditor5-font",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-font"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-font/-/ckeditor5-font-41.4.1.tgz",
+      "npmIntegrity": "sha512-/I8bRR70vLhZbyB9m3snzSMH0uO3TWlDKuxkXu0mAVNUI2bSBMswjprYDlW2K6WpUgw0afJ436A7npZE1N7txg==",
+      "moduleIdentifierCount": 26
+    },
+    {
+      "name": "@ckeditor/ckeditor5-heading",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-heading"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-heading/-/ckeditor5-heading-41.4.1.tgz",
+      "npmIntegrity": "sha512-xEZunJZqv+tr3/kWRYWP+8ePy179/YQntrPUTcAY7KuSwnsYv8Yl+JQhDUXAbnaFs02m18Leg/aHz1z05MO+0w==",
+      "moduleIdentifierCount": 6
+    },
+    {
+      "name": "@ckeditor/ckeditor5-highlight",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-highlight"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-highlight/-/ckeditor5-highlight-41.4.1.tgz",
+      "npmIntegrity": "sha512-K9K3c8VGK8YmgsVL3Xh/fE1zXeI7gwc0vTSRPpAAk3NTylQzhc5btZmCUyRhjw4ocLBW3UTfh/qCgvFc9rWVuA==",
+      "moduleIdentifierCount": 7
+    },
+    {
+      "name": "@ckeditor/ckeditor5-horizontal-line",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-horizontal-line"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-horizontal-line/-/ckeditor5-horizontal-line-41.4.1.tgz",
+      "npmIntegrity": "sha512-1gehv/N5c4j1q3W/6mDEKrbk/rl/YBl/Q4WSv3d/MOe+NUDaJn65h43KUSYw0cEfH+rTfePhlljrnw/UJ47JYw==",
+      "moduleIdentifierCount": 5
+    },
+    {
+      "name": "@ckeditor/ckeditor5-indent",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-indent"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-indent/-/ckeditor5-indent-41.4.1.tgz",
+      "npmIntegrity": "sha512-YCKOy3Kby5Uev0HmkcT9cpp2nWPbsKXcywoC9KVapzxtdT8d5100uV8O19NvFu9xinNlnBuOQP8SyiR2DDGVNQ==",
+      "moduleIdentifierCount": 7
+    },
+    {
+      "name": "@ckeditor/ckeditor5-paragraph",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-paragraph"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-paragraph/-/ckeditor5-paragraph-41.4.1.tgz",
+      "npmIntegrity": "sha512-mR6p+ODlVXC2eLkLPC4udVDO3byXvo0WTvQQOTFU3fSHUUF39Bcvx2fnq1d+v8I9iLgLZ0Ug2BmX9cBLeGmg2A==",
+      "moduleIdentifierCount": 5
+    },
+    {
+      "name": "@ckeditor/ckeditor5-select-all",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-select-all"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-select-all/-/ckeditor5-select-all-41.4.1.tgz",
+      "npmIntegrity": "sha512-DqgZHzjEZlHZndqC7G08TrkknSRo6vvTJ5qDzdpMNJfZ/leo/rcKw8PVjwANCvMopcwghsfg04DfCyk+q9CoAg==",
+      "moduleIdentifierCount": 6
+    },
+    {
+      "name": "@ckeditor/ckeditor5-show-blocks",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-show-blocks"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-show-blocks/-/ckeditor5-show-blocks-41.4.1.tgz",
+      "npmIntegrity": "sha512-7o40X/oQvJyT3aAuazJzxxttSKwT81b1y8ZdncxEWkeU/M+2tSTkkjyzztJP/FD82ULKsocWqcrmQBSsLj4HTg==",
+      "moduleIdentifierCount": 6
+    },
+    {
+      "name": "@ckeditor/ckeditor5-source-editing",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-source-editing"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-source-editing/-/ckeditor5-source-editing-41.4.1.tgz",
+      "npmIntegrity": "sha512-xqBOHEfEGJmEBlDy/I9g6V+VVHSy9XY/gKPZukLxK31aFtbo4WmLOApiUQzUtqsqTZaExeLy+9dhg9Okw0+0PA==",
+      "moduleIdentifierCount": 4
+    },
+    {
+      "name": "@ckeditor/ckeditor5-special-characters",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-special-characters"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-special-characters/-/ckeditor5-special-characters-41.4.1.tgz",
+      "npmIntegrity": "sha512-6bCM3oHhPbfi7EEZSfiBWqTpKZ1tfTDB2iW81OPCYYGTQwc0PFogrfe1mtie1POlWelD+mO8P41o70GfOQ3Ysg==",
+      "moduleIdentifierCount": 15
+    },
+    {
+      "name": "@ckeditor/ckeditor5-typing",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-typing"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-typing/-/ckeditor5-typing-41.4.1.tgz",
+      "npmIntegrity": "sha512-K6wHZvDJBWqHa7b+FCV+nNg2B1TZqb/zhki+xxP484M3ro7kHUoJJ7zSEhH9OjUckKs1jBo9NvJfkMnuFWEx4g==",
+      "moduleIdentifierCount": 13
+    },
+    {
+      "name": "@ckeditor/ckeditor5-ui",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-ui"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-ui/-/ckeditor5-ui-41.4.1.tgz",
+      "npmIntegrity": "sha512-NuLa45LD2XYbBgE4VVBccggQ0FVy1OXtngr4grh9LWHf1EQNiFRZEm+bHc4kLnM6JmVsSHZraYuCm/7KjRMmKw==",
+      "moduleIdentifierCount": 131
+    },
+    {
+      "name": "@ckeditor/ckeditor5-undo",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-undo"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-undo/-/ckeditor5-undo-41.4.1.tgz",
+      "npmIntegrity": "sha512-UILJXqoHHkmTHz0snF2qR0OfjyfofCLFTP2z1P1T5Zjo+FkwHK3nlE9r9D4aVtdBii1jaM3DhzQ5+gwSX3ELPg==",
+      "moduleIdentifierCount": 7
+    },
+    {
+      "name": "@ckeditor/ckeditor5-utils",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-utils"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-utils/-/ckeditor5-utils-41.4.1.tgz",
+      "npmIntegrity": "sha512-g8M2802mQM4BV+5NLA1VlC4sRkLottV+SQoVwIHFydw3zGACo7UxO8i1QQBOcqBTvwYNGg9BOPoInpbDXuuJIg==",
+      "moduleIdentifierCount": 57
+    },
+    {
+      "name": "@ckeditor/ckeditor5-watchdog",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-watchdog"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-watchdog/-/ckeditor5-watchdog-41.4.1.tgz",
+      "npmIntegrity": "sha512-TTk3ODm8IUHxI9rzvlQ9oO0cH4pIeasOnZGN/Az1FiiuCXdrs62K+Df7+u1RaAaQrhSXaS6uPbDazR8esTXgjQ==",
+      "moduleIdentifierCount": 6
+    },
+    {
+      "name": "@ckeditor/ckeditor5-widget",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-widget"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-widget/-/ckeditor5-widget-41.4.1.tgz",
+      "npmIntegrity": "sha512-dRDpbAoJoY9Go81FURTTiWKjMLxKERZOdecpW2I3W5Z52cEoccroURdYkeejTX+XNINwb5dXNBym9Z1Hce8NAg==",
+      "moduleIdentifierCount": 17
+    },
+    {
+      "name": "ckeditor5",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git"
+      },
+      "npmTarball": "https://registry.npmjs.org/ckeditor5/-/ckeditor5-41.4.1.tgz",
+      "npmIntegrity": "sha512-XK3ED7meT9xNuIikPBq8kblIZyYhO9+m+z6ZxOzeyPiInQcB0Brdf9kkeg4TnRS5B/9b5I9oB9x9ASir45WL5g==",
+      "moduleIdentifierCount": 12
+    },
+    {
+      "name": "color-convert",
+      "version": "2.0.1",
+      "license": "MIT",
+      "repository": "Qix-/color-convert",
+      "npmTarball": "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz",
+      "npmIntegrity": "sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==",
+      "moduleIdentifierCount": 3
+    },
+    {
+      "name": "color-name",
+      "version": "1.1.4",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "git@github.com:colorjs/color-name.git"
+      },
+      "npmTarball": "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz",
+      "npmIntegrity": "sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==",
+      "moduleIdentifierCount": 1
+    },
+    {
+      "name": "color-parse",
+      "version": "1.4.2",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/colorjs/color-parse"
+      },
+      "npmTarball": "https://registry.npmjs.org/color-parse/-/color-parse-1.4.2.tgz",
+      "npmIntegrity": "sha512-RI7s49/8yqDj3fECFZjUI1Yi0z/Gq1py43oNJivAIIDSyJiOZLfYCRQEgn8HEVAj++PcRe8AnL2XF0fRJ3BTnA==",
+      "moduleIdentifierCount": 1
+    },
+    {
+      "name": "lodash-es",
+      "version": "4.17.21",
+      "license": "MIT",
+      "repository": "lodash/lodash",
+      "npmTarball": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz",
+      "npmIntegrity": "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==",
+      "moduleIdentifierCount": 191
+    },
+    {
+      "name": "vanilla-colorful",
+      "version": "0.7.2",
+      "license": "MIT",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/web-padawan/vanilla-colorful.git"
+      },
+      "npmTarball": "https://registry.npmjs.org/vanilla-colorful/-/vanilla-colorful-0.7.2.tgz",
+      "npmIntegrity": "sha512-z2YZusTFC6KnLERx1cgoIRX2CjPRP0W75N+3CC6gbvdX5Ch47rZkEMGO2Xnf+IEmi3RiFLxS18gayMA27iU7Kg==",
+      "moduleIdentifierCount": 12
+    }
+  ],
+  "upstreamArchivesInspected": [
+    {
+      "tag": "v41.4.1",
+      "commit": "c3319030d8d3d0291b794f24d40c0970c99c9628",
+      "url": "https://codeload.github.com/ckeditor/ckeditor5/tar.gz/c3319030d8d3d0291b794f24d40c0970c99c9628",
+      "sha256": "d1ee0711f14ee6a7684d45fe48e3e430d0a5cd8c587c6d7876b4be369ba38f13",
+      "size": 73563874
+    },
+    {
+      "version": "0.7.2",
+      "commit": "d227133e466cc0be720ae0fda775a0d3a927679e",
+      "url": "https://codeload.github.com/web-padawan/vanilla-colorful/tar.gz/d227133e466cc0be720ae0fda775a0d3a927679e",
+      "sha256": "43a12e5913e15b92f5170d34bb9bc4949171a2a9b04206db890ebdc2bfd32e78",
+      "size": 528899
+    }
+  ],
+  "remainingWork": [
+    "Assemble and distribute the exact release sources; inspected archives are currently local audit inputs only.",
+    "Verify the build path from CKEditor TypeScript sources and vanilla-colorful TypeScript/style inputs to the npm-level files used by this bundle.",
+    "Resolve Lodash ES module generation provenance and include the appropriate modification sources and generation inputs.",
+    "Review copied-code notices in vanilla-colorful ACKNOWLEDGMENTS, including react-colorful, color-fns, and the cited HSV conversion implementation.",
+    "Review and preserve licenses of any build tools or other files included in the final source archive.",
+    "Publish and verify a persistent release source-download location before pub.dev upload."
+  ]
+}

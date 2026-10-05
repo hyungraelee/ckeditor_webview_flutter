@@ -65,3 +65,7 @@ Preserve upstream license notices when rebuilding or distributing assets. Build
 scripts, lockfiles, and upstream links alone do not satisfy complete
 corresponding-source distribution obligations. See
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+For the bundled source inventory, source-distribution plan, package file review,
+and outstanding publication checks, see
+[the release source audit](tool/release/README.md).
