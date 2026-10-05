@@ -17,7 +17,7 @@ Usage:
   dart run ckeditor_webview_flutter init --version "^42.0.0"
 
 Options:
-  --version <request>  Required 42.x request, e.g. 42.0.0, ^42.0.0, or 42.x.
+  --version <request>  Numeric npm request, e.g. 41.4.1, ^43.0.0, or 44.x.
   --asset <path>       Relative HTML asset key (default: assets/ckeditor.html).
   --help              Show this help.
 
@@ -52,9 +52,11 @@ It does not overwrite user HTML, modify Dart files, or invoke Node/npm.
   }
   final version = options['--version'];
   if (version == null ||
-      !RegExp(r'^(?:[~^]?42\.\d+\.\d+|42\.(?:x|\d+\.x))$').hasMatch(version)) {
+      !RegExp(r'^(?:[~^]?\d+\.\d+\.\d+|\d+\.(?:x|\d+\.x))$')
+          .hasMatch(version)) {
     throw const FormatException(
-      'Supply --version with a supported 42.x request, such as "^42.0.0".',
+      'Supply --version with an exact, caret/tilde, or numeric wildcard '
+      'request, such as "^43.0.0". Tags, URLs, and prereleases are not accepted.',
     );
   }
   final asset = options['--asset'] ?? 'assets/ckeditor.html';

@@ -9,10 +9,11 @@ The bundled editor is **CKEditor 5 41.4.1**, with English UI as the fallback.
 Heading, font, color, highlight, alignment, and special-character settings use CKEditor
 defaults. Toolbar overflow uses CKEditor's grouping menu.
 
-Applications can optionally select a **42.x** engine with a Node.js/npm-based
-build tool. Default usage requires no Node installation. This first opt-in
-adapter is not a guarantee of device or HTML round-trip compatibility with all
-42.x versions; other major versions are rejected until adapters are reviewed.
+Applications can optionally request a CKEditor version with a Node.js/npm-based
+build tool. There is no major-version whitelist: legacy source builds and modern
+npm builds use separate toolchains. Default usage requires no Node installation.
+Requested versions must provide the package's plugins and compatible build/API
+layout; build success does not guarantee device or HTML round-trip compatibility.
 
 ## Usage
 
@@ -141,9 +142,10 @@ See CKEditor's [UI language guide](https://ckeditor.com/docs/ckeditor5/latest/ge
 This package uses the legacy 41.4.1 translation format rather than the current
 CDN format shown for newer editor versions.
 
-Opt-in generated assets use their actual resolved 42.x version and the official
-`translations/<language>.umd.js` endpoint, passing its translation object to
-the editor configuration. The same timeout and English fallback apply.
+Opt-in generated assets use their actual resolved version. Modern installations
+use the official `translations/<language>.umd.js` endpoint and pass its object to
+the editor configuration; legacy installations use the matching super-build
+translation endpoint. The same timeout and English fallback apply.
 
 ## Optional engine version builds
 
@@ -166,6 +168,42 @@ It freezes the resolved engine and npm dependencies, even for caret/wildcard
 requests. Updates require an explicit command; ordinary runs reuse the selected
 version and cache. Build-time version requests do not change `getHtml()`'s HTML
 storage contract or add unsupported features to the existing toolbar.
+
+Accept exact, caret/tilde, and numeric wildcard requests such as `41.4.1`,
+`^43.0.0`, `~44.0.0`, or `48.x`. Tags, URLs, prereleases, and compound ranges are
+not accepted. Versions before 42 use the legacy webpack recipe; newer versions
+use esbuild. Generated engines from version 44 receive the widget's `licenseKey`
+at initialization, as described in the
+[official self-hosted installation guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/installation/self-hosted/quick-start.html).
+
+Both widget options are optional: `editorAsset` defaults to the bundled 41.4.1
+editor, and `licenseKey` defaults to `'GPL'`. The GPL default requires
+GPL-compliant use. The bundled engine and generated releases before 44 ignore
+the key. Override it to pass a self-hosted CKEditor commercial key when
+appropriate; this does not change this package's own GPL license or grant
+permission to use the package under different terms.
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  editorAsset: 'assets/ckeditor.html',
+  licenseKey: const String.fromEnvironment(
+    'CKEDITOR_LICENSE_KEY', defaultValue: 'GPL',
+  ),
+)
+```
+
+The consuming app can use `--dart-define=CKEDITOR_LICENSE_KEY=...` or supply a
+value through its own configuration. Key values are passed through the bridge
+and are not written into generated HTML, npm locks, or cache metadata. App
+configuration does not provide secret storage for a value shipped on devices.
+Changing `licenseKey` recreates the WebView. Empty/whitespace keys report
+`invalid_license_key` when the selected engine requires one; other activation
+failures are reported by CKEditor through `onError`.
+
+After updating the builder package, run `flutter clean` and rebuild generated
+assets. Asset protocol 2 prevents older assets with hard-coded GPL activation
+from silently ignoring a widget override.
 
 ## HTML and editing
 

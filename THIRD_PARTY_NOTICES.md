@@ -32,7 +32,7 @@ Source: https://github.com/lodash/lodash
 
 ## Source distribution
 
-The optional builder in `tool/ckeditor_builder/` resolves CKEditor 42.x in the
+The optional builder in `tool/ckeditor_builder/` resolves requested CKEditor versions in the
 consuming application's build environment. It preserves installed upstream
 license texts in the generated HTML and `dist/THIRD_PARTY_NOTICES.json` cache
 artifact. The app's `ckeditor_webview_flutter.lock` identifies the resolved

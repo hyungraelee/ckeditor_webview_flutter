@@ -164,6 +164,7 @@ class CkEditorController extends ChangeNotifier {
     required double minHeight,
     String uiLanguage = 'en',
     List<String>? toolbarItems,
+    String? licenseKey,
   }) async {
     final session = _session;
     if (session == null ||
@@ -180,6 +181,7 @@ class CkEditorController extends ChangeNotifier {
         'minHeight': minHeight,
         'uiLanguage': uiLanguage,
         'toolbarItems': toolbarItems,
+        'licenseKey': licenseKey,
       });
       // Return a boolean, not a Promise (native WebViews do not await it).
       final result = await _execute(

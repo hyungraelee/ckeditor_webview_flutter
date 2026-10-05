@@ -16,6 +16,9 @@ function readJson(file) { return JSON.parse(fs.readFileSync(file, 'utf8')); }
 function writeJson(file, value) { fs.writeFileSync(file, JSON.stringify(value, null, 2) + '\n'); }
 function hash(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
 function inlineScript(value) { return value.replace(/<\/script/gi, '<\\/script'); }
+function isEditorPackage(name) {
+  return /(?:^|\/)node_modules\/@ckeditor\/ckeditor5-(?!dev-)[^/]+$/.test(name);
+}
 
 // Execute npm's JavaScript CLI through Node; this also avoids .cmd shell quoting
 // on Windows and keeps version requests out of shell command strings.
@@ -66,10 +69,15 @@ async function build() {
   if (Number(process.versions.node.split('.')[0]) < 20) {
     throw new Error('Opt-in editor builds require Node.js 20 or newer.');
   }
-  if (!/^(?:[~^]?42\.\d+\.\d+|42\.(?:x|\d+\.x))$/.test(request || '')) {
-    throw new Error('This build adapter supports CKEditor 42.x only. Use an exact version, '
-      + 'a caret/tilde request such as ^42.0.0, or 42.x. Other majors are not yet supported.');
+  if (!/^(?:[~^]?\d+\.\d+\.\d+|\d+\.(?:x|\d+\.x))$/.test(request || '')) {
+    throw new Error('Use an exact, caret/tilde, or numeric wildcard version request, '
+      + 'such as ^43.0.0 or 44.x. Tags, URLs, and prereleases are not accepted.');
   }
+  const requestedMajor = Number(request.match(/\d+/)[0]);
+  const modern = requestedMajor >= 42;
+  const legacyRecipe = readJson(path.join(packageRoot, 'tool/ckeditor_build/package.json'));
+  const buildDependencies = modern ? { esbuild: compilerVersion }
+    : { esbuild: compilerVersion, ...legacyRecipe.devDependencies };
   fs.mkdirSync(cache, { recursive: true });
   // Exclusive access prevents simultaneous asset builds from changing the same
   // npm installation or lock. Normal completion releases this lock file.
@@ -87,13 +95,14 @@ async function build() {
     fs.renameSync(nextLock, persistentLock);
   };
   const manifest = { name: 'ckeditor-webview-flutter-generated', version: '1.0.0', private: true,
-    dependencies: { ckeditor5: request, esbuild: compilerVersion } };
+    dependencies: { ckeditor5: request, ...buildDependencies } };
   const updating = updateFlag === '--update';
   let lock;
   if (fs.existsSync(persistentLock)) {
     lock = readJson(persistentLock);
     const previous = lock.packages?.['']?.dependencies;
-    if (!updating && (previous?.ckeditor5 !== request || previous?.esbuild !== compilerVersion)) {
+    if (!updating && (previous?.ckeditor5 !== request ||
+        Object.entries(buildDependencies).some(([name, value]) => previous?.[name] !== value))) {
       throw new Error('The editor request or compiler changed. Run '
         + 'dart run ckeditor_webview_flutter --update, then flutter clean and rebuild.');
     }
@@ -105,8 +114,10 @@ async function build() {
   const lockedVersion = lock?.packages?.['node_modules/ckeditor5']?.version;
   const reusable = lockedVersion && fs.existsSync(installed)
     && readJson(installed).version === lockedVersion
-    && fs.existsSync(path.join(modules, 'esbuild', 'package.json'))
-    && readJson(path.join(modules, 'esbuild', 'package.json')).version === compilerVersion;
+    && Object.entries(buildDependencies).every(([name, value]) => {
+      const metadata = path.join(modules, name, 'package.json');
+      return fs.existsSync(metadata) && readJson(metadata).version === value;
+    });
   if (updating) {
     npm(['install']);
     npm(['update', 'ckeditor5']);
@@ -117,9 +128,11 @@ async function build() {
   }
   lock = readJson(localLock);
   const version = lock.packages['node_modules/ckeditor5'].version;
-  if (!/^42\.\d+\.\d+$/.test(version)) throw new Error(`Unsupported resolved version: ${version}`);
+  if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error(`Unsupported resolved version: ${version}`);
+  const major = Number(version.split('.')[0]);
+  if (major !== requestedMajor) throw new Error(`Unexpected resolved major: ${version}`);
   for (const [name, info] of Object.entries(lock.packages)) {
-    if (/node_modules\/@ckeditor\/ckeditor5-(?!dev-)/.test(name) && info.version !== version) {
+    if (isEditorPackage(name) && info.version !== version) {
       throw new Error(`Mixed editor versions: ${name}@${info.version}; expected ${version}.`);
     }
   }
@@ -127,10 +140,12 @@ async function build() {
   fs.mkdirSync(dist, { recursive: true });
   const editorHtml = path.join(dist, 'editor.html');
   const metadataFile = path.join(dist, 'build-info.json');
-  const entry = fs.readFileSync(path.join(packageRoot, 'tool/ckeditor_builder/entry.mjs'), 'utf8');
+  const entry = fs.readFileSync(path.join(packageRoot, modern
+    ? 'tool/ckeditor_builder/entry.mjs' : 'tool/ckeditor_build/editor-entry.js'), 'utf8');
+  const legacyBuilder = fs.readFileSync(path.join(packageRoot, 'tool/ckeditor_builder/legacy.cjs'), 'utf8');
   const bridge = fs.readFileSync(path.join(packageRoot, 'assets/editor/editor.js'), 'utf8');
   const layoutCss = fs.readFileSync(path.join(packageRoot, 'assets/editor/editor.css'), 'utf8');
-  const fingerprint = hash(JSON.stringify([lock, entry, bridge, layoutCss,
+  const fingerprint = hash(JSON.stringify([lock, entry, bridge, layoutCss, legacyBuilder,
     fs.readFileSync(__filename, 'utf8'), fs.readFileSync(path.join(packageRoot, 'LICENSE'), 'utf8')]));
   if (!updating && fs.existsSync(metadataFile) && fs.existsSync(editorHtml)) {
     const previous = readJson(metadataFile);
@@ -144,15 +159,20 @@ async function build() {
       return;
     }
   }
-  const entryPath = path.join(cache, 'entry.mjs');
+  const entryPath = path.join(cache, modern ? 'entry.mjs' : 'editor-entry.js');
   fs.writeFileSync(entryPath, entry);
-  const esbuild = createRequire(path.join(cache, 'package.json'))('esbuild');
-  await esbuild.build({ entryPoints: [entryPath], bundle: true, format: 'iife',
-    globalName: 'CKEDITOR', target: 'es2020', minify: true, legalComments: 'external',
-    outfile: path.join(dist, 'ckeditor.js'), logLevel: 'warning' });
+  const requireFromCache = createRequire(path.join(cache, 'package.json'));
+  if (modern) {
+    const esbuild = requireFromCache('esbuild');
+    await esbuild.build({ entryPoints: [entryPath], bundle: true, format: 'iife',
+      globalName: 'CKEDITOR', target: 'es2020', minify: true, legalComments: 'external',
+      outfile: path.join(dist, 'ckeditor.js'), logLevel: 'warning' });
+  } else {
+    await require('./legacy.cjs')({ requireFromCache, cache, dist, entryPath });
+  }
   const javascript = fs.readFileSync(path.join(dist, 'ckeditor.js'), 'utf8');
   const stylesheet = fs.readFileSync(path.join(dist, 'ckeditor.css'), 'utf8');
-  const info = { protocol: 1, version, translationFormat: 'umd' };
+  const info = { protocol: 2, version, translationFormat: modern ? 'umd' : 'legacy' };
   const thirdPartyNotices = notices(lock);
   const html = `<!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -169,7 +189,7 @@ document.head.appendChild(style); })();</script>
   writeJson(path.join(dist, 'THIRD_PARTY_NOTICES.json'), thirdPartyNotices);
   writeJson(metadataFile, { ...info, request, fingerprint, htmlSha256: hash(html),
     packages: Object.fromEntries(Object.entries(lock.packages)
-      .filter(([name]) => name === 'node_modules/ckeditor5' || /node_modules\/@ckeditor\/ckeditor5-/.test(name))
+      .filter(([name]) => name === 'node_modules/ckeditor5' || isEditorPackage(name))
       .map(([name, value]) => [name.replace(/^node_modules\//, ''), value.version])) });
   // Persist only a successful resolution/build. A failed update preserves the
   // previously selected application lock and therefore cannot silently switch it.

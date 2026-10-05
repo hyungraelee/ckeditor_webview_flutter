@@ -228,12 +228,17 @@
       const expand = options.autoHeight ?? false;
       const minHeight = options.minHeight ?? 300;
       const uiLanguage = options.uiLanguage ?? 'en';
+      const licenseKey = options.licenseKey;
       const toolbarItems = getToolbarItems(options.toolbarItems);
       if (typeof initialHtml !== 'string' || typeof readOnly !== 'boolean' ||
           !Number.isInteger(debounceMs) || debounceMs < 0 ||
           typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0 ||
           typeof uiLanguage !== 'string') {
         throw bridgeError('invalid_argument', 'Invalid editor initialization options.');
+      }
+      if (licenseKey != null &&
+          (typeof licenseKey !== 'string' || !licenseKey.trim())) {
+        throw bridgeError('invalid_license_key', 'Supply a non-empty CKEditor license key.');
       }
       changeDebounceMs = debounceMs;
       autoHeight = expand;
@@ -255,7 +260,10 @@
           [uiLanguage]: window.CKEDITOR_TRANSLATIONS[uiLanguage]
         };
       }
-      // 41.x does not require the licenseKey initialization option added in 44.x.
+      // Flutter supplies activation at runtime; generated assets store no key.
+      if (licenseKey != null) {
+        config.licenseKey = licenseKey;
+      }
       const instance = await bundle.ClassicEditor.create(
         document.getElementById('editor'), config
       );

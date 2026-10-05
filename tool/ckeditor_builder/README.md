@@ -4,11 +4,14 @@ This tool is an opt-in Flutter asset transformer. The default widget still uses
 its bundled CKEditor 41.4.1 and never invokes Node.js/npm. The public default
 engine version can be reassessed independently of this build tool.
 
-The first modern adapter accepts **42.x** requests only: `42.0.0`, `^42.0.0`,
-`~42.0.0`, `42.x`, and `42.0.x`. It uses the same plugin and toolbar contract as
-the default editor. Other major versions fail explicitly; they need a reviewed
-build adapter before being enabled. Build support is not a claim of device or
-web round-trip compatibility across all versions.
+The builder accepts stable numeric npm requests across major versions:
+`41.4.1`, `^43.0.0`, `~44.0.0`, `48.x`, and `48.5.x`, for example. Tags, URLs,
+prereleases, and compound ranges are not accepted. There is no major-version
+whitelist. It uses the same plugin and toolbar contract as the default editor.
+Releases must supply those plugins and a compatible source/export layout; npm
+or bundler failures report missing versions or incompatible dependencies.
+Build support is not a claim of device or web round-trip compatibility for
+every historical or future release.
 
 ## Application setup
 
@@ -57,7 +60,7 @@ CkEditorWebView(
 
 Run `flutter pub get`, then use the debugger, `flutter run`, or `flutter build`
 as usual. Flutter invokes the transformer during asset bundling. On the first
-build, npm resolves the request and esbuild produces a self-contained local
+build, npm resolves the request and the selected toolchain produces a self-contained local
 HTML document. It contains the JS, CSS, package bridge, engine metadata, and
 third-party notices. The placeholder source file remains unchanged. No remote
 editor code is loaded at runtime.
@@ -118,11 +121,29 @@ removing `.dart_tool/ckeditor_webview_flutter/build.lock`.
 
 ## Compatibility and licensing
 
-The adapter keeps editor packages on one exact version, uses an ES2020 bundle
-target, and supplies the expected editor/plugin exports. These build checks do
+The builder keeps editor packages on one exact version and supplies the expected
+editor/plugin exports. Releases before 42 use the existing source-import webpack
+recipe and its pinned build tools. Releases from 42 use the modern npm exports,
+CSS, and esbuild with an ES2020 target. These build checks do
 not verify WebView support on older operating systems, keyboard/selection,
 auto-height, source editing, navigation, or the consuming web editor's HTML.
 Windows Node/npm discovery is implemented but requires a Windows build check.
+
+The optional widget `licenseKey` defaults to `'GPL'` and is passed at runtime
+to generated releases from 44; earlier releases do not receive that option.
+Override it with a self-hosted CKEditor commercial key when appropriate.
+The default requires GPL-compliant use and follows the
+[official initialization requirements](https://ckeditor.com/docs/ckeditor5/latest/getting-started/installation/self-hosted/quick-start.html).
+The builder never stores application key values in generated HTML, metadata,
+or lockfiles and does not enable premium plugins. The app can supply
+`const String.fromEnvironment('CKEDITOR_LICENSE_KEY', defaultValue: 'GPL')`
+with Flutter's `--dart-define`, or use its own configuration. A CKEditor key
+does not change this package's GPL license or grant a commercial package license.
+Commercial key activation remains unverified.
+
+Generated assets use protocol 2. Run `flutter clean` and rebuild after updating
+the builder package so assets using an older initialization contract are replaced.
+The widget rejects old assets instead of ignoring a caller's key override.
 
 The generated artifact includes upstream license texts and does not change the
 package's GPL-2.0-or-later terms. The cache, lockfile, and build recipe do not by
