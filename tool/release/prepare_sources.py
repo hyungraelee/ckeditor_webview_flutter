@@ -152,7 +152,7 @@ def main():
     source_inputs = json.loads((ROOT / 'tool/release/source-inputs.json').read_text())
     records = {}
     installations = []
-    for recipe in ['tool/ckeditor_build', 'tool/release/source-build']:
+    for recipe in ['tool/ckeditor_build', 'tool/release/source-build', 'tool/release/lodash-build']:
         lock = json.loads((ROOT / recipe / 'package-lock.json').read_text())
         packages = []
         omitted = []

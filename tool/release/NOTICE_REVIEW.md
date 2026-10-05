@@ -20,7 +20,7 @@ checks the recorded notice/source digests, and rejects differing evidence or
 new unreviewed inputs without notice files. Both commands use local inputs;
 only preparation without `--offline` downloads pinned archives.
 
-The report inventories 485 distinct npm tarballs. A notice filename means a
+The current report inventories 487 distinct npm tarballs. A notice filename means a
 file was preserved, not that every embedded component, term, or source obligation
 has been approved. License declarations are reported separately from full
 notices. An unchanged audited unresolved input remains visible in the report;
@@ -91,14 +91,16 @@ the main npm publication source, and the audit repeats that comparison.
 The [official custom-build documentation](https://lodash.com/custom-builds)
 describes modularized ES output. The archived npm `lodash-cli` 4.17.5 reference
 pins Lodash 4.17.5; it must not be treated as a verified 4.17.21 generator recipe.
-Historical ES generation remains unresolved. The existing rebuild still
-verifies the 191 audited unminified ES inputs directly against their exact
-publication commit; this phase does not execute the generator reference.
+The follow-up now preserves a separate 4.17.21 generator commit, supersedes
+the older reference input, and regenerates all 191 audited ES inputs from the
+development source. Six other published modules differ or are absent; complete
+historical npm release reproduction remains unverified. See
+[LODASH_GENERATION.md](LODASH_GENERATION.md) for the pinned recipe and scope.
 
 ## Remaining publication work
 
 Complete the two upstream notice clarifications, copied-code revision/HSV
-permission review, historical Lodash generation review, and build-tool source
+permission review and build-tool source
 form/notice applicability review. Regenerate from the approved release checkout,
 verify the source rebuild, then publish and verify persistent anonymous source
 download access. Device/SDK/package-consumption and HTML round trips remain
