@@ -186,7 +186,7 @@ language, translations, layout, and lifecycle remain managed by the package.
 This map does not install plugins, bundle fonts, or inject visual CSS. A font
 choice works only if that font is available on the device. Class-based heading,
 highlight, or indentation choices may need matching content CSS in the editor
-and on the publishing website; CSS injection is not provided by this API.
+and on the publishing website. Use `customCss` for editor-side visual styles.
 
 Settings apply on creation/retry. Updating `config` does not recreate an active
 editor or change its current document. Treat the map and all nested containers
@@ -205,6 +205,72 @@ for font family and numeric sizes to accept values beyond menu choices;
 option can also be included). This does not enable arbitrary HTML support or
 guarantee compatibility with a web custom build. Validate repeated HTML round
 trips using matching features and settings.
+
+## Visual styles
+
+Pass optional CSS text through `customCss` to style the toolbar and editing
+content independently of feature `config`:
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  customCss: '''
+:root {
+  --ck-color-toolbar-background: #eef2ff;
+  --ck-color-base-border: #a5b4fc;
+  --ck-color-focus-border: #4f46e5;
+  --ck-border-radius: 8px;
+}
+#editor-container .ck-content {
+  background: #fffdf7;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.8;
+  padding: 16px 20px;
+}
+''',
+)
+```
+
+Null or an empty string preserves existing styles. CSS is transferred as a
+JSON-encoded string and assigned to a dedicated style element's `textContent`
+after the bundled styles, before editor creation. Supply CSS rules without
+HTML `style` tags. Normal cascade, specificity, and inline-style precedence
+apply; invalid declarations are handled by the WebView's CSS parser.
+
+| Target | Examples |
+| --- | --- |
+| Toolbar and controls | `:root` variables such as `--ck-color-toolbar-background`, `--ck-color-base-border`, `--ck-color-focus-border`, `--ck-border-radius`, `--ck-font-size-base` |
+| Editing content | `#editor-container .ck-content` for font, line height, background, or padding |
+| Source-editing textarea | `#editor-container .ck-source-editing-area textarea` |
+
+Variables and selectors depend on the selected CKEditor version. Prefer its
+documented theme variables for UI changes. See the official
+[editor and content styles guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/setup/css.html).
+Styles affect the WebView document; Flutter loading/error overlays use their
+existing builders. Avoid overriding the package's height, flex, and overflow
+rules, which support fixed/automatic height, scrolling, and caret visibility.
+
+`getHtml()` still returns CKEditor's data HTML. It does not include this
+stylesheet or turn CSS into inline document formatting. For example, changing
+the default content font in CSS changes its display without adding font spans
+to every paragraph. Apply matching content styles to the publishing page to
+keep that appearance. Explicit font/color formatting in the document continues
+to follow normal CSS precedence.
+
+Use the supplied string directly or load a registered app CSS asset with
+`rootBundle.loadString()` before creating the widget. The package does not load
+a CSS file path automatically. Relative URLs inside CSS resolve from the editor
+HTML asset, which differs between bundled and generated editors; fonts and
+resources are not copied or rebased automatically. Remote URLs and imports need
+network access. The example CSS needs no external resources.
+
+Styles apply on creation/retry, like `config`. Updating `customCss` alone does
+not recreate an active document. For generated `editorAsset` builds, update
+the package, run `flutter clean`, and rebuild. Current generated assets advertise
+`supportsCustomCss: true`; older assets report `invalid_editor_bundle` when
+non-empty CSS is requested rather than silently ignoring it. Assets without CSS
+customization remain usable with the existing compatible protocol.
 
 ## UI language
 
@@ -348,7 +414,8 @@ All CKEditor runtime packages are pinned to 41.4.1. The build writes the bundle,
 CSS, vendor license, and version/hash metadata to `assets/editor/`. The bridge's
 plugin and toolbar lists live in `assets/editor/editor.js`. When changing
 plugins, keep those lists aligned with `tool/ckeditor_build/editor-entry.js`.
-The build intentionally keeps CKEditor's feature configuration at defaults.
+Default usage retains CKEditor's feature settings and the package's layout CSS;
+the widget can customize features with `config` and appearance with `customCss`.
 
 ## License
 

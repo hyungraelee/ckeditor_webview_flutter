@@ -86,6 +86,26 @@
   let resizeObserver = null;
   let mutationObserver = null;
   let lastLayout = '';
+  let customStyle = null;
+
+  function removeCustomStyle() {
+    if (customStyle) customStyle.remove();
+    customStyle = null;
+  }
+
+  function applyCustomCss(css) {
+    if (css != null && typeof css !== 'string') {
+      throw bridgeError('invalid_custom_css', 'customCss must be a string or null.');
+    }
+    removeCustomStyle();
+    if (css == null || css === '') return;
+    customStyle = document.createElement('style');
+    customStyle.id = 'ckeditor-flutter-custom-css';
+    // Keep CSS as text, including quotes and closing-tag-like sequences.
+    // The stylesheet is outside the editable data and is never serialized.
+    customStyle.textContent = css;
+    document.head.appendChild(customStyle);
+  }
 
   function scheduleLayout() {
     if (!autoHeight || state !== 'ready' || layoutFrame !== null) return;
@@ -304,6 +324,7 @@
       if (licenseKey != null) {
         config.licenseKey = licenseKey;
       }
+      applyCustomCss(options.customCss);
       const instance = await bundle.ClassicEditor.create(
         document.getElementById('editor'), config
       );
@@ -333,6 +354,7 @@
       state = 'error';
       cancelChange();
       stopLayout();
+      removeCustomStyle();
       const failedEditor = editor;
       editor = null;
       if (failedEditor) {
@@ -376,6 +398,7 @@
     state = 'disposed';
     cancelChange();
     stopLayout();
+    removeCustomStyle();
     if (editorElement) editorElement.removeEventListener('input', onSourceInput);
     editorElement = null;
     const instance = editor;

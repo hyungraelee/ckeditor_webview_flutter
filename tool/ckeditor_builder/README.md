@@ -12,6 +12,12 @@ instead of silently ignoring settings. The npm lock keeps the selected engine
 version unchanged. See the package README for supported feature keys and
 initialization behavior.
 
+Generated assets also support the widget's optional `customCss` string and
+advertise `supportsCustomCss: true`. Rebuild older assets before requesting
+non-empty CSS; unchanged compatible assets remain usable without it. Styling
+is supplied at runtime, not stored in the npm lock, and is not part of saved
+document HTML. See the package README for CSS cascade and resource paths.
+
 The builder accepts stable numeric npm requests across major versions:
 `41.4.1`, `^43.0.0`, `~44.0.0`, `48.x`, and `48.5.x`, for example. Tags, URLs,
 prereleases, and compound ranges are not accepted. There is no major-version

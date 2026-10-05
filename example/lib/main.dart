@@ -73,6 +73,23 @@ class EditorPage extends StatefulWidget {
 }
 
 class _EditorPageState extends State<EditorPage> {
+  static const _customCss = '''
+:root {
+  --ck-color-toolbar-background: #eef2ff;
+  --ck-color-base-border: #a5b4fc;
+  --ck-color-focus-border: #4f46e5;
+  --ck-color-button-on-background: #c7d2fe;
+  --ck-border-radius: 8px;
+}
+#editor-container .ck-content {
+  background: #fffdf7;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  line-height: 1.8;
+  padding: 16px 20px;
+}
+''';
+
   final _controller = CkEditorController();
   bool _busy = false;
   String? _htmlOutput;
@@ -158,6 +175,7 @@ class _EditorPageState extends State<EditorPage> {
                         },
                       }
                     : null,
+                customCss: widget.autoHeight ? _customCss : null,
                 height: widget.autoHeight ? null : 360,
                 autoHeight: widget.autoHeight,
                 minHeight: 360,
