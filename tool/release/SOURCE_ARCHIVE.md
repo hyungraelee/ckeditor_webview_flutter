@@ -31,7 +31,10 @@ sources also preserve the reviewed conversion relationship; see
 [COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md). The build-input follow-up retains
 official TypeScript 5.0.4/4.8.4 sources, their original build/bootstrap files and
 notices, the webpack CLI npm gitHead sources, and scoped notice references; see
-[BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md).
+[BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md). The official
+ckeditor5-dev 39.7.0 source also preserves GPL build-tool sources and build
+configuration; all 29 distributed translation/utils library JavaScript files
+compare byte for byte with the npm inputs.
 
 The default output is `.dart_tool/release/source-candidate.tar.gz`, accompanied
 by a SHA-256 sidecar. Cache and outputs are ignored by Git and publishing and
@@ -47,7 +50,7 @@ Offline mode requires previously verified cached inputs and rejects missing or
 corrupt ones. Without offline mode, invalid cache entries are downloaded again
 and verified. Initial downloads may take time and use substantial disk space.
 The notice-reviewed candidate is approximately 88 MiB compressed, reduced from
-the 201 MiB full-input candidate. It contains 506 pinned inputs and omits 22 optional
+the 201 MiB full-input candidate. It contains 507 pinned inputs and omits 22 optional
 platform-specific npm inputs. The fresh rebuild below verifies that those inputs
 are unnecessary for this audited build. Required compiler/tool tarballs are kept
 intact; the remaining size is primarily npm build dependencies. It is a separate

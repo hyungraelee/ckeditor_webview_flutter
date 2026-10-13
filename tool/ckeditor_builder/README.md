@@ -155,6 +155,14 @@ with Flutter's `--dart-define`, or use its own configuration. A CKEditor key
 does not change this package's GPL license or grant a commercial package license.
 Commercial key activation remains unverified.
 
+Version syntax support is not a license grant. Review the actual resolved release
+and included plugins: some distributions, including LTS-only releases, have
+different commercial terms. A key accepted by CKEditor does not by itself prove
+that a contract covers mobile redistribution or the selected self-hosted setup.
+Cloud/CDN-only entitlements do not cover this local asset distribution model.
+See the [official licensing guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/license-and-legal.html).
+This package provides no commercial exception for its own GPL integration code.
+
 Generated assets use protocol 2. Run `flutter clean` and rebuild after updating
 the builder package so assets using an older initialization contract are replaced.
 The widget rejects old assets instead of ignoring a caller's key override.

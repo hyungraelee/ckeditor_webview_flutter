@@ -177,6 +177,209 @@
       "npmPath": "package/index.js",
       "upstreamId": "boolbase-source",
       "upstreamPath": "index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/ckeditortranslationsplugin.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/ckeditortranslationsplugin.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/cleanpofilecontent.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/cleanpofilecontent.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/createdictionaryfrompofilecontent.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/createdictionaryfrompofilecontent.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/findmessages.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/findmessages.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/multiplelanguagetranslationservice.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/multiplelanguagetranslationservice.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/servetranslations.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/servetranslations.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/translatesourceloader.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/translatesourceloader.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/builds/getdllpluginwebpackconfig.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/builds/getdllpluginwebpackconfig.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/builds/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/builds/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/createentryfile.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/createentryfile.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/geteditorconfig.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/geteditorconfig.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/getlicensebanner.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/getlicensebanner.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/getplugins.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/getplugins.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/git.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/git.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/loaders/ck-debug-loader.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/loaders/ck-debug-loader.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/loaders/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/loaders/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/logger.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/logger.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/stream.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/stream.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/getpostcssconfig.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/getpostcssconfig.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/themeimporter.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/themeimporter.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/themelogger.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/themelogger.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/utils/getpackagename.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/utils/getpackagename.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/tools.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/tools.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/tools/createspinner.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/tools/createspinner.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/workspace.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/workspace.js"
     }
   ],
   "copiedCodeSourceFiles": [

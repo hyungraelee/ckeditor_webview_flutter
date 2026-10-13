@@ -108,6 +108,21 @@
         "package.json"
       ],
       "status": "later renamed project; reference notice only, 1.9.0 applicability unresolved"
+    },
+    {
+      "id": "ckeditor5-dev-gpl-source",
+      "upstreamId": "ckeditor5-dev-source",
+      "prefixes": [
+        "packages/ckeditor5-dev-translations/lib/",
+        "packages/ckeditor5-dev-utils/lib/"
+      ],
+      "requiredPaths": [
+        "LICENSE.md",
+        "package.json",
+        "packages/ckeditor5-dev-translations/package.json",
+        "packages/ckeditor5-dev-utils/package.json"
+      ],
+      "status": "official release source; all 29 distributed library JavaScript inputs compared with npm"
     }
   ],
   "cliGeneration": {

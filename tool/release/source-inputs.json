@@ -244,6 +244,22 @@
         "doc",
         "samples"
       ]
+    },
+    {
+      "id": "ckeditor5-dev-source",
+      "repository": "ckeditor/ckeditor5-dev",
+      "tag": "v39.7.0",
+      "commit": "15c6c4290c794717f03021bf4cf3ee8a511ca942",
+      "url": "https://codeload.github.com/ckeditor/ckeditor5-dev/tar.gz/15c6c4290c794717f03021bf4cf3ee8a511ca942",
+      "sha256": "8441598cf37355f5400c403ba9683a4e65ffb8c49065cb8e19614907beb8e92d",
+      "size": 372546,
+      "provenance": "official v39.7.0 tag; translation/utils JavaScript sources compared with locked npm inputs",
+      "excludeDirectories": [
+        "docs",
+        "tests",
+        "packages/*/tests",
+        "packages/*/docs"
+      ]
     }
   ],
   "unresolved": [

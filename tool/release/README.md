@@ -193,3 +193,10 @@ webpack CLI/component JavaScript inputs are source-generated and checked before
 the bundle build. Compiler bootstrap reproduction and exhaustive transitive
 build-tool review remain unverified. See
 [BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md).
+
+The [integration licensing review](INTEGRATION_LICENSE_REVIEW.md) records five
+pinned official/community repository comparisons and official distribution
+guidance. It clarifies this package's independent GPL terms, retained source
+access, and the scope of build-tool review. The source candidate also preserves
+the official GPL developer-tool release and compares 29 translation/utils
+JavaScript files with the exact npm inputs.
