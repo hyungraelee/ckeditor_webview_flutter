@@ -174,13 +174,84 @@
         "test",
         "demo"
       ]
+    },
+    {
+      "id": "boolbase-source",
+      "repository": "fb55/boolbase",
+      "commit": "be0bcd8a4e917a0a5895e95b523fbbed05a64871",
+      "url": "https://codeload.github.com/fb55/boolbase/tar.gz/be0bcd8a4e917a0a5895e95b523fbbed05a64871",
+      "sha256": "9cd10a06ef91bbe0ef8b592e2df45fdb6822c22b695fff2abc5b976c8a4e6f68",
+      "size": 1538,
+      "version": "1.0.0",
+      "provenance": "original ISC license-addition commit; index.js matches locked npm 1.0.0"
+    },
+    {
+      "id": "acorn-later-notice",
+      "repository": "xtuc/acorn-import-attributes",
+      "commit": "2c7059709cc529d81194c2d7057c181f4000e375",
+      "url": "https://codeload.github.com/xtuc/acorn-import-attributes/tar.gz/2c7059709cc529d81194c2d7057c181f4000e375",
+      "sha256": "6c72ab2d35701bc332385f8fd43e8e9b359a72ed6e323f9b9675e1809bfd51cf",
+      "size": 12399,
+      "version": "1.9.1",
+      "provenance": "later renamed import-attributes project; notice reference only, applicability to assertions 1.9.0 unresolved",
+      "excludeDirectories": [
+        "test",
+        "tests"
+      ]
+    },
+    {
+      "id": "webpack-cli-source",
+      "repository": "webpack/webpack-cli",
+      "commit": "e07f0e58df103011435524d757102534b75a6796",
+      "url": "https://codeload.github.com/webpack/webpack-cli/tar.gz/e07f0e58df103011435524d757102534b75a6796",
+      "sha256": "13693ddd1307931a3b66f3ca1096c194da3e1c23275b453ebd2221f84b96c8f4",
+      "size": 422749,
+      "version": "5.1.4",
+      "provenance": "exact npm gitHead; nine CLI/component JavaScript files reproduced with pinned TypeScript 4.8.4",
+      "excludeDirectories": [
+        "test",
+        "tests",
+        "packages/*/tests",
+        "packages/*/src/__tests__"
+      ]
+    },
+    {
+      "id": "typescript-5-source",
+      "repository": "microsoft/TypeScript",
+      "commit": "3b45f4db12bbae97d10f62ec0e2d94858252c5ab",
+      "version": "5.0.4",
+      "url": "https://codeload.github.com/microsoft/TypeScript/tar.gz/3b45f4db12bbae97d10f62ec0e2d94858252c5ab",
+      "sha256": "51ebdad1d40d8cd993b7115a73babe3a5c829c73f3927cba6c82c6a228e948f4",
+      "size": 29567050,
+      "provenance": "official v5.0.4 release tag; compiler source retained, compiler-to-npm regeneration not verified",
+      "excludeDirectories": [
+        "tests",
+        "doc",
+        "samples"
+      ]
+    },
+    {
+      "id": "typescript-4-source",
+      "repository": "microsoft/TypeScript",
+      "commit": "a614119c1921ca61d549a7eee65c0b8c69c28752",
+      "version": "4.8.4",
+      "url": "https://codeload.github.com/microsoft/TypeScript/tar.gz/a614119c1921ca61d549a7eee65c0b8c69c28752",
+      "sha256": "21f4f7ccb2906adca66501f3721b7e252a9cfeee9b4b380d21cca8c295f6c0e2",
+      "size": 36533185,
+      "provenance": "official v4.8.4 release tag; compiler source retained, compiler-to-npm regeneration not verified",
+      "excludeDirectories": [
+        "tests",
+        "doc",
+        "samples"
+      ]
     }
   ],
   "unresolved": [
     "The verified Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent, so complete historical npm release reproduction remains unverified.",
     "Thirteen early vanilla-colorful/react-colorful conversion initializers match after documented normalization; color-fns source lineage is retained. Exact selected copying commits and original HSV permission remain unresolved.",
-    "Complete notices for acorn-import-assertions 1.9.0 and boolbase 1.0.0 require upstream clarification.",
+    "The later acorn-import-attributes MIT notice is retained as a reference; applicability to acorn-import-assertions 1.9.0 remains unresolved.",
     "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
+    "Official TypeScript compiler release sources are retained, but compiler-to-npm bootstrap reproduction and exhaustive transitive build-tool source review remain unverified.",
     "Public source download access has not been provided."
   ]
 }

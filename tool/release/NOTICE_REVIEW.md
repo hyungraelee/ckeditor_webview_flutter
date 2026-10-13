@@ -43,13 +43,13 @@ All npm tarballs remain intact; embedded notices are never replaced.
 | `saxes` 5.0.1 | Full upstream LICENSE, including inherited sax/XML notices, at the v5.0.1 tag | Upstream notice preserved |
 | `blurhash` 2.0.5 | Wolt MIT notice and TypeScript sources at the 2.0.5 version-bump commit | Upstream notice preserved |
 | `@tootallnate/once` 1.1.2 | Full MIT notice from the upstream license-addition commit; its 1.1.2 TypeScript source matches the npm gitHead | Upstream notice preserved |
-| `acorn-import-assertions` 1.9.0 | npm/gitHead package metadata and README declare MIT without complete notice | Upstream clarification pending |
-| `boolbase` 1.0.0 | npm metadata declares ISC; inspected same-version upstream also lacks complete notice | Upstream clarification pending |
+| `acorn-import-assertions` 1.9.0 | MIT declaration; later renamed import-attributes notice retained as a reference with changed source | Applicability unresolved |
+| `boolbase` 1.0.0 | Original ISC text at the upstream license-addition commit; its `index.js` matches the locked npm input | Upstream notice preserved |
 
 Do not fabricate a copyright owner/year or treat an SPDX declaration as a
 recovered original notice. Obtain upstream clarification or review an appropriate
-build-dependency replacement for the two pending inputs before source release.
-This record does not conclude that they are unlicensed.
+build-dependency replacement for the remaining acorn input before source release.
+This record does not conclude that the input is unlicensed.
 
 Exact commit URLs and archive hashes are in [source-inputs.json](source-inputs.json).
 The audit verifies six blurhash library TypeScript files against the npm source
@@ -100,10 +100,20 @@ development source. Six other published modules differ or are absent; complete
 historical npm release reproduction remains unverified. See
 [LODASH_GENERATION.md](LODASH_GENERATION.md) for the pinned recipe and scope.
 
+## Build-input follow-up
+
+The original boolbase ISC text is now preserved from the 2015 license-addition
+commit at version 1.0.0. Its implementation is byte-identical to the locked npm
+input. The later acorn-import-attributes notice is retained separately and is
+not treated as an applicable recovered notice for assertions 1.9.0.
+[BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md) records these sources,
+the two TypeScript release source trees, the CLI generation comparison, and the
+limits of the scoped build-tool source review.
+
 ## Remaining publication work
 
-Complete the two upstream notice clarifications, copied-code revision/HSV
-permission review and build-tool source
+Complete the acorn notice applicability clarification, copied-code revision/HSV
+permission review and remaining build-tool source
 form/notice applicability review. Regenerate from the approved release checkout,
 verify the source rebuild, then publish and verify persistent anonymous source
 download access. Device/SDK/package-consumption and HTML round trips remain

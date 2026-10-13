@@ -83,7 +83,7 @@ an applicable original grant or obtain clarification from the relevant author
 or maintainer. Any replacement of the distributed conversion code requires a
 separate reviewed change and renewed bundle/device verification.
 
-Two build-input notice clarifications, build-tool source-form review, final
+The remaining acorn notice applicability clarification, build-tool source-form review, final
 release-checkout regeneration, and persistent public source downloads remain
 separate release work. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
 
@@ -98,7 +98,7 @@ candidate's notice report remains recomputable by the updated auditor.
 
 Offline preparation reproduced an identical candidate from verified cache
 inputs. A fresh offline source rebuild matched all seven generated editor
-outputs. The current candidate contains 501 pinned inputs and 120 package files,
+outputs. The color-review candidate contained 501 pinned inputs and 120 package files,
 approximately 60 MiB compressed, separate from the Flutter runtime package.
 Python/Node/JSON syntax, documentation, and diff checks passed. Package snapshot
 publish dry-run passed with zero warnings, approximately 397 KB compressed;

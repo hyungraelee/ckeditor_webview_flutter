@@ -127,6 +127,11 @@ def build_report(manifest, input_bytes, package_bytes):
             if data != upstream[entry['rightId']][1][entry['rightPath']]:
                 raise ValueError('Development source differs from publication source')
             comparisons.append({**entry, 'sha256': digest(data)})
+        elif entry['kind'] == 'npm-upstream-equality':
+            data = upstream[entry['upstreamId']][1][entry['upstreamPath']]
+            if data != npm_files[entry['npmUrl']][entry['npmPath']]:
+                raise ValueError('Upstream source differs from locked npm source')
+            comparisons.append({**entry, 'sha256': digest(data)})
         else:
             raise ValueError('Unknown source comparison kind')
     report = {'schemaVersion': 1, 'status': 'notice inventory; final publication review pending',
@@ -136,6 +141,29 @@ def build_report(manifest, input_bytes, package_bytes):
             'remainingReview': manifest['unresolved']}
     if 'copiedCodeSourceFiles' in review:
         report['copiedCodeSourceFiles'] = copied_sources
+    if 'buildToolReviewPath' in review:
+        tools = json.loads(package_bytes(review['buildToolReviewPath']))
+        if tools['schemaVersion'] != 1:
+            raise ValueError('Unsupported build-tool review version')
+        groups = []
+        seen_groups = set()
+        for group in tools['sourceGroups']:
+            if group['id'] in seen_groups:
+                raise ValueError('Duplicate build-tool source group')
+            seen_groups.add(group['id'])
+            if ('upstreamId' in group) == ('npmUrl' in group):
+                raise ValueError('Build-tool source group must identify exactly one input')
+            files = (upstream[group['upstreamId']][1] if 'upstreamId' in group
+                     else npm_files[group['npmUrl']])
+            selected = set(group['requiredPaths'])
+            for prefix in group['prefixes']:
+                matches = {name for name in files if name.startswith(prefix)}
+                if not matches:
+                    raise ValueError(f'Build-tool source prefix is absent: {prefix}')
+                selected.update(matches)
+            groups.append({**group, 'files': [{'path': name, 'sha256': digest(files[name])}
+                                            for name in sorted(selected)]})
+        report['buildToolSources'] = {'status': tools['status'], 'sourceGroups': groups}
     return report
 
 

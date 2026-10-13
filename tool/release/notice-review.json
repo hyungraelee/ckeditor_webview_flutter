@@ -18,7 +18,7 @@
       "url": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
       "integrity": "sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==",
       "status": "declaration-only",
-      "reason": "Pinned npm input declares its license but contains no complete license/copyright notice; inspected matching upstream also lacks a complete notice.",
+      "reason": "Locked 1.9.0 declares MIT without a complete notice. A later renamed import-attributes 1.9.1 notice is retained separately; its applicability to the changed assertions source is unresolved.",
       "upstreamId": "acorn-import-assertions"
     },
     {
@@ -45,8 +45,10 @@
       "version": "1.0.0",
       "url": "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz",
       "integrity": "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==",
-      "status": "declaration-only",
-      "reason": "Pinned npm input and inspected 1.0.0 upstream sources declare ISC but provide no complete notice; historical npm gitHead is unavailable."
+      "status": "upstream-notice",
+      "upstreamId": "boolbase-source",
+      "path": "LICENSE",
+      "sha256": "cdf4d87ae0a6c160227263bf4e39a0a10e30e89ae7256e0f7ac7bde0836552c6"
     },
     {
       "name": "esrecurse",
@@ -168,6 +170,13 @@
       "leftPath": "src/index.ts",
       "rightId": "tootallnate-once",
       "rightPath": "src/index.ts"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz",
+      "npmPath": "package/index.js",
+      "upstreamId": "boolbase-source",
+      "upstreamPath": "index.js"
     }
   ],
   "copiedCodeSourceFiles": [
@@ -259,5 +268,6 @@
         "rgbToHsv"
       ]
     }
-  ]
+  ],
+  "buildToolReviewPath": "tool/release/build-tool-review.json"
 }

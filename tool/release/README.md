@@ -75,7 +75,8 @@ inventory. The source preparation tools verify these originals, then select
 CKEditor sources without unused documentation, tests, samples, or generated
 demo builds. Notices and build/modification inputs are preserved, and the source
 manifest records the selection and original provenance. No project source
-release has been published. The notice-reviewed candidate is approximately 60 MiB,
+release has been published. The latest candidate is approximately 88 MiB, including compiler modification
+sources and original bootstrap files,
 including npm build inputs; do not add it to Flutter runtime assets. Keep source
 distribution separate from the editor loaded in the WebView.
 
@@ -183,3 +184,12 @@ third-party license completeness, native device behavior, or HTML compatibility.
 Android/iOS example checks, actual packaged-file consumption, SDK compatibility,
 web/app round trips, release document/version review, and source publication must
 still be completed before a public release.
+
+The build-input follow-up preserves boolbase's original ISC notice with a
+byte-identical implementation comparison. The later acorn-import-attributes
+notice remains a reference with unresolved applicability to assertions 1.9.0.
+Official source trees for both pinned TypeScript compilers are retained; nine
+webpack CLI/component JavaScript inputs are source-generated and checked before
+the bundle build. Compiler bootstrap reproduction and exhaustive transitive
+build-tool review remain unverified. See
+[BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md).

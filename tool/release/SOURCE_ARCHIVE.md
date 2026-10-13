@@ -28,7 +28,10 @@ Copied-code references do not establish an exact copied revision. The Lodash
 recipe reproduces the audited ES inputs, rather than the complete npm release;
 see [LODASH_GENERATION.md](LODASH_GENERATION.md). Historical React/early port
 sources also preserve the reviewed conversion relationship; see
-[COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md).
+[COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md). The build-input follow-up retains
+official TypeScript 5.0.4/4.8.4 sources, their original build/bootstrap files and
+notices, the webpack CLI npm gitHead sources, and scoped notice references; see
+[BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md).
 
 The default output is `.dart_tool/release/source-candidate.tar.gz`, accompanied
 by a SHA-256 sidecar. Cache and outputs are ignored by Git and publishing and
@@ -43,8 +46,8 @@ python3 tool/release/prepare_sources.py --offline \
 Offline mode requires previously verified cached inputs and rejects missing or
 corrupt ones. Without offline mode, invalid cache entries are downloaded again
 and verified. Initial downloads may take time and use substantial disk space.
-The notice-reviewed candidate is approximately 60 MiB compressed, reduced from
-the 201 MiB full-input candidate. It contains 501 pinned inputs and omits 22 optional
+The notice-reviewed candidate is approximately 88 MiB compressed, reduced from
+the 201 MiB full-input candidate. It contains 506 pinned inputs and omits 22 optional
 platform-specific npm inputs. The fresh rebuild below verifies that those inputs
 are unnecessary for this audited build. Required compiler/tool tarballs are kept
 intact; the remaining size is primarily npm build dependencies. It is a separate
@@ -99,7 +102,10 @@ needed for the verified build path.
 
 Before generation, the rebuild checks eleven copied-code source/notice files
 and compares thirteen early React/port conversion initializers. The original HSV
-permission remains unresolved; the comparison is not license approval.
+permission remains unresolved; the comparison is not license approval. The
+rebuild also regenerates nine webpack CLI/component JavaScript inputs with
+TypeScript 4.8.4 and requires byte equality before using them in the bundle build.
+This does not rebuild the TypeScript compilers themselves.
 
 The source regeneration step:
 
@@ -127,8 +133,8 @@ dependency. Generated assets stay in the extraction; repository assets are never
 overwritten.
 
 The workspace retains `SOURCE_GENERATION_REPORT.json`,
-`LODASH_GENERATION_REPORT.json`, `COLOR_SOURCE_REVIEW_REPORT.json`, and
-`REBUILD_REPORT.json`
+`LODASH_GENERATION_REPORT.json`, `COLOR_SOURCE_REVIEW_REPORT.json`,
+`BUILD_TOOL_SOURCE_REPORT.json`, and `REBUILD_REPORT.json`
 with generation counts, environment, asset hashes, archive checksum, and
 remaining review items. Treat a failed comparison as a release preparation
 failure; do not replace the distributed bundle merely to obtain matching hashes.
@@ -149,9 +155,9 @@ all redistribution or corresponding-source obligations. Before publication:
   npm release rebuild. See [the scoped comparison](LODASH_GENERATION.md).
 - Review notices and source forms of included build tools and dependency files.
   Of the eleven retained inputs without standalone notice filenames, six have
-  complete embedded notices and three now have pinned upstream notices preserved.
-  Two declare a license without a recovered complete notice and need upstream
-  clarification. The inventory does not approve source forms or notice applicability
+  complete embedded notices and four now have pinned upstream notices preserved.
+  Acorn still declares a license without a recovered applicable complete notice.
+  Its later renamed-project notice is a reference requiring clarification. The inventory does not approve source forms or notice applicability
   for every included file. See [the targeted review](NOTICE_REVIEW.md).
   No generated candidate is automatically approved for publication.
 - Regenerate from the approved release checkout, review the actual manifest and
