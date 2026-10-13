@@ -40,7 +40,7 @@ possible; this phase performs neither upstream contact nor dependency replacemen
 
 ## Source forms inspected
 
-[build-tool-review.json](build-tool-review.json) records seven scoped source
+[build-tool-review.json](build-tool-review.json) records eight scoped source
 file groups. The notice auditor enumerates their source paths and digests in
 `SOURCE_NOTICE_REPORT.json`, requires expected source/configuration/notice files,
 and ties them to the preserved archive bytes.
@@ -53,6 +53,7 @@ and ties them to the preserved archive bytes.
 | webpack 5.91.0 | npm `lib/` JavaScript and original MIT notice retained | Generated helpers/schema preparation and complete upstream generation remain outside this comparison |
 | Terser 5.51.2 | npm unbundled `lib/` and `main.js`, property inputs, original BSD notice retained alongside its generated bundle | Historical Rollup output reproduction not performed |
 | CSSO 5.0.5 | npm `lib/` ES module modification sources and original MIT notice retained alongside generated CommonJS/distribution outputs | Full upstream ES-to-CJS/distribution generation not reproduced |
+| CKEditor developer tools 39.7.0 | Official v39.7.0 source commit `15c6c4290c794717f03021bf4cf3ee8a511ca942`, original GPL text, package/build metadata, and translation/utils JavaScript sources | All 29 distributed library JS files match npm inputs; other developer-tool packages are not independently release-rebuilt |
 | Later acorn notice | Original MIT text, changed source, metadata at the pinned later commit | Reference only; applicability to assertions 1.9.0 unresolved |
 
 Compiler repositories exclude tests, documentation, and samples using recorded
@@ -98,3 +99,9 @@ Regenerate from the approved clean release checkout, verify final source/bundle
 checks, and provide persistent anonymous source downloads. Device/SDK/package
 consumption and actual web/app HTML round trips remain separate validation.
 Nothing in this workflow uploads a source archive or publishes to pub.dev.
+
+The [integration licensing review](INTEGRATION_LICENSE_REVIEW.md) distinguishes
+source/notice obligations for distributed components from compiler bootstrap
+reproducibility. A failed or absent bootstrap comparison is not, by itself, a
+finding that the complete distribution is unlicensed. Component terms, copied
+output, and actual source availability require their own review.

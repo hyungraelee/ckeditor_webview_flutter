@@ -379,8 +379,23 @@ activity's `windowSoftInputMode="adjustResize"` when input is covered.
 any later version. See `LICENSE` and `THIRD_PARTY_NOTICES.md`. The bundled
 CKEditor is GPL-2.0-or-later; its original notices are preserved.
 
-Using the package in a closed-source app requires a separate assessment of GPL
-obligations or appropriate CKEditor commercial licensing. Publishing this
-package as open source does not grant a commercial CKEditor license to its users.
-Before publishing a compiled release, provide the complete corresponding source
-required by the GPL in addition to the build recipes and upstream references.
+This Flutter integration is offered under GPL-2.0-or-later; it does not include
+a commercial license or exception for the integration code. A CKEditor
+commercial agreement or `licenseKey` applies to the CKSource software covered
+by that agreement and does not replace this package's GPL terms. A closed-source
+app must address the terms of both components; purchasing an editor key alone
+does not grant permission to use this package under different terms.
+
+GPL-compliant use may be commercial; charging a fee does not waive GPL terms.
+The bundled editor and locally generated editors use self-hosted distribution.
+If relying on CKSource commercial terms, the agreement must cover the selected
+engine, features, and deployment or redistribution model; a Cloud/CDN-only plan
+is not a self-hosted entitlement.
+See CKEditor's [licensing guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/license-and-legal.html).
+UI translation downloads do not change the editor's local distribution model.
+
+When distributing GPL-covered code, retain applicable copyright/license notices
+and provide the required corresponding source for the actual distributed version,
+including local changes and build inputs. Preserve source access for distributed
+releases; build recipes and upstream links alone are insufficient. App-specific
+source distribution remains the app distributor's responsibility.

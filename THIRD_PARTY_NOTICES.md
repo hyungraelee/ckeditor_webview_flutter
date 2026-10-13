@@ -22,6 +22,12 @@ in the generated JavaScript and CSS are preserved.
 CKEditor is a trademark of CKSource Holding sp. z o.o. This package is an
 independent Flutter integration and is not an official CKSource product.
 
+The project's GPL terms are separate from CKSource's commercial agreements.
+Passing a CKEditor commercial key does not relicense the Flutter integration or
+grant a commercial exception for this package. Any commercial arrangement must
+cover the actual engine, features, and local/mobile distribution model; this
+package does not grant such rights on CKSource's behalf.
+
 ## Lodash
 
 The CKEditor license identifies Lodash as an included MIT-licensed component.
@@ -69,3 +75,8 @@ release work are documented in
 source archive. Local source candidates can be prepared and rebuilt with
 [the maintainer source tools](tool/release/SOURCE_ARCHIVE.md); final review and a
 public release source-download location remain pending.
+
+The [integration licensing review](tool/release/INTEGRATION_LICENSE_REVIEW.md)
+compares pinned public integration examples with official licensing guidance.
+It records source-access retention and component-specific review requirements;
+another integration's license does not establish permission for this distribution.
