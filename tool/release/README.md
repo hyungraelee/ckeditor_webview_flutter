@@ -187,7 +187,9 @@ still be completed before a public release.
 
 The build-input follow-up preserves boolbase's original ISC notice with a
 byte-identical implementation comparison. The later acorn-import-attributes
-notice remains a reference with unresolved applicability to assertions 1.9.0.
+notice was initially a reference with unresolved applicability to assertions 1.9.0.
+The subsequent [permission review](PERMISSION_REVIEW.md) preserves pre-release
+owner authorization and the original notice, closing that recorded notice gap.
 Official source trees for both pinned TypeScript compilers are retained; nine
 webpack CLI/component JavaScript inputs are source-generated and checked before
 the bundle build. Compiler bootstrap reproduction and exhaustive transitive
@@ -206,3 +208,10 @@ The [component distribution review](COMPONENT_DISTRIBUTION_REVIEW.md) records
 families, and all 66 GPL source mappings. It adds supplemental data attribution
 and explicit embedded third-party-notice reporting while keeping source-presence
 evidence separate from final applicability approval.
+
+The [targeted permission follow-up](PERMISSION_REVIEW.md) preserves primary acorn
+owner clarification and an unchanged supplemental MIT notice. New source candidates
+verify the notice/evidence bytes and two locked-input source comparisons. The
+author-account HSV Gist is now recovered, but its inspected material contains no
+explicit grant; that original permission question remains open. Runtime editor
+assets and dependencies are unchanged.
