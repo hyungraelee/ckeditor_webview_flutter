@@ -72,8 +72,10 @@ remain unestablished. Complete reference sources remain available for review.
 Both libraries cite the [Axon Flux HSV repost](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c),
 which credits an earlier implementation at mjijackson.com and contains conversion
 code without an explicit license. The original site link and the related author
-repository/gist could not be recovered during this review. The React and port
-functions use adapted scaling, indexing, and rounding; this relationship and
+repository/gist could not be recovered during the initial review. The subsequent
+[permission follow-up](PERMISSION_REVIEW.md) recovered an author-account Gist,
+but found no explicit grant in the inspected code or existing comments. The React
+and port functions use adapted scaling, indexing, and rounding; this relationship and
 their own MIT notices do not independently establish the original author's grant.
 
 No new copyright year, permission text, or license is inferred from the repost,
@@ -83,7 +85,7 @@ an applicable original grant or obtain clarification from the relevant author
 or maintainer. Any replacement of the distributed conversion code requires a
 separate reviewed change and renewed bundle/device verification.
 
-The remaining acorn notice applicability clarification, build-tool source-form review, final
+The remaining build-tool source-form review, final
 release-checkout regeneration, and persistent public source downloads remain
 separate release work. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
 

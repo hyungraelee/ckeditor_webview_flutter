@@ -171,6 +171,12 @@ def build_report(manifest, input_bytes, package_bytes):
                 raise ValueError(f'Unknown notice evidence status: {status}')
             if content is not None and digest(content) != evidence['sha256']:
                 raise ValueError(f'Reviewed notice content differs: {entry["name"]}')
+            if 'packagePath' in evidence and package_bytes(evidence['packagePath']) != content:
+                raise ValueError(f'Supplemental notice differs from upstream: {entry["name"]}')
+            if 'permissionEvidence' in evidence:
+                permission = evidence['permissionEvidence']
+                if digest(package_bytes(permission['packagePath'])) != permission['sha256']:
+                    raise ValueError(f'Reviewed permission evidence differs: {entry["name"]}')
             entry['reviewEvidence'] = evidence
         else:
             status = 'notice-file-present' if notice_paths else 'unreviewed-missing-notice'

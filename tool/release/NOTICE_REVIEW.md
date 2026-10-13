@@ -43,13 +43,13 @@ All npm tarballs remain intact; embedded notices are never replaced.
 | `saxes` 5.0.1 | Full upstream LICENSE, including inherited sax/XML notices, at the v5.0.1 tag | Upstream notice preserved |
 | `blurhash` 2.0.5 | Wolt MIT notice and TypeScript sources at the 2.0.5 version-bump commit | Upstream notice preserved |
 | `@tootallnate/once` 1.1.2 | Full MIT notice from the upstream license-addition commit; its 1.1.2 TypeScript source matches the npm gitHead | Upstream notice preserved |
-| `acorn-import-assertions` 1.9.0 | MIT declaration; later renamed import-attributes notice retained as a reference with changed source | Applicability unresolved |
+| `acorn-import-assertions` 1.9.0 | MIT README declaration; pre-release owner authorization and owner-merged original notice, preserved as a supplemental copy | Upstream notice with maintainer clarification |
 | `boolbase` 1.0.0 | Original ISC text at the upstream license-addition commit; its `index.js` matches the locked npm input | Upstream notice preserved |
 
 Do not fabricate a copyright owner/year or treat an SPDX declaration as a
-recovered original notice. Obtain upstream clarification or review an appropriate
-build-dependency replacement for the remaining acorn input before source release.
-This record does not conclude that the input is unlicensed.
+recovered original notice. The [targeted permission follow-up](PERMISSION_REVIEW.md)
+now preserves the acorn owner's earlier authorization and original notice;
+this closes the recorded acorn notice gap without replacing a dependency.
 
 Exact commit URLs and archive hashes are in [source-inputs.json](source-inputs.json).
 The audit verifies six blurhash library TypeScript files against the npm source
@@ -82,6 +82,9 @@ The cited [HSV conversion page](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to
 reposts code from an earlier site but does not establish an explicit license.
 Preserving the acknowledgment does not resolve that permission question. Do not
 substitute a different algorithm or claim clarified permission without review.
+The subsequently recovered author-account Gist also has no explicit grant in
+the inspected material; [PERMISSION_REVIEW.md](PERMISSION_REVIEW.md) records the
+fixed revision and remaining alternatives.
 
 ## Lodash source and generator evidence
 
@@ -104,8 +107,9 @@ historical npm release reproduction remains unverified. See
 
 The original boolbase ISC text is now preserved from the 2015 license-addition
 commit at version 1.0.0. Its implementation is byte-identical to the locked npm
-input. The later acorn-import-attributes notice is retained separately and is
-not treated as an applicable recovered notice for assertions 1.9.0.
+input. The later acorn-import-attributes notice was initially retained as a
+reference. Its supplemental applicability to assertions 1.9.0 is now assessed
+using the earlier owner's clarification in [PERMISSION_REVIEW.md](PERMISSION_REVIEW.md).
 [BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md) records these sources,
 the two TypeScript release source trees, the CLI generation comparison, and the
 limits of the scoped build-tool source review.
@@ -121,9 +125,8 @@ source/notice evidence and do not approve complete licensing applicability.
 
 ## Remaining publication work
 
-Complete the acorn notice applicability clarification, copied-code revision/HSV
-permission review and remaining build-tool source
-form/notice applicability review. Regenerate from the approved release checkout,
+Complete the copied-code revision/HSV permission review and remaining build-tool
+source form/notice applicability review. Regenerate from the approved release checkout,
 verify the source rebuild, then publish and verify persistent anonymous source
 download access. Device/SDK/package-consumption and HTML round trips remain
 separate checks. No source artifact or pub.dev package is uploaded by these tools.

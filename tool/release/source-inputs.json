@@ -104,7 +104,7 @@
       "url": "https://codeload.github.com/xtuc/acorn-import-assertions/tar.gz/809f1c58c699fd084b6db8096963d916fc69d4c7",
       "sha256": "02253ebaccd4df578b6f46c3bd4b10bedf6f89257694cedb7251d081e15591d5",
       "size": 13465,
-      "provenance": "exact npm gitHead; MIT declaration only",
+      "provenance": "exact npm gitHead; MIT README declaration and maintainer notice clarification preserved",
       "version": "1.9.0"
     },
     {
@@ -193,7 +193,7 @@
       "sha256": "6c72ab2d35701bc332385f8fd43e8e9b359a72ed6e323f9b9675e1809bfd51cf",
       "size": 12399,
       "version": "1.9.1",
-      "provenance": "later renamed import-attributes project; notice reference only, applicability to assertions 1.9.0 unresolved",
+      "provenance": "original MIT notice; applicability to retained assertions 1.9.0 assessed using pre-release maintainer clarification",
       "excludeDirectories": [
         "test",
         "tests"
@@ -265,7 +265,6 @@
   "unresolved": [
     "The verified Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent, so complete historical npm release reproduction remains unverified.",
     "Thirteen early vanilla-colorful/react-colorful conversion initializers match after documented normalization; color-fns source lineage is retained. Exact selected copying commits and original HSV permission remain unresolved.",
-    "The later acorn-import-attributes MIT notice is retained as a reference; applicability to acorn-import-assertions 1.9.0 remains unresolved.",
     "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
     "Official TypeScript compiler release sources are retained, but compiler-to-npm bootstrap reproduction and exhaustive transitive build-tool source review remain unverified.",
     "Public source download access has not been provided."

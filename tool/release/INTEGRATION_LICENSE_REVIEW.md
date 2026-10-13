@@ -101,8 +101,9 @@ material, rather than consumer setup instructions.
 
 Before publication, the remaining work includes:
 
-- Review original HSV permission and acorn notice applicability using their
-  recorded evidence; other integrations do not resolve these questions.
+- Review original HSV permission using its recorded evidence; other integrations
+  do not resolve that question. The subsequent [permission review](PERMISSION_REVIEW.md)
+  closes the recorded acorn notice gap using primary maintainer clarification.
 - Review source/notice applicability for the actual retained components, keeping
   historical reproduction limits distinct from an identified missing grant.
 - Regenerate the approved clean release candidate and verify source/build outputs.

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "status": "maintainer clarification supports supplemental acorn notice; HSV permission unresolved",
+  "acorn": {
+    "name": "acorn-import-assertions",
+    "version": "1.9.0",
+    "npmUrl": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+    "gitHead": "809f1c58c699fd084b6db8096963d916fc69d4c7",
+    "declaredLicense": "MIT",
+    "author": "Sven Sauleau",
+    "publicationDate": "2023-05-12",
+    "lockedFiles": [
+      {
+        "path": "README.md",
+        "sha256": "66ca0a3cbccf13090cf72427030664a061411428ff2848bd1c5ba8cfbffd1bf6"
+      },
+      {
+        "path": "src/index.js",
+        "sha256": "477b5fc249cba5358d412a3b37ec94b97e20600bcc8594f5a86a92cb409f044b"
+      }
+    ],
+    "maintainerStatement": {
+      "url": "https://github.com/xtuc/acorn-import-attributes/issues/16#issuecomment-1439894133",
+      "apiUrl": "https://api.github.com/repos/xtuc/acorn-import-attributes/issues/comments/1439894133",
+      "id": 1439894133,
+      "user": "xtuc",
+      "authorAssociation": "OWNER",
+      "createdAt": "2023-02-22T11:53:37Z",
+      "updatedAt": "2023-02-22T11:53:37Z",
+      "body": "Please feel free to add a MIT license with my name in the project ",
+      "bodySha256": "667db363e6fdf8a8c78c5215b04bd669f5eb75f309a560f90754644938892923"
+    },
+    "noticeAddition": {
+      "url": "https://github.com/xtuc/acorn-import-attributes/pull/26",
+      "commit": "2c7059709cc529d81194c2d7057c181f4000e375",
+      "mergeCommit": "668d8e911eac405e5fbd1f2b2ae91074753cefe2",
+      "mergedBy": "xtuc",
+      "mergedAt": "2023-08-27T13:52:30Z",
+      "path": "LICENSE",
+      "sha256": "68d38391fb464a7ffdfd27f6f41c46700dc7c8e3a11bd91bc9d75e9e3706badd",
+      "packagePath": "tool/release/notices/acorn-import-assertions-LICENSE.txt"
+    },
+    "assessment": "The locked README declares MIT. The maintainer authorized an MIT notice with his name before 1.9.0 and subsequently merged that notice. Preserve the unchanged original text as supplemental notice for the retained 1.9.0 input; this is a documented applicability assessment, not byte equality with the later changed implementation or complete legal certification."
+  },
+  "hsv": {
+    "status": "no explicit original grant recovered",
+    "gistUrl": "https://gist.github.com/mjackson/5311256",
+    "apiUrl": "https://api.github.com/gists/5311256/132d6d1f39bf422e03c8ab86b5329d6f4dfbc383",
+    "owner": "mjackson",
+    "revision": "132d6d1f39bf422e03c8ab86b5329d6f4dfbc383",
+    "committedAt": "2013-04-04T15:17:10Z",
+    "file": "color-conversion-algorithms.js",
+    "sha256": "1aae8efa78a2338ddac9c8c19d0ab067d004f4785728a6713b62287fffb6ea1a",
+    "observation": "The recovered author-account gist contains conversion code without explicit license text. The 30 existing comments retrieved in this review contain no comment by the gist owner. Third-party requests, reposts and ports do not supply an original grant. The gist implementation is not added to the distributed source candidate.",
+    "nextScope": "Obtain an applicable original clarification, or separately review a conversion implementation replacement and regenerate/retest affected outputs."
+  }
+}

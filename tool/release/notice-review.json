@@ -17,9 +17,16 @@
       "version": "1.9.0",
       "url": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
       "integrity": "sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==",
-      "status": "declaration-only",
-      "reason": "Locked 1.9.0 declares MIT without a complete notice. A later renamed import-attributes 1.9.1 notice is retained separately; its applicability to the changed assertions source is unresolved.",
-      "upstreamId": "acorn-import-assertions"
+      "status": "upstream-notice",
+      "reason": "Locked README declares MIT; maintainer authorized an MIT notice with his name before 1.9.0 and later merged the preserved original text. Supplemental notice applicability is assessed with permission-evidence.json.",
+      "upstreamId": "acorn-later-notice",
+      "path": "LICENSE",
+      "sha256": "68d38391fb464a7ffdfd27f6f41c46700dc7c8e3a11bd91bc9d75e9e3706badd",
+      "packagePath": "tool/release/notices/acorn-import-assertions-LICENSE.txt",
+      "permissionEvidence": {
+        "packagePath": "tool/release/permission-evidence.json",
+        "sha256": "5ed5736e39d5d9c61c124ac18c19c27b909b4f098f2fb4df7c244b91953151c4"
+      }
     },
     {
       "name": "agent-base",
@@ -380,6 +387,22 @@
       "npmPath": "package/lib/workspace.js",
       "upstreamId": "ckeditor5-dev-source",
       "upstreamPath": "packages/ckeditor5-dev-utils/lib/workspace.js"
+    },
+    {
+      "id": "acorn-locked-readme",
+      "kind": "npm-upstream-equality",
+      "upstreamId": "acorn-import-assertions",
+      "upstreamPath": "README.md",
+      "npmUrl": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+      "npmPath": "package/README.md"
+    },
+    {
+      "id": "acorn-locked-implementation",
+      "kind": "npm-upstream-equality",
+      "upstreamId": "acorn-import-assertions",
+      "upstreamPath": "src/index.js",
+      "npmUrl": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+      "npmPath": "package/src/index.js"
     }
   ],
   "copiedCodeSourceFiles": [

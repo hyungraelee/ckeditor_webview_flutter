@@ -4,7 +4,8 @@ This maintainer review covers the actual bundled-editor inventory and the npm
 inputs retained in the 41.4.1 source candidate. It records component roles,
 notice preservation, and source-presence evidence. It is not complete legal
 approval of every embedded component, and does not resolve original HSV
-permission or acorn notice applicability.
+permission. The subsequent [permission review](PERMISSION_REVIEW.md) assesses
+acorn supplemental-notice applicability using primary maintainer evidence.
 
 ## Two distribution scopes
 
@@ -95,11 +96,12 @@ notice/reference condition. Original tarball bytes remain unchanged.
 
 ## Unresolved permissions and release disposition
 
-The acorn input still declares MIT; its later renamed-project notice is a
-preserved reference with unresolved applicability. The original HSV grant
-remains unrecovered. This phase adds no new permission evidence for either,
-does not infer a grant from a downstream declaration, and does not contact an
-upstream author. Their existing notice/source records remain unchanged.
+The acorn input still declares MIT. The subsequent
+[permission review](PERMISSION_REVIEW.md) preserves the owner's pre-release
+clarification and original notice as supplemental evidence, closing the recorded
+acorn notice gap. The original HSV grant remains unrecovered. The later
+author-account Gist is now accessible but adds no explicit grant in the inspected
+material. No upstream author was contacted; existing runtime notices remain intact.
 
 The classification narrows the previous broad build-input review into explicit
 roles, declaration families, and GPL source evidence. It does not mark the
