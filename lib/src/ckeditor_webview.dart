@@ -40,9 +40,9 @@ class CkEditorWebView extends StatefulWidget {
     this.onNavigationBlocked,
     this.loadingBuilder,
     this.errorBuilder,
-  }) : assert(height == null || height > 0),
-       assert(minHeight > 0 && minHeight < double.infinity),
-       assert(changeDebounce >= Duration.zero);
+  })  : assert(height == null || (height > 0 && height < double.infinity)),
+        assert(minHeight > 0 && minHeight < double.infinity),
+        assert(changeDebounce >= Duration.zero);
 
   final CkEditorController controller;
 
@@ -196,8 +196,7 @@ class CkEditorWebView extends StatefulWidget {
     BuildContext context,
     CkEditorError error,
     VoidCallback? retry,
-  )?
-  errorBuilder;
+  )? errorBuilder;
 
   @override
   State<CkEditorWebView> createState() => _CkEditorWebViewState();
@@ -238,11 +237,13 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
     try {
       final assetKey = _editorAssetKey;
       if (!RegExp(r'^[A-Za-z0-9_./-]+\.html$').hasMatch(assetKey) ||
-          assetKey.split('/').any((part) =>
-              part.isEmpty || part == '.' || part == '..')) {
+          assetKey
+              .split('/')
+              .any((part) => part.isEmpty || part == '.' || part == '..')) {
         throw const CkEditorError(
           code: 'invalid_editor_asset',
-          message: 'Use a relative HTML asset key without traversal or URL components.',
+          message:
+              'Use a relative HTML asset key without traversal or URL components.',
         );
       }
       final webView = WebViewController();
@@ -267,8 +268,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
         },
         onLayoutChanged: (layout) {
           if (!_isCurrent(owner) || !widget.autoHeight) return;
-          final needsBuild =
-              _layout?.height != layout.height ||
+          final needsBuild = _layout?.height != layout.height ||
               _layout?.captureGestures != layout.captureGestures;
           _layout = layout;
           if (needsBuild) setState(() {});
@@ -312,7 +312,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
                 owner,
                 const CkEditorError(
                   code: 'navigation_blocked',
-                  message: '허용되지 않은 에디터 페이지입니다.',
+                  message: 'The editor page is not allowed.',
                 ),
                 fatal: true,
               );
@@ -323,7 +323,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
                 owner,
                 const CkEditorError(
                   code: 'webview_reloaded',
-                  message: '에디터 페이지가 변경되었습니다. 다시 시도해주세요.',
+                  message: 'The editor page changed. Please retry.',
                 ),
                 fatal: true,
               );
@@ -347,7 +347,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
               owner,
               CkEditorError(
                 code: 'webview_load_failed',
-                message: '에디터 페이지를 불러오지 못했습니다.',
+                message: 'The editor page could not be loaded.',
                 cause: error,
               ),
               fatal: true,
@@ -363,7 +363,7 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
           ? error
           : CkEditorError(
               code: 'webview_load_failed',
-              message: '로컬 에디터를 불러오지 못했습니다.',
+              message: 'The local editor could not be loaded.',
               cause: error,
             );
       if (identical(_attachedController, controller)) {
@@ -542,16 +542,15 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
       final viewportBottom = viewportTop + viewport.size.height;
       final media = MediaQuery.of(context);
       final keyboardTop = media.size.height - media.viewInsets.bottom;
-      final visibleBottom = viewportBottom < keyboardTop
-          ? viewportBottom
-          : keyboardTop;
+      final visibleBottom =
+          viewportBottom < keyboardTop ? viewportBottom : keyboardTop;
       final caretTop = origin + _layout!.caretTop!;
       final caretBottom = origin + _layout!.caretBottom!;
       final delta = caretBottom > visibleBottom - 20
           ? caretBottom - visibleBottom + 20
           : caretTop < viewportTop + 20
-          ? caretTop - viewportTop - 20
-          : 0.0;
+              ? caretTop - viewportTop - 20
+              : 0.0;
       if (delta.abs() < 1) return;
       final target = (position.pixels + delta)
           .clamp(position.minScrollExtent, position.maxScrollExtent)
@@ -609,94 +608,90 @@ class _CkEditorWebViewState extends State<CkEditorWebView>
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) => SizedBox(
-      height: widget.autoHeight
-          ? (_layout?.height ?? widget.minHeight).clamp(
-              widget.minHeight,
-              double.infinity,
-            )
-          : widget.height ?? (constraints.hasBoundedHeight ? null : 360),
-      child: ListenableBuilder(
-        listenable: widget.controller,
-        builder: (context, child) {
-          final controller = widget.controller;
-          final error =
-              _setupError ??
-              (controller.state == CkEditorState.error
-                  ? controller.error
-                  : null);
-          if (error != null || controller.state == CkEditorState.disposed) {
-            final displayedError =
-                error ??
-                const CkEditorError(
-                  code: 'disposed',
-                  message: 'The editor controller is disposed.',
-                );
-            final retry = controller.state == CkEditorState.disposed
-                ? null
-                : _retry;
-            return widget.errorBuilder?.call(context, displayedError, retry) ??
-                ColoredBox(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              displayedError.message,
-                              textAlign: TextAlign.center,
+        builder: (context, constraints) => SizedBox(
+          height: widget.autoHeight
+              ? (_layout?.height ?? widget.minHeight).clamp(
+                  widget.minHeight,
+                  double.infinity,
+                )
+              : widget.height ?? (constraints.hasBoundedHeight ? null : 360),
+          child: ListenableBuilder(
+            listenable: widget.controller,
+            builder: (context, child) {
+              final controller = widget.controller;
+              final error = _setupError ??
+                  (controller.state == CkEditorState.error
+                      ? controller.error
+                      : null);
+              if (error != null || controller.state == CkEditorState.disposed) {
+                final displayedError = error ??
+                    const CkEditorError(
+                      code: 'disposed',
+                      message: 'The editor controller is disposed.',
+                    );
+                final retry =
+                    controller.state == CkEditorState.disposed ? null : _retry;
+                return widget.errorBuilder
+                        ?.call(context, displayedError, retry) ??
+                    ColoredBox(
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Center(
+                                child: Text(
+                                  displayedError.message,
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
                             ),
-                          ),
+                            if (retry != null)
+                              FilledButton(
+                                onPressed: retry,
+                                child: const Text('Retry'),
+                              ),
+                          ],
                         ),
-                        if (retry != null)
-                          FilledButton(
-                            onPressed: retry,
-                            child: const Text('Retry'),
-                          ),
-                      ],
+                      ),
+                    );
+              }
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  if (_webView != null)
+                    IgnorePointer(
+                      ignoring: !controller.isReady,
+                      child: WebViewWidget(
+                        key: ObjectKey(_webView),
+                        controller: _webView!,
+                        // In autoHeight mode vertical swipes scroll the Flutter
+                        // form. Native selection and open menus retain gestures.
+                        gestureRecognizers: widget.autoHeight &&
+                                !(_layout?.captureGestures ?? false)
+                            ? {
+                                Factory<OneSequenceGestureRecognizer>(
+                                  () => LongPressGestureRecognizer(),
+                                ),
+                              }
+                            : {
+                                Factory<OneSequenceGestureRecognizer>(
+                                  () => EagerGestureRecognizer(),
+                                ),
+                              },
+                      ),
                     ),
-                  ),
-                );
-          }
-          return Stack(
-            fit: StackFit.expand,
-            children: [
-              if (_webView != null)
-                IgnorePointer(
-                  ignoring: !controller.isReady,
-                  child: WebViewWidget(
-                    key: ObjectKey(_webView),
-                    controller: _webView!,
-                    // In autoHeight mode vertical swipes scroll the Flutter
-                    // form. Native selection and open menus retain gestures.
-                    gestureRecognizers:
-                        widget.autoHeight &&
-                            !(_layout?.captureGestures ?? false)
-                        ? {
-                            Factory<OneSequenceGestureRecognizer>(
-                              () => LongPressGestureRecognizer(),
-                            ),
-                          }
-                        : {
-                            Factory<OneSequenceGestureRecognizer>(
-                              () => EagerGestureRecognizer(),
-                            ),
-                          },
-                  ),
-                ),
-              if (!controller.isReady)
-                ColoredBox(
-                  color: Colors.white,
-                  child:
-                      widget.loadingBuilder?.call(context) ??
-                      const Center(child: CircularProgressIndicator()),
-                ),
-            ],
-          );
-        },
-      ),
-    ),
-  );
+                  if (!controller.isReady)
+                    ColoredBox(
+                      color: Colors.white,
+                      child: widget.loadingBuilder?.call(context) ??
+                          const Center(child: CircularProgressIndicator()),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      );
 }

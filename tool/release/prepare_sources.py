@@ -60,7 +60,8 @@ def snapshot_files():
         ['git', 'ls-files', '--cached', '--others', '--exclude-standard', '-z'],
         cwd=ROOT).decode().split('\0')
     root_files = {'LICENSE', 'README.md', 'CONTRIBUTING.md', 'THIRD_PARTY_NOTICES.md',
-                  'CHANGELOG.md', 'pubspec.yaml', 'analysis_options.yaml', '.pubignore', '.gitignore'}
+                  'CHANGELOG.md', 'pubspec.yaml', 'analysis_options.yaml', '.pubignore', '.gitignore',
+                  '.fvmrc'}
     folders = {'lib', 'bin', 'assets', 'tool', 'test', 'example'}
     selected = []
     for name in sorted(set(names)):
@@ -69,8 +70,11 @@ def snapshot_files():
         p = Path(name)
         if name not in root_files and p.parts[0] not in folders:
             continue
+        # Keep shared exclusion rules: rebuilding the example can generate
+        # native files that must still be excluded from a later pub archive.
+        checked_parts = p.parts[:-1] if p.name == '.gitignore' else p.parts
         if any(part in {'node_modules', 'build', '__pycache__', 'AGENTS.md', 'agents.md'}
-               or part.startswith('.') for part in p.parts) and name not in root_files:
+               or part.startswith('.') for part in checked_parts) and name not in root_files:
             continue
         if any(part.startswith('.env') for part in p.parts):
             continue

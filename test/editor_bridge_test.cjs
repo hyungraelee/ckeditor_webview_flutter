@@ -182,6 +182,18 @@ test('failed creation removes CSS and does not announce ready', async t => {
   assert.equal(h.messages[0].data.code, 'editor_create_failed');
 });
 
+for (const reason of [null, 'Rejected by the engine', 7]) {
+  test(`non-Error creation rejection reaches the error channel: ${reason}`, async t => {
+    const h = createHarness({ failCreation: true, creationError: reason });
+    t.after(() => h.destroy());
+    await h.initialize({ customCss: '.ck-content { color: navy; }' });
+    assert.equal(h.head.length, 2);
+    assert.deepEqual(h.messages, [{ type: 'error', data: {
+      code: 'editor_create_failed', message: String(reason)
+    } }]);
+  });
+}
+
 test('disposal during pending creation destroys the late editor without events', async () => {
   const h = createHarness({ deferCreation: true });
   const initialization = h.initialize({ customCss: '.ck-content { color: navy; }' });

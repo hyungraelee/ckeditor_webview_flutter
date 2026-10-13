@@ -120,14 +120,17 @@ def main():
         run(['node', 'tool/release/verify_build_tool_sources.cjs', str(work)], package)
     run(['node', 'tool/release/rebuild-source-inputs.cjs', str(work)], package)
     run(['npm', 'run', 'build'], package / 'tool/ckeditor_build')
-    for name in ['ckeditor.js', 'ckeditor.css', 'ckeditor.js.LICENSE.txt', 'CKEDITOR-LICENSE.txt',
-                 'LODASH-LICENSE.txt', 'THIRD_PARTY_LICENSES.txt', 'build-info.json']:
+    generated = {'ckeditor.js', 'ckeditor.css', 'ckeditor.js.LICENSE.txt', 'CKEDITOR-LICENSE.txt',
+                 'LODASH-LICENSE.txt', 'THIRD_PARTY_LICENSES.txt', 'build-info.json'}
+    for name in expected:
         if sha256(asset_dir / name) != expected[name]:
             raise ValueError(f'Rebuilt release asset differs: {name}')
     report = {'archiveSha256': sha256(archive), 'status': 'source rebuild verified; publication review pending',
               'node': subprocess.check_output(['node', '--version'], text=True).strip(),
               'npm': subprocess.check_output(['npm', '--version'], text=True).strip(),
-              'matchedAssets': expected, 'remainingReview': manifest['unresolved']}
+              'matchedAssets': {name: value for name, value in expected.items() if name in generated},
+              'preservedAssets': {name: value for name, value in expected.items() if name not in generated},
+              'remainingReview': manifest['unresolved']}
     (work / 'REBUILD_REPORT.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps({'report': str(work / 'REBUILD_REPORT.json'), 'result': report['status']}))
 

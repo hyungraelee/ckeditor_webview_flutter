@@ -10,20 +10,23 @@ From the repository root:
 ```sh
 fvm flutter pub get
 fvm flutter test
-node --test test/editor_bridge_test.cjs
+node --test test/*_test.cjs
 fvm flutter analyze
 ```
 
 Without FVM, use equivalent commands with a compatible Flutter SDK. Flutter
 tests cover controller readiness, command ordering, JSON/HTML transport,
 snapshots, failure recovery, timeouts, detach/re-attach, and disposal through a
-fake JavaScript execution boundary.
+fake JavaScript execution boundary. Setup-command tests check YAML preservation,
+idempotence, and rejection of conflicting files or transformers.
 
 The independent bridge suite requires Node.js 20+ and uses Node's built-in test
 runner, with no npm installation or editor rebuild. It executes the actual
 `assets/editor/editor.js` in an isolated VM with an editor/DOM harness and
 deterministic timers. It covers source-editing reads, debounced changes,
 configuration protection, CSS text insertion, and failure/disposal cleanup.
+The optional builder suite uses local npm/compiler fixtures to check lock-based
+cache invalidation, extracted notices, and cleanup after a failed build.
 Node is required only to run this suite or use optional engine builds; bundled
 package use and the Flutter tests do not require it.
 
@@ -69,3 +72,6 @@ corresponding-source distribution obligations. See
 For the bundled source inventory, source-distribution plan, package file review,
 and outstanding publication checks, see
 [the release source audit](tool/release/README.md).
+
+For release artifact names, source publication, and the first manual pub.dev
+upload, follow [the manual release procedure](tool/release/MANUAL_RELEASE.md).

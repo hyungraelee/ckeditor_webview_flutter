@@ -15,14 +15,24 @@ build tool. Default usage requires no Node installation.
 Requested versions must provide the package's plugins and compatible build/API
 layout; build success does not guarantee device or HTML round-trip compatibility.
 
+## Installation
+
+Requires Flutter **3.27.0+** and Dart **3.6.0+** on Android or iOS.
+
+```yaml
+dependencies:
+  ckeditor_webview_flutter: ^0.1.0
+```
+
+Run `flutter pub get`. Package assets are registered automatically; there is
+no need to copy editor files or register them in the consuming app.
+This package uses **GPL-2.0-or-later**; see [License](#license) before integrating it.
+
 ## Usage
 
 An Android/iOS app is included in [`example/`](example/README.md). It demonstrates
 fixed and automatic height, sample content, and inline HTML output. Open
 `example/` as a Flutter project to run it with an IDE debugger.
-
-Add this package as a dependency. Its assets are registered by the package;
-the consuming app does not need to copy the editor files or register them again.
 
 ```dart
 import 'package:ckeditor_webview_flutter/ckeditor_webview_flutter.dart';
@@ -92,6 +102,9 @@ Events: `onReady`, `onChanged`, `onFocus`, `onBlur`, and `onError`. Override
 receives a retry callback, or null for a disposed controller. Navigation outside
 the local editor document is blocked; `onNavigationBlocked` lets your app
 delegate a URL to an external browser if desired.
+
+Package error messages are English diagnostics. Use `CkEditorError.code` to
+select localized messages in your `errorBuilder` or error reporting.
 
 ## Toolbar
 
@@ -399,3 +412,12 @@ and provide the required corresponding source for the actual distributed version
 including local changes and build inputs. Preserve source access for distributed
 releases; build recipes and upstream links alone are insufficient. App-specific
 source distribution remains the app distributor's responsibility.
+
+Bundled-editor source downloads for package **0.1.0**:
+
+- [Source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz)
+- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz.sha256)
+
+The archive contains the package sources, pinned upstream sources, notices, and
+offline rebuild inputs for the bundled 41.4.1 editor. It is a separate download
+and is not included in your app. See [source rebuild instructions](tool/release/SOURCE_ARCHIVE.md).

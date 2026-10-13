@@ -19,7 +19,8 @@ const featureNames = [
   'Alignment', 'Indent', 'IndentBlock'
 ];
 
-function createHarness({ failCreation = false, deferCreation = false } = {}) {
+function createHarness({ failCreation = false, deferCreation = false,
+  creationError = new Error('Fixture creation failed') } = {}) {
   const messages = [];
   const head = [{ id: 'vendor-css' }, { id: 'layout-css' }];
   const inputListeners = new Map();
@@ -77,7 +78,7 @@ function createHarness({ failCreation = false, deferCreation = false } = {}) {
     config = options;
     data = options.initialData;
     calls.push('create');
-    if (failCreation) throw new Error('Fixture creation failed');
+    if (failCreation) throw creationError;
     if (pendingCreation) await pendingCreation;
     return instance;
   } };
