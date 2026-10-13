@@ -219,6 +219,40 @@ void main() {
     expect(session.commands, isEmpty);
   });
 
+  test('fatal errors cancel native work and queued commands only once',
+      () async {
+    session.attach();
+    session.ready();
+    final response = Completer<Object>();
+    session.respond = (_, __) => response.future;
+    final read = expectLater(
+        controller.getHtml(), throwsA(errorCode('javascript_error')));
+    final write = expectLater(
+        controller.setHtml('pending'), throwsA(errorCode('javascript_error')));
+    await flushQueue();
+    session.event('error', {'code': 'javascript_error', 'message': 'Failed'});
+    await Future.wait([read, write]);
+    response.completeError(StateError('Late native error'));
+    await flushQueue();
+    expect(controller.state, CkEditorState.error);
+    expect(session.errors.single.code, 'javascript_error');
+    expect(session.commands.map((command) => command.$1), ['getHtml']);
+  });
+
+  test('completed commands do not become failures when a session ends',
+      () async {
+    session.attach();
+    session.ready();
+    for (var index = 0; index < 100; index++) {
+      expect(await controller.getHtml(), '<p>Seed</p>');
+    }
+    controller.detach(session.owner);
+    await flushQueue();
+    expect(session.errors, isEmpty);
+    expect(controller.cachedHtml, '<p>Seed</p>');
+    expect(session.destroyCalls, 1);
+  });
+
   test('invalid config fails before crossing the native execution boundary',
       () async {
     final cycle = <String, Object?>{};

@@ -1,24 +1,15 @@
 ## 0.1.0
 
-- Add optional `customCss` for editor UI and content appearance, with text-based stylesheet insertion, lifecycle cleanup, and generated-asset capability checks.
-- Demonstrate custom toolbar colors, borders, and content typography/spacing in the automatic-height example; document that these styles are not included in saved HTML.
+Initial release for Android and iOS, requiring Flutter 3.27.0 and Dart 3.6.0 or later.
 
-- Add optional JSON-based `config` for included editor features, documented settings, protected package options, validation errors, and capability checks for generated assets.
-- Demonstrate custom font sizes, font families, and a color palette in the automatic-height example while retaining defaults in fixed-height mode.
+- Bundle CKEditor 5 41.4.1 as local WebView assets, with offline English UI and optional system-language translations from the official CDN.
+- Provide an HTML controller with readiness handling, ordered commands, read-only mode, source editing, recovery snapshots, and error callbacks.
+- Support fixed and automatic height, parent scrolling, and caret visibility handling.
+- Allow custom toolbar items, JSON feature configuration, CSS, and loading/error UI.
+- Offer optional Node.js/npm engine builds with version requests, persistent dependency locks, an asset setup command, and runtime license-key configuration.
+- Include an example with sample content, both height modes, custom feature settings/styles, and inline HTML output.
+- Preserve GPL-2.0-or-later and third-party notices, with separate versioned sources and offline rebuild tooling for the bundled editor.
 
-- Add opt-in Node.js/npm engine builds through a Flutter asset transformer, with version-aware legacy/modern toolchains, persistent npm locks, cached local HTML assets, and explicit updates.
-- Add an `init --version` command that creates the editor input asset and registers the transformer while preserving unrelated pubspec settings and comments.
-- Add optional `editorAsset` and `licenseKey` widget options with bundled-editor and GPL defaults, runtime key overrides, and version-matched UI translations; default bundled use still requires no Node.js/npm.
-- Validate required license keys and version generated assets to prevent outdated assets from ignoring runtime key overrides.
-
-- Extract the standalone Flutter controller and local WebView editor.
-- Bundle CKEditor 5 41.4.1 with English UI and default feature configuration.
-- Fetch official 41.4.1 UI translations for the system locale, with a three-second network timeout and offline English fallback.
-- Support HTML commands, debounced events, read-only mode, and source editing.
-- Add configurable toolbar items, order, and group separators with documented supported names.
-- Preserve readiness handling, lifecycle snapshots, error handling, and navigation restrictions.
-- Support fixed height and automatic content height with caret visibility handling.
-- Replace application-specific logging and widgets with callbacks and Flutter UI.
-- Add an Android/iOS example app with height modes, sample content, and inline HTML output.
-- Align the example's SDK constraints and native scaffold with Flutter 3.27.0, and pin the development SDK with FVM.
-- Import internal annotations directly from meta for compatibility with Flutter 3.27.0.
+Unsupported HTML can be normalized or removed by CKEditor. Image uploads and
+General HTML Support are not included; compatibility with a web custom build
+requires matching features/settings and HTML round-trip validation.

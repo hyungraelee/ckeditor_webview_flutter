@@ -99,13 +99,16 @@ root. It is an npm-format lockfile containing the resolved engine, all package
 versions, integrity hashes, and the original version request. `^` and wildcard
 requests are resolved once, not refreshed during ordinary application builds.
 An existing lock is restored with `npm ci` when the local dependencies are
-missing. A mismatched version request/compiler requires an explicit update.
+missing or the last successful installation used a different lock or native
+Node platform/ABI. This includes transitive dependency changes at the same
+editor version. A mismatched version request/compiler requires an explicit update.
 
 Dependencies and generated files are cached under
 `.dart_tool/ckeditor_webview_flutter/`. This folder belongs in `.gitignore`.
 `dist/build-info.json` records the exact engine version, package versions, and
-artifact hash; `dist/THIRD_PARTY_NOTICES.json` retains the installed license
-texts. Cached HTML is reused only if its fingerprint and hash match. The cache
+artifact hash; `dist/THIRD_PARTY_NOTICES.json` and the generated HTML retain
+installed license/acknowledgment files and notices extracted by the bundler.
+Cached HTML is reused only if its fingerprint and hash match. The cache
 is disposable; the application lockfile is persistent.
 
 The first build and dependency restoration require registry access. A complete

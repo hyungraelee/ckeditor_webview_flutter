@@ -61,7 +61,9 @@ Package files come from an explicit set of source/documentation folders and
 root files, intersected with Git's tracked/non-ignored file list. Local agent
 instructions, environment files, hidden caches, build output, dependency
 installation folders, and Python bytecode are excluded. Symlinks require review
-instead of being followed. The manifest records each package file's digest,
+instead of being followed. Shared `.gitignore` files, `.pubignore`, and the
+`.fvmrc` SDK pin are retained so source checkouts preserve build/publication rules.
+The manifest records each package file's digest,
 the repository commit, and whether working-tree changes were included. Final
 release candidates must be regenerated from the approved clean release checkout.
 
@@ -143,14 +145,16 @@ The workspace retains `SOURCE_GENERATION_REPORT.json`,
 with generation counts, environment, asset hashes, archive checksum, and
 remaining review items. Treat a failed comparison as a release preparation
 failure; do not replace the distributed bundle merely to obtain matching hashes.
+`matchedAssets` records the seven regenerated outputs; `preservedAssets` records
+the three hand-authored editor files checked unchanged during rebuilding.
 
-## Outstanding publication review
+## Review limits and final publication checks
 
 The candidate proves a scoped source-to-bundle rebuild path, not completion of
-all redistribution or corresponding-source obligations. Before publication:
+all redistribution or corresponding-source obligations. Recorded limits:
 
-- Complete provenance/notice review for vanilla-colorful's copied color-fns and
-  react-colorful revisions and HSV conversion code. Its upstream acknowledgments
+- The exact copied revisions of vanilla-colorful's color-fns and react-colorful
+  code and the original HSV grant remain unconfirmed. Upstream acknowledgments
   and additional reference MIT notices are included. The preserved early React/port
   relationship is verified as described in [COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md). The cited
   [HSV conversion page](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c)
@@ -160,11 +164,14 @@ all redistribution or corresponding-source obligations. Before publication:
   npm release rebuild. See [the scoped comparison](LODASH_GENERATION.md).
 - Review notices and source forms of included build tools and dependency files.
   Of the eleven retained inputs without standalone notice filenames, six have
-  complete embedded notices and four now have pinned upstream notices preserved.
-  Acorn still declares a license without a recovered applicable complete notice.
-  Its later renamed-project notice is a reference requiring clarification. The inventory does not approve source forms or notice applicability
+  complete embedded notices and five have pinned upstream notices preserved.
+  The [permission review](PERMISSION_REVIEW.md) records acorn's pre-release owner
+  authorization and original MIT notice. The inventory does not approve source forms or notice applicability
   for every included file. See [the targeted review](NOTICE_REVIEW.md).
   No generated candidate is automatically approved for publication.
+
+Before uploading the package, follow [MANUAL_RELEASE.md](MANUAL_RELEASE.md):
+
 - Regenerate from the approved release checkout, review the actual manifest and
   archive contents, retain checksums, and verify the final source rebuild.
 - Publish the reviewed versioned source artifact at a persistent anonymous

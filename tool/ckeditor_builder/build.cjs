@@ -42,7 +42,7 @@ function npm(args) {
   if (result.status !== 0) throw new Error(`npm ${args[0]} failed (exit ${result.status}).`);
 }
 
-function notices(lock) {
+function notices(lock, dist) {
   const groups = new Map();
   for (const name of Object.keys(lock.packages)) {
     if (!name.startsWith('node_modules/') || name.split('/').includes('..')) continue;
@@ -50,7 +50,7 @@ function notices(lock) {
     if (!fs.existsSync(directory)) continue;
     const info = readJson(path.join(directory, 'package.json'));
     for (const file of fs.readdirSync(directory)) {
-      if (!/^(license|copying)(\..*)?$/i.test(file)) continue;
+      if (!/^(licen[cs]e|copying|notice|third[_-]?party[_-]?notices?|acknowledg[e]?ments?)(\..*)?$/i.test(file)) continue;
       const license = path.join(directory, file);
       if (!fs.statSync(license).isFile()) continue;
       const text = fs.readFileSync(license, 'utf8');
@@ -59,9 +59,16 @@ function notices(lock) {
       groups.get(key).packages.push(`${info.name}@${info.version}`);
     }
   }
+  const extracted = [];
+  for (const name of ['ckeditor.js.LEGAL.txt', 'ckeditor.css.LEGAL.txt', 'ckeditor.js.LICENSE.txt']) {
+    const file = path.join(dist, name);
+    if (fs.existsSync(file)) {
+      extracted.push({ packages: [`Bundled editor: ${name}`], text: fs.readFileSync(file, 'utf8') });
+    }
+  }
   return [
     { packages: ['ckeditor_webview_flutter'], text: fs.readFileSync(path.join(packageRoot, 'LICENSE'), 'utf8') },
-    ...groups.values()
+    ...groups.values(), ...extracted
   ];
 }
 
@@ -110,21 +117,31 @@ async function build() {
   }
   writeJson(path.join(cache, 'package.json'), manifest);
   const modules = path.join(cache, 'node_modules');
+  // Top-level versions alone cannot identify a transitive installation, or a
+  // partially installed update. Bind reuse to the complete successful npm lock.
+  const installationStamp = path.join(cache, 'installation.sha256');
+  const installationHash = () => hash(JSON.stringify([
+    fs.readFileSync(localLock, 'utf8'), process.platform, process.arch, process.versions.modules
+  ]));
   const installed = path.join(modules, 'ckeditor5', 'package.json');
   const lockedVersion = lock?.packages?.['node_modules/ckeditor5']?.version;
-  const reusable = lockedVersion && fs.existsSync(installed)
+  const reusable = lockedVersion && fs.existsSync(installationStamp)
+    && fs.readFileSync(installationStamp, 'utf8') === installationHash()
+    && fs.existsSync(installed)
     && readJson(installed).version === lockedVersion
     && Object.entries(buildDependencies).every(([name, value]) => {
       const metadata = path.join(modules, name, 'package.json');
       return fs.existsSync(metadata) && readJson(metadata).version === value;
     });
-  if (updating) {
-    npm(['install']);
-    npm(['update', 'ckeditor5']);
-  } else if (!lock) {
-    npm(['install']);
-  } else if (!reusable) {
-    npm(['ci']);
+  if (updating || !lock || !reusable) {
+    fs.rmSync(installationStamp, { force: true });
+    if (updating) {
+      npm(['install']);
+      npm(['update', 'ckeditor5']);
+    } else {
+      npm([lock ? 'ci' : 'install']);
+    }
+    fs.writeFileSync(installationStamp, installationHash());
   }
   lock = readJson(localLock);
   const version = lock.packages['node_modules/ckeditor5'].version;
@@ -159,6 +176,9 @@ async function build() {
       return;
     }
   }
+  // Do not carry extracted notices or CSS from a different toolchain forward.
+  fs.rmSync(dist, { recursive: true, force: true });
+  fs.mkdirSync(dist, { recursive: true });
   const entryPath = path.join(cache, modern ? 'entry.mjs' : 'editor-entry.js');
   fs.writeFileSync(entryPath, entry);
   const requireFromCache = createRequire(path.join(cache, 'package.json'));
@@ -174,7 +194,7 @@ async function build() {
   const stylesheet = fs.readFileSync(path.join(dist, 'ckeditor.css'), 'utf8');
   const info = { protocol: 2, version, translationFormat: modern ? 'umd' : 'legacy',
     supportsConfig: true, supportsCustomCss: true };
-  const thirdPartyNotices = notices(lock);
+  const thirdPartyNotices = notices(lock, dist);
   const html = `<!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Document editor</title>

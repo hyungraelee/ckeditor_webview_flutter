@@ -180,8 +180,10 @@
 
   function errorData(error, fallbackCode) {
     return {
-      code: error.bridgeCode || fallbackCode,
-      message: error.message || String(error)
+      code: typeof error?.bridgeCode === 'string' && error.bridgeCode
+        ? error.bridgeCode : fallbackCode,
+      message: typeof error?.message === 'string' && error.message
+        ? error.message : String(error)
     };
   }
 
