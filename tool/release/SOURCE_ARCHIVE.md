@@ -78,7 +78,9 @@ The archive contains:
   unchanged in `package/`.
 - `SOURCE_NOTICE_REPORT.json`: recomputable evidence for the 487 npm inputs,
   targeted embedded/upstream notices, copied-code reference notices, source
-  comparisons, and remaining review. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
+  comparisons, component roles/GPL source-presence mappings, supplemental source
+  attribution, and remaining review. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md) and
+  [COMPONENT_DISTRIBUTION_REVIEW.md](COMPONENT_DISTRIBUTION_REVIEW.md).
 
 ## Rebuild in a fresh environment
 

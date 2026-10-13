@@ -110,6 +110,15 @@ not treated as an applicable recovered notice for assertions 1.9.0.
 the two TypeScript release source trees, the CLI generation comparison, and the
 limits of the scoped build-tool source review.
 
+## Distributed component scope
+
+The [component distribution review](COMPONENT_DISTRIBUTION_REVIEW.md) distinguishes
+30 emitted-editor packages from 457 additional retained npm inputs, records nine
+declaration families and all 66 GPL source mappings, and preserves supplemental
+CC-BY data attribution. New notice scans explicitly include third-party-notice
+filenames, including TypeScript's retained embedded notices. These checks record
+source/notice evidence and do not approve complete licensing applicability.
+
 ## Remaining publication work
 
 Complete the acorn notice applicability clarification, copied-code revision/HSV

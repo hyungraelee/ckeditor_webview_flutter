@@ -200,3 +200,9 @@ guidance. It clarifies this package's independent GPL terms, retained source
 access, and the scope of build-tool review. The source candidate also preserves
 the official GPL developer-tool release and compares 29 translation/utils
 JavaScript files with the exact npm inputs.
+
+The [component distribution review](COMPONENT_DISTRIBUTION_REVIEW.md) records
+30 emitted packages and 457 other retained npm inputs, license declaration
+families, and all 66 GPL source mappings. It adds supplemental data attribution
+and explicit embedded third-party-notice reporting while keeping source-presence
+evidence separate from final applicability approval.
