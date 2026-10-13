@@ -1,0 +1,314 @@
+{
+  "schemaVersion": 1,
+  "status": "component-role and source-presence evidence; final applicability review pending",
+  "expectedNpmInputs": 487,
+  "expectedEmittedInputs": 30,
+  "licenseFamilies": [
+    "GPL-2.0-or-later",
+    "MIT",
+    "ISC",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "Apache-2.0",
+    "CC0-1.0",
+    "CC-BY-4.0",
+    "BlueOak-1.0.0"
+  ],
+  "legacyDeclarations": [
+    {
+      "value": [
+        {
+          "type": "MIT",
+          "url": "https://github.com/tkellen/node-rechoir/blob/master/LICENSE"
+        }
+      ],
+      "family": "MIT"
+    }
+  ],
+  "gplSourceMappings": [
+    {
+      "upstreamId": "ckeditor5",
+      "version": "41.4.1",
+      "noticePath": "LICENSE.md",
+      "packages": [
+        {
+          "name": "@ckeditor/ckeditor5-adapter-ckfinder",
+          "path": "packages/ckeditor5-adapter-ckfinder/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-alignment",
+          "path": "packages/ckeditor5-alignment/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-autoformat",
+          "path": "packages/ckeditor5-autoformat/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-autosave",
+          "path": "packages/ckeditor5-autosave/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-basic-styles",
+          "path": "packages/ckeditor5-basic-styles/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-block-quote",
+          "path": "packages/ckeditor5-block-quote/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-build-balloon",
+          "path": "packages/ckeditor5-build-balloon/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-build-balloon-block",
+          "path": "packages/ckeditor5-build-balloon-block/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-build-classic",
+          "path": "packages/ckeditor5-build-classic/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-build-decoupled-document",
+          "path": "packages/ckeditor5-build-decoupled-document/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-build-inline",
+          "path": "packages/ckeditor5-build-inline/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-build-multi-root",
+          "path": "packages/ckeditor5-build-multi-root/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-ckbox",
+          "path": "packages/ckeditor5-ckbox/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-ckfinder",
+          "path": "packages/ckeditor5-ckfinder/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-clipboard",
+          "path": "packages/ckeditor5-clipboard/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-cloud-services",
+          "path": "packages/ckeditor5-cloud-services/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-code-block",
+          "path": "packages/ckeditor5-code-block/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-core",
+          "path": "packages/ckeditor5-core/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-easy-image",
+          "path": "packages/ckeditor5-easy-image/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-editor-balloon",
+          "path": "packages/ckeditor5-editor-balloon/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-editor-classic",
+          "path": "packages/ckeditor5-editor-classic/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-editor-decoupled",
+          "path": "packages/ckeditor5-editor-decoupled/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-editor-inline",
+          "path": "packages/ckeditor5-editor-inline/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-editor-multi-root",
+          "path": "packages/ckeditor5-editor-multi-root/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-engine",
+          "path": "packages/ckeditor5-engine/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-enter",
+          "path": "packages/ckeditor5-enter/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-essentials",
+          "path": "packages/ckeditor5-essentials/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-find-and-replace",
+          "path": "packages/ckeditor5-find-and-replace/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-font",
+          "path": "packages/ckeditor5-font/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-heading",
+          "path": "packages/ckeditor5-heading/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-highlight",
+          "path": "packages/ckeditor5-highlight/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-horizontal-line",
+          "path": "packages/ckeditor5-horizontal-line/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-html-embed",
+          "path": "packages/ckeditor5-html-embed/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-html-support",
+          "path": "packages/ckeditor5-html-support/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-image",
+          "path": "packages/ckeditor5-image/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-indent",
+          "path": "packages/ckeditor5-indent/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-language",
+          "path": "packages/ckeditor5-language/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-link",
+          "path": "packages/ckeditor5-link/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-list",
+          "path": "packages/ckeditor5-list/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-markdown-gfm",
+          "path": "packages/ckeditor5-markdown-gfm/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-media-embed",
+          "path": "packages/ckeditor5-media-embed/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-mention",
+          "path": "packages/ckeditor5-mention/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-minimap",
+          "path": "packages/ckeditor5-minimap/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-page-break",
+          "path": "packages/ckeditor5-page-break/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-paragraph",
+          "path": "packages/ckeditor5-paragraph/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-paste-from-office",
+          "path": "packages/ckeditor5-paste-from-office/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-remove-format",
+          "path": "packages/ckeditor5-remove-format/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-restricted-editing",
+          "path": "packages/ckeditor5-restricted-editing/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-select-all",
+          "path": "packages/ckeditor5-select-all/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-show-blocks",
+          "path": "packages/ckeditor5-show-blocks/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-source-editing",
+          "path": "packages/ckeditor5-source-editing/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-special-characters",
+          "path": "packages/ckeditor5-special-characters/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-style",
+          "path": "packages/ckeditor5-style/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-table",
+          "path": "packages/ckeditor5-table/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-theme-lark",
+          "path": "packages/ckeditor5-theme-lark/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-typing",
+          "path": "packages/ckeditor5-typing/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-ui",
+          "path": "packages/ckeditor5-ui/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-undo",
+          "path": "packages/ckeditor5-undo/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-upload",
+          "path": "packages/ckeditor5-upload/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-utils",
+          "path": "packages/ckeditor5-utils/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-watchdog",
+          "path": "packages/ckeditor5-watchdog/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-widget",
+          "path": "packages/ckeditor5-widget/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-word-count",
+          "path": "packages/ckeditor5-word-count/"
+        },
+        {
+          "name": "ckeditor5",
+          "path": ""
+        }
+      ]
+    },
+    {
+      "upstreamId": "ckeditor5-dev-source",
+      "version": "39.7.0",
+      "noticePath": "LICENSE.md",
+      "packages": [
+        {
+          "name": "@ckeditor/ckeditor5-dev-translations",
+          "path": "packages/ckeditor5-dev-translations/"
+        },
+        {
+          "name": "@ckeditor/ckeditor5-dev-utils",
+          "path": "packages/ckeditor5-dev-utils/"
+        }
+      ]
+    }
+  ],
+  "supplementalNotices": [
+    {
+      "packagePath": "tool/release/SOURCE_ATTRIBUTIONS.md",
+      "sha256": "ce62eed16d59b2237053cf1a28e93902bca315127a605c74955bd746b7b89155"
+    }
+  ]
+}

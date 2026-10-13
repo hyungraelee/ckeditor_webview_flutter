@@ -31,6 +31,88 @@ def archive_files(data, strip_root=False):
     return files
 
 
+def component_report(profile, packages, upstream, package_bytes):
+    """Record distribution roles and source presence without approving licenses."""
+    if profile['schemaVersion'] != 1:
+        raise ValueError('Unsupported component review version')
+    if len(packages) != profile['expectedNpmInputs']:
+        raise ValueError('Changed npm input scope requires component review')
+    inventory = json.loads(package_bytes('tool/release/bundled-source-inventory.json'))
+    for name in ('ckeditor.js', 'ckeditor.css'):
+        if digest(package_bytes('assets/editor/' + name)) != inventory['matchedAssetsSha256'][name]:
+            raise ValueError('Emitted inventory bundle hash differs')
+    if digest(package_bytes('tool/ckeditor_build/package-lock.json')) != inventory['lockfileSha256']:
+        raise ValueError('Emitted inventory build lock differs')
+    emitted = {row['npmTarball']: row for row in inventory['runtimePackages']}
+    mappings = {}
+    for group in profile['gplSourceMappings']:
+        for entry in group['packages']:
+            key = (entry['name'], group['version'])
+            if key in mappings:
+                raise ValueError('Duplicate GPL source mapping')
+            mappings[key] = (group, entry)
+    rows = []
+    by_family = {}
+    by_role = {}
+    seen_emitted = set()
+    seen_gpl = set()
+    for package in packages:
+        declaration = package['declaredLicense']
+        family = declaration if isinstance(declaration, str) else next(
+            (entry['family'] for entry in profile['legacyDeclarations']
+             if declaration == entry['value']), None)
+        if family not in profile['licenseFamilies']:
+            raise ValueError(f'Unreviewed license declaration: {package["name"]}')
+        role = 'emitted-editor' if package['url'] in emitted else 'retained-archive-input'
+        if role == 'emitted-editor':
+            entry = emitted[package['url']]
+            if (package['name'], package['version'], package['integrity']) != (
+                    entry['name'], entry['version'], entry['npmIntegrity']):
+                raise ValueError('Emitted package evidence differs')
+            seen_emitted.add(package['url'])
+        row = {'name': package['name'], 'version': package['version'],
+               'url': package['url'], 'licenseFamily': family, 'role': role}
+        if family == 'GPL-2.0-or-later':
+            key = (package['name'], package['version'])
+            if key not in mappings:
+                raise ValueError(f'Unreviewed GPL source mapping: {package["name"]}')
+            group, entry = mappings[key]
+            record, files = upstream[group['upstreamId']]
+            metadata_path = entry['path'] + 'package.json'
+            metadata = json.loads(files[metadata_path])
+            if (metadata['name'], metadata['version']) != key:
+                raise ValueError('GPL modification-source metadata differs')
+            notice = files[group['noticePath']]
+            # Root CKEditor aggregate uses src/; package modules may use theme/lib.
+            prefixes = [entry['path'] + part + '/' for part in ('src', 'lib', 'theme', 'lang')]
+            sources = sorted(name for name in files if name.startswith(tuple(prefixes))
+                             and name.endswith(('.ts', '.js', '.css', '.scss', '.svg', '.po')))
+            if not sources:
+                raise ValueError(f'GPL modification-source files absent: {package["name"]}')
+            evidence = [{'path': name, 'sha256': digest(files[name])} for name in sources]
+            row['sourcePresence'] = {'upstreamId': group['upstreamId'], 'url': record['url'],
+                'metadataPath': metadata_path, 'metadataSha256': digest(files[metadata_path]),
+                'noticePath': group['noticePath'], 'noticeSha256': digest(notice),
+                'sourceFileCount': len(sources),
+                'sourceListSha256': digest(json.dumps(evidence, sort_keys=True).encode())}
+            seen_gpl.add(key)
+        by_family[family] = by_family.get(family, 0) + 1
+        by_role[role] = by_role.get(role, 0) + 1
+        rows.append(row)
+    if seen_emitted != set(emitted) or len(seen_emitted) != profile['expectedEmittedInputs']:
+        raise ValueError('Emitted package scope requires review')
+    if seen_gpl != set(mappings):
+        raise ValueError('Stale GPL source mapping')
+    for notice in profile['supplementalNotices']:
+        if digest(package_bytes(notice['packagePath'])) != notice['sha256']:
+            raise ValueError('Supplemental source attribution differs')
+    return {'status': profile['status'],
+            'scope': 'roles, declarations and source presence; not complete applicability approval',
+            'summary': {'byLicenseFamily': by_family, 'byRole': by_role,
+                        'gplSourceMappings': len(seen_gpl)},
+            'packages': rows, 'supplementalNotices': profile['supplementalNotices']}
+
+
 def build_report(manifest, input_bytes, package_bytes):
     review = json.loads(package_bytes('tool/release/notice-review.json'))
     if review['schemaVersion'] != 1:
@@ -60,8 +142,9 @@ def build_report(manifest, input_bytes, package_bytes):
                               len(PurePosixPath(candidates[1]).parts)):
             raise ValueError(f'Ambiguous npm package metadata: {record["url"]}')
         metadata = json.loads(files[candidates[0]])
-        notice_paths = sorted(name for name in files if PurePosixPath(name).name.lower().startswith(
-            ('license', 'licence', 'copying', 'notice', 'copyright', 'acknowledg')))
+        prefixes = ('license', 'licence', 'copying', 'notice', 'copyright', 'acknowledg')
+        prefixes += tuple(review.get('additionalNoticePrefixes', []))
+        notice_paths = sorted(name for name in files if PurePosixPath(name).name.lower().startswith(prefixes))
         entry = {'name': metadata['name'], 'version': metadata['version'],
                  'url': record['url'], 'integrity': record['integrity'],
                  'declaredLicense': metadata.get('license', metadata.get('licenses')),
@@ -164,6 +247,10 @@ def build_report(manifest, input_bytes, package_bytes):
             groups.append({**group, 'files': [{'path': name, 'sha256': digest(files[name])}
                                             for name in sorted(selected)]})
         report['buildToolSources'] = {'status': tools['status'], 'sourceGroups': groups}
+    if 'componentReviewPath' in review:
+        profile = json.loads(package_bytes(review['componentReviewPath']))
+        report['distributionComponents'] = component_report(profile, report['packages'],
+                                                            upstream, package_bytes)
     return report
 
 

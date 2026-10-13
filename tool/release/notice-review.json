@@ -472,5 +472,11 @@
       ]
     }
   ],
-  "buildToolReviewPath": "tool/release/build-tool-review.json"
+  "buildToolReviewPath": "tool/release/build-tool-review.json",
+  "additionalNoticePrefixes": [
+    "thirdpartynotice",
+    "third-party-notice",
+    "third_party_notice"
+  ],
+  "componentReviewPath": "tool/release/component-review.json"
 }
