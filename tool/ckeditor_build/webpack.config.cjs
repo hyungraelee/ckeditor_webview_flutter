@@ -15,7 +15,7 @@ module.exports = {
   },
   devtool: false,
   plugins: [
-    new CKEditorTranslationsPlugin({ language: 'ko' }),
+    new CKEditorTranslationsPlugin({ language: 'en' }),
     new MiniCssExtractPlugin({ filename: 'ckeditor.css' }),
     new webpack.BannerPlugin({
       banner: 'CKEditor 5 v41.4.1 | Copyright (c) 2003-2024 CKSource Holding sp. z o.o.\nFor licensing, see CKEDITOR-LICENSE.txt.',

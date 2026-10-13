@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart'
+    show ChangeNotifier, ValueChanged, VoidCallback;
+import 'package:meta/meta.dart' show internal;
 
 import 'ckeditor_error.dart';
 
+/// Initialization and lifecycle state of a [CkEditorController].
 enum CkEditorState { notInitialized, loading, ready, error, disposed }
 
 /// The names match EVENT in assets/editor/editor.js.
@@ -68,44 +72,45 @@ class CkEditorController extends ChangeNotifier {
       onTimeout: () {
         throw const CkEditorError(
           code: 'ready_timeout',
-          message: '에디터가 준비되지 않았습니다.',
+          message: 'The editor is not ready.',
         );
       },
     );
     _checkDisposed();
     if (!identical(ready, _ready.future)) {
-      throw const CkEditorError(code: 'detached', message: '에디터 연결이 변경되었습니다.');
+      throw const CkEditorError(
+          code: 'detached', message: 'The editor connection changed.');
     }
     if (_state == CkEditorState.error) throw _error!;
   }
 
   Future<void> setHtml(String html) => _queue((session) async {
-    final revision = _htmlRevision;
-    await _send(session, 'setHtml', [html]);
-    if (revision == _htmlRevision) _cachedHtml = html;
-  });
+        final revision = _htmlRevision;
+        await _send(session, 'setHtml', [html]);
+        if (revision == _htmlRevision) _cachedHtml = html;
+      });
 
   /// Reads the current model, including uncommitted SourceEditing textarea data.
   Future<String> getHtml() => _queue((session) async {
-    final revision = _htmlRevision;
-    final html = await _send(session, 'getHtml');
-    if (html is! String) {
-      throw const CkEditorError(
-        code: 'invalid_bridge_result',
-        message: '에디터가 올바른 HTML을 반환하지 않았습니다.',
-      );
-    }
-    if (revision == _htmlRevision) _cachedHtml = html;
-    return html;
-  });
+        final revision = _htmlRevision;
+        final html = await _send(session, 'getHtml');
+        if (html is! String) {
+          throw const CkEditorError(
+            code: 'invalid_bridge_result',
+            message: 'The editor returned invalid HTML data.',
+          );
+        }
+        if (revision == _htmlRevision) _cachedHtml = html;
+        return html;
+      });
 
   Future<void> setReadOnly(bool readOnly) => _queue((session) async {
-    await _send(session, 'setReadOnly', [readOnly]);
-  });
+        await _send(session, 'setReadOnly', [readOnly]);
+      });
 
   Future<void> focus() => _queue((session) async {
-    await _send(session, 'focus');
-  });
+        await _send(session, 'focus');
+      });
 
   Future<void> clear() => setHtml('');
 
@@ -127,7 +132,7 @@ class CkEditorController extends ChangeNotifier {
     if (_session != null) {
       throw const CkEditorError(
         code: 'controller_already_attached',
-        message: '하나의 Controller를 여러 에디터에 동시에 사용할 수 없습니다.',
+        message: 'A controller can only be attached to one editor at a time.',
       );
     }
     _session = _EditorSession(owner, execute);
@@ -145,7 +150,7 @@ class CkEditorController extends ChangeNotifier {
         owner,
         const CkEditorError(
           code: 'ready_timeout',
-          message: '에디터 초기화 시간이 초과되었습니다. 다시 시도해주세요.',
+          message: 'Editor initialization timed out. Please retry.',
         ),
         fatal: true,
       );
@@ -160,6 +165,11 @@ class CkEditorController extends ChangeNotifier {
     required Duration changeDebounce,
     required bool autoHeight,
     required double minHeight,
+    String uiLanguage = 'en',
+    List<String>? toolbarItems,
+    Map<String, Object?>? config,
+    String? customCss,
+    String? licenseKey,
   }) async {
     final session = _session;
     if (session == null ||
@@ -168,12 +178,18 @@ class CkEditorController extends ChangeNotifier {
       return;
     }
     try {
+      _validateConfigValue(config, HashSet<Object>.identity());
       final options = jsonEncode({
         'initialHtml': _cachedHtml ?? '',
         'readOnly': readOnly,
         'changeDebounceMs': changeDebounce.inMilliseconds,
         'autoHeight': autoHeight,
         'minHeight': minHeight,
+        'uiLanguage': uiLanguage,
+        'toolbarItems': toolbarItems,
+        'config': config,
+        'customCss': customCss,
+        'licenseKey': licenseKey,
       });
       // Return a boolean, not a Promise (native WebViews do not await it).
       final result = await _execute(
@@ -184,14 +200,15 @@ class CkEditorController extends ChangeNotifier {
       if (result != true) {
         throw const CkEditorError(
           code: 'bridge_missing',
-          message: '로컬 에디터 bridge를 불러오지 못했습니다.',
+          message: 'The local editor bridge is unavailable.',
         );
       }
     } catch (error) {
       if (!identical(_session, session)) return;
       reportError(
         owner,
-        _asError(error, 'bridge_initialize_failed', '에디터 초기화에 실패했습니다.'),
+        _asError(
+            error, 'bridge_initialize_failed', 'Editor initialization failed.'),
         fatal: true,
       );
     }
@@ -251,7 +268,7 @@ class CkEditorController extends ChangeNotifier {
         owner,
         CkEditorError(
           code: 'invalid_json_message',
-          message: '에디터에서 잘못된 이벤트를 전달했습니다.',
+          message: 'The editor sent an invalid event.',
           cause: error,
         ),
         fatal: _state == CkEditorState.loading,
@@ -283,8 +300,7 @@ class CkEditorController extends ChangeNotifier {
         reportError(
           owner,
           eventError!,
-          fatal:
-              _state == CkEditorState.loading ||
+          fatal: _state == CkEditorState.loading ||
               const {
                 'asset_load_failed',
                 'javascript_error',
@@ -305,7 +321,7 @@ class CkEditorController extends ChangeNotifier {
       _state = CkEditorState.error;
       _readyTimer?.cancel();
       if (!_ready.isCompleted) _ready.completeError(error);
-      if (!_session!.ended.isCompleted) _session!.ended.complete(error);
+      _session!.end(error);
     }
     notifyListeners();
     _onError?.call(error);
@@ -315,7 +331,8 @@ class CkEditorController extends ChangeNotifier {
   void detach(Object owner) {
     if (!identical(_session?.owner, owner)) return;
     _endSession(
-      const CkEditorError(code: 'detached', message: '에디터 화면이 닫혔습니다.'),
+      const CkEditorError(
+          code: 'detached', message: 'The editor was detached.'),
     );
     _ready = _createReady();
     _commandTail = Future<void>.value();
@@ -334,21 +351,21 @@ class CkEditorController extends ChangeNotifier {
           onTimeout: () {
             throw const CkEditorError(
               code: 'ready_timeout',
-              message: '에디터가 준비되지 않았습니다.',
+              message: 'The editor is not ready.',
             );
           },
         );
         if (!identical(ready, _ready.future) || _session == null) {
           throw const CkEditorError(
             code: 'detached',
-            message: '에디터 연결이 변경되었습니다.',
+            message: 'The editor connection changed.',
           );
         }
         if (!isReady) {
           throw _error ??
               const CkEditorError(
                 code: 'editor_not_ready',
-                message: '에디터가 준비되지 않았습니다.',
+                message: 'The editor is not ready.',
               );
         }
         return await action(_session!);
@@ -356,7 +373,7 @@ class CkEditorController extends ChangeNotifier {
         final editorError = _asError(
           error,
           'bridge_call_failed',
-          '에디터 명령 실행에 실패했습니다.',
+          'The editor command failed.',
         );
         if (identical(ready, _ready.future) && _session != null) {
           reportError(
@@ -405,24 +422,19 @@ class CkEditorController extends ChangeNotifier {
     } catch (error) {
       throw CkEditorError(
         code: 'invalid_bridge_result',
-        message: '에디터 명령 응답을 해석하지 못했습니다.',
+        message: 'The editor command response could not be decoded.',
         cause: error,
       );
     }
   }
 
   Future<Object> _execute(_EditorSession session, String script) async {
-    final result = await Future.any<Object>([
-      session.execute(script).timeout(commandTimeout),
-      session.ended.future.then<Object>((error) => throw error),
-    ]);
+    final result = await session.run(script, commandTimeout);
     if (!identical(_session, session)) {
-      throw const CkEditorError(code: 'detached', message: '에디터 연결이 변경되었습니다.');
+      throw const CkEditorError(
+          code: 'detached', message: 'The editor connection changed.');
     }
-    if (session.ended.isCompleted) {
-      throw _error ??
-          const CkEditorError(code: 'detached', message: '에디터 연결이 종료되었습니다.');
-    }
+    if (session.endError case final error?) throw error;
     return result;
   }
 
@@ -432,7 +444,7 @@ class CkEditorController extends ChangeNotifier {
     final session = _session;
     _session = null;
     if (session != null) {
-      if (!session.ended.isCompleted) session.ended.complete(error);
+      session.end(error);
       unawaited(_destroy(session));
     }
     _onReady = null;
@@ -457,7 +469,7 @@ class CkEditorController extends ChangeNotifier {
     if (_state == CkEditorState.disposed) {
       throw const CkEditorError(
         code: 'disposed',
-        message: '종료된 에디터 Controller입니다.',
+        message: 'The editor controller is disposed.',
       );
     }
   }
@@ -500,11 +512,48 @@ class CkEditorController extends ChangeNotifier {
     _endSession(
       const CkEditorError(
         code: 'disposed',
-        message: '에디터 Controller가 종료되었습니다.',
+        message: 'The editor controller was disposed.',
       ),
     );
     _state = CkEditorState.disposed;
     super.dispose();
+  }
+}
+
+// Validate before JSON encoding, which can otherwise invoke arbitrary toJson
+// methods or report generic serialization errors instead of a config error.
+void _validateConfigValue(Object? value, Set<Object> ancestors) {
+  if (value == null || value is bool || value is String) return;
+  if (value is num && value.isFinite) return;
+  if ((value is! Map && value is! List) || !ancestors.add(value)) {
+    throw const CkEditorError(
+      code: 'invalid_editor_config',
+      message:
+          'Config must contain only acyclic JSON values and finite numbers.',
+    );
+  }
+  try {
+    if (value is Map) {
+      for (final entry in value.entries) {
+        final key = entry.key;
+        if (key is! String ||
+            key.contains('.') ||
+            const {'__proto__', 'prototype', 'constructor'}.contains(key)) {
+          throw const CkEditorError(
+            code: 'invalid_editor_config',
+            message:
+                'Config keys must be strings without dots or prototype keys.',
+          );
+        }
+        _validateConfigValue(entry.value, ancestors);
+      }
+    } else {
+      for (final item in value as List) {
+        _validateConfigValue(item, ancestors);
+      }
+    }
+  } finally {
+    ancestors.remove(value);
   }
 }
 
@@ -513,5 +562,37 @@ class _EditorSession {
 
   final Object owner;
   final Future<Object> Function(String) execute;
-  final Completer<CkEditorError> ended = Completer<CkEditorError>();
+  final Set<Completer<Object>> _pending = {};
+  CkEditorError? endError;
+
+  Future<Object> run(String script, Duration timeout) async {
+    if (endError case final error?) throw error;
+    final result = Completer<Object>();
+    _pending.add(result);
+    // Only outstanding native calls need cancellation. Attaching a listener to
+    // one session-long Future for every command retains completed calls until
+    // the screen closes.
+    unawaited(Future<Object>.sync(() => execute(script)).then<void>(
+      (value) {
+        if (!result.isCompleted) result.complete(value);
+      },
+      onError: (Object error, StackTrace stack) {
+        if (!result.isCompleted) result.completeError(error, stack);
+      },
+    ));
+    try {
+      return await result.future.timeout(timeout);
+    } finally {
+      _pending.remove(result);
+    }
+  }
+
+  void end(CkEditorError error) {
+    if (endError != null) return;
+    endError = error;
+    for (final result in _pending) {
+      if (!result.isCompleted) result.completeError(error);
+    }
+    _pending.clear();
+  }
 }

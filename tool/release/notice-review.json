@@ -1,0 +1,505 @@
+{
+  "schemaVersion": 1,
+  "status": "notice evidence reviewed; publication approval pending",
+  "reviewedInputs": [
+    {
+      "name": "@tootallnate/once",
+      "version": "1.1.2",
+      "url": "https://registry.npmjs.org/@tootallnate/once/-/once-1.1.2.tgz",
+      "integrity": "sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==",
+      "status": "upstream-notice",
+      "upstreamId": "tootallnate-once-license",
+      "path": "LICENSE",
+      "sha256": "737a723fe0ef2b0e337e330b9f42f6b9f50d13d9b1087c2b2c6fc2486b68f8c2"
+    },
+    {
+      "name": "acorn-import-assertions",
+      "version": "1.9.0",
+      "url": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+      "integrity": "sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==",
+      "status": "upstream-notice",
+      "reason": "Locked README declares MIT; maintainer authorized an MIT notice with his name before 1.9.0 and later merged the preserved original text. Supplemental notice applicability is assessed with permission-evidence.json.",
+      "upstreamId": "acorn-later-notice",
+      "path": "LICENSE",
+      "sha256": "68d38391fb464a7ffdfd27f6f41c46700dc7c8e3a11bd91bc9d75e9e3706badd",
+      "packagePath": "tool/release/notices/acorn-import-assertions-LICENSE.txt",
+      "permissionEvidence": {
+        "packagePath": "tool/release/permission-evidence.json",
+        "sha256": "5ed5736e39d5d9c61c124ac18c19c27b909b4f098f2fb4df7c244b91953151c4"
+      }
+    },
+    {
+      "name": "agent-base",
+      "version": "6.0.2",
+      "url": "https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz",
+      "integrity": "sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "f1425c3b72330fe4fb2aa5a2fb152e939bdf534692a32b5f0b38f74147b98556"
+    },
+    {
+      "name": "blurhash",
+      "version": "2.0.5",
+      "url": "https://registry.npmjs.org/blurhash/-/blurhash-2.0.5.tgz",
+      "integrity": "sha512-cRygWd7kGBQO3VEhPiTgq4Wc43ctsM+o46urrmPOiuAe+07fzlSB9OJVdpgDL0jPqXUVQ9ht7aq7kxOeJHRK+w==",
+      "status": "upstream-notice",
+      "upstreamId": "blurhash",
+      "path": "License.md",
+      "sha256": "e2066f9b0007ff98f6ab4677b2e2016a5cb183fe9d43d02570b56f4cb6fa76f0"
+    },
+    {
+      "name": "boolbase",
+      "version": "1.0.0",
+      "url": "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz",
+      "integrity": "sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==",
+      "status": "upstream-notice",
+      "upstreamId": "boolbase-source",
+      "path": "LICENSE",
+      "sha256": "cdf4d87ae0a6c160227263bf4e39a0a10e30e89ae7256e0f7ac7bde0836552c6"
+    },
+    {
+      "name": "esrecurse",
+      "version": "4.3.0",
+      "url": "https://registry.npmjs.org/esrecurse/-/esrecurse-4.3.0.tgz",
+      "integrity": "sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==",
+      "status": "embedded-notice",
+      "path": "package/esrecurse.js",
+      "sha256": "aa99847033c240a621fe987f0e06b754f388f22abd11a05bdf9cdd00794b7350"
+    },
+    {
+      "name": "glob-to-regexp",
+      "version": "0.4.1",
+      "url": "https://registry.npmjs.org/glob-to-regexp/-/glob-to-regexp-0.4.1.tgz",
+      "integrity": "sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "18a53184b61f21e9f39035c106e5e6bf885353ce4177d18e15fcb18980cb1ee2"
+    },
+    {
+      "name": "http-proxy-agent",
+      "version": "4.0.1",
+      "url": "https://registry.npmjs.org/http-proxy-agent/-/http-proxy-agent-4.0.1.tgz",
+      "integrity": "sha512-k0zdNgqWTGA6aeIRVpvfVob4fL52dTfaehylg0Y4UvSySvOq/Y+BOyPrgpUrA7HylqvU8vIZGsRuXmspskV0Tg==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "ca0b65367e78e9c255a1c9883eb7ec30aae491d76e1c6815b865563106d21dff"
+    },
+    {
+      "name": "https-proxy-agent",
+      "version": "5.0.1",
+      "url": "https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz",
+      "integrity": "sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "32f0856d2c43df7d05cca960fdee84e1e38ab545bd7b2186433dfa41aa90a712"
+    },
+    {
+      "name": "imurmurhash",
+      "version": "0.1.4",
+      "url": "https://registry.npmjs.org/imurmurhash/-/imurmurhash-0.1.4.tgz",
+      "integrity": "sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==",
+      "status": "embedded-notice",
+      "path": "package/README.md",
+      "sha256": "4491517f7deb68d0b2a3bb590e785e276a60f12448447a9650d0bd50161a101c"
+    },
+    {
+      "name": "saxes",
+      "version": "5.0.1",
+      "url": "https://registry.npmjs.org/saxes/-/saxes-5.0.1.tgz",
+      "integrity": "sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==",
+      "status": "upstream-notice",
+      "upstreamId": "saxes",
+      "path": "LICENSE",
+      "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e"
+    }
+  ],
+  "copiedCodeNotices": [
+    {
+      "name": "react-colorful",
+      "upstreamId": "react-colorful-reference",
+      "path": "LICENSE",
+      "sha256": "f23e00b31b9d88bf16e445d423936272ef5c7245782970f3092765aa8160cb31",
+      "packagePath": "tool/release/notices/react-colorful-LICENSE.txt",
+      "provenance": "reference only; exact copied revision unresolved"
+    },
+    {
+      "name": "color-fns",
+      "upstreamId": "color-fns-reference",
+      "path": "LICENSE",
+      "sha256": "b09da81ff7efa56d6d65a7dc1a27da6e2b61b76872941fffe6e03c51c3841c43",
+      "packagePath": "tool/release/notices/color-fns-LICENSE.txt",
+      "provenance": "reference only; exact copied revision unresolved"
+    }
+  ],
+  "sourceComparisons": [
+    {
+      "kind": "npm-source-map",
+      "npmUrl": "https://registry.npmjs.org/blurhash/-/blurhash-2.0.5.tgz",
+      "sourceMapPath": "package/dist/index.js.map",
+      "upstreamId": "blurhash",
+      "files": [
+        {
+          "sourceMapName": "../src/index.ts",
+          "upstreamPath": "TypeScript/src/index.ts"
+        },
+        {
+          "sourceMapName": "../src/base83.ts",
+          "upstreamPath": "TypeScript/src/base83.ts"
+        },
+        {
+          "sourceMapName": "../src/utils.ts",
+          "upstreamPath": "TypeScript/src/utils.ts"
+        },
+        {
+          "sourceMapName": "../src/error.ts",
+          "upstreamPath": "TypeScript/src/error.ts"
+        },
+        {
+          "sourceMapName": "../src/decode.ts",
+          "upstreamPath": "TypeScript/src/decode.ts"
+        },
+        {
+          "sourceMapName": "../src/encode.ts",
+          "upstreamPath": "TypeScript/src/encode.ts"
+        }
+      ]
+    },
+    {
+      "kind": "upstream-equality",
+      "leftId": "lodash-tag-source",
+      "leftPath": "lodash.js",
+      "rightId": "lodash",
+      "rightPath": "lodash.js"
+    },
+    {
+      "kind": "upstream-equality",
+      "leftId": "tootallnate-once-license",
+      "leftPath": "src/index.ts",
+      "rightId": "tootallnate-once",
+      "rightPath": "src/index.ts"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz",
+      "npmPath": "package/index.js",
+      "upstreamId": "boolbase-source",
+      "upstreamPath": "index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/ckeditortranslationsplugin.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/ckeditortranslationsplugin.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/cleanpofilecontent.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/cleanpofilecontent.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/createdictionaryfrompofilecontent.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/createdictionaryfrompofilecontent.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/findmessages.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/findmessages.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/multiplelanguagetranslationservice.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/multiplelanguagetranslationservice.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/servetranslations.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/servetranslations.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-translations/-/ckeditor5-dev-translations-39.7.0.tgz",
+      "npmPath": "package/lib/translatesourceloader.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-translations/lib/translatesourceloader.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/builds/getdllpluginwebpackconfig.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/builds/getdllpluginwebpackconfig.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/builds/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/builds/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/createentryfile.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/createentryfile.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/geteditorconfig.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/geteditorconfig.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/getlicensebanner.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/getlicensebanner.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/getplugins.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/getplugins.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/bundler/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/bundler/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/git.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/git.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/loaders/ck-debug-loader.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/loaders/ck-debug-loader.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/loaders/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/loaders/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/logger.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/logger.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/stream.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/stream.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/getpostcssconfig.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/getpostcssconfig.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/index.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/index.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/themeimporter.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/themeimporter.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/themelogger.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/themelogger.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/styles/utils/getpackagename.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/styles/utils/getpackagename.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/tools.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/tools.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/tools/createspinner.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/tools/createspinner.js"
+    },
+    {
+      "kind": "npm-upstream-equality",
+      "npmUrl": "https://registry.npmjs.org/@ckeditor/ckeditor5-dev-utils/-/ckeditor5-dev-utils-39.7.0.tgz",
+      "npmPath": "package/lib/workspace.js",
+      "upstreamId": "ckeditor5-dev-source",
+      "upstreamPath": "packages/ckeditor5-dev-utils/lib/workspace.js"
+    },
+    {
+      "id": "acorn-locked-readme",
+      "kind": "npm-upstream-equality",
+      "upstreamId": "acorn-import-assertions",
+      "upstreamPath": "README.md",
+      "npmUrl": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+      "npmPath": "package/README.md"
+    },
+    {
+      "id": "acorn-locked-implementation",
+      "kind": "npm-upstream-equality",
+      "upstreamId": "acorn-import-assertions",
+      "upstreamPath": "src/index.js",
+      "npmUrl": "https://registry.npmjs.org/acorn-import-assertions/-/acorn-import-assertions-1.9.0.tgz",
+      "npmPath": "package/src/index.js"
+    }
+  ],
+  "copiedCodeSourceFiles": [
+    {
+      "id": "react-convert",
+      "upstreamId": "react-colorful-reference",
+      "path": "src/utils/convert.ts",
+      "sha256": "3160c0b09e30fa4450dacff4cb3aedf406024c30d5963fdef4c5a49366abedcd"
+    },
+    {
+      "id": "react-license",
+      "upstreamId": "react-colorful-reference",
+      "path": "LICENSE",
+      "sha256": "f23e00b31b9d88bf16e445d423936272ef5c7245782970f3092765aa8160cb31"
+    },
+    {
+      "id": "react-acknowledgments",
+      "upstreamId": "react-colorful-reference",
+      "path": "ACKNOWLEDGMENTS",
+      "sha256": "9f9c0959e8d2ebe2ed205179cd7347cc5b9f610c0eb496387b2a054280407ff9"
+    },
+    {
+      "id": "early-vanilla-convert",
+      "upstreamId": "vanilla-colorful-port-source",
+      "path": "src/lib/utils/convert.ts",
+      "sha256": "ed479f4c95b9c046bac06a76e90953820639e5235eecfd7ef7d93fa63ab13fc4"
+    },
+    {
+      "id": "early-vanilla-license",
+      "upstreamId": "vanilla-colorful-port-source",
+      "path": "LICENSE",
+      "sha256": "d54c0da8c6d862403dcd92136bd75e446b351613bfc14a4032995221d6f3bc90"
+    },
+    {
+      "id": "early-vanilla-acknowledgments",
+      "upstreamId": "vanilla-colorful-port-source",
+      "path": "ACKNOWLEDGMENTS",
+      "sha256": "f533a3ccec5057bfcffebbe4a7d7780a2f3b6b9022ab84dae755a740d069ac35"
+    },
+    {
+      "id": "color-fns-hex",
+      "upstreamId": "color-fns-reference",
+      "path": "src/hex2rgb.js",
+      "sha256": "1c36092db224d90dc25963c82e77936f3a4c3490a8e515a02bf93f6fdf801d39"
+    },
+    {
+      "id": "color-fns-rgb",
+      "upstreamId": "color-fns-reference",
+      "path": "src/rgb2hex.js",
+      "sha256": "e802d6718eb3e71362eb164bfeed3eb1de296a2dd574837dba5fa731ddaff6bd"
+    },
+    {
+      "id": "color-fns-license",
+      "upstreamId": "color-fns-reference",
+      "path": "LICENSE",
+      "sha256": "b09da81ff7efa56d6d65a7dc1a27da6e2b61b76872941fffe6e03c51c3841c43"
+    },
+    {
+      "id": "released-vanilla-convert",
+      "upstreamId": "vanilla-colorful",
+      "path": "src/lib/utils/convert.ts",
+      "sha256": "521fe58c54a249043560144f9ca79b193f8e38c56fa9027f95e234e88334db3a"
+    },
+    {
+      "id": "released-vanilla-acknowledgments",
+      "upstreamId": "vanilla-colorful",
+      "path": "ACKNOWLEDGMENTS",
+      "sha256": "11422f1b449e88e5a0bcbce7d12b9628d1f612f75bb8c1ea81a5bddcb61348ef"
+    }
+  ],
+  "copiedCodeComparisons": [
+    {
+      "kind": "transpiled-initializer-structure",
+      "left": "react-convert",
+      "right": "early-vanilla-convert",
+      "names": [
+        "hexToHsv",
+        "hexToRgb",
+        "hslStringToHsv",
+        "hslToHsv",
+        "hsvToHex",
+        "hsvToHsl",
+        "hsvToHslString",
+        "hsvToRgb",
+        "hsvToRgbString",
+        "rgbStringToHsv",
+        "format",
+        "rgbToHex",
+        "rgbToHsv"
+      ]
+    }
+  ],
+  "buildToolReviewPath": "tool/release/build-tool-review.json",
+  "additionalNoticePrefixes": [
+    "thirdpartynotice",
+    "third-party-notice",
+    "third_party_notice"
+  ],
+  "componentReviewPath": "tool/release/component-review.json"
+}

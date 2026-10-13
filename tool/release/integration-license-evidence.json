@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-13",
+  "status": "scoped public-source observations; not compliance certification",
+  "repositories": [
+    {
+      "repository": "ckeditor/ckeditor5-react",
+      "ref": "v12.0.0",
+      "commit": "21d889d95f503ded5c0aa78d42453e15b2af7a5f",
+      "commitDate": "2026-10-08T08:23:11Z",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "6d7a4833697097cc99dbb1e9f9f0f098ed1fc6c9740d386d18ad95b47d2df90b",
+          "bytes": 1212,
+          "url": "https://github.com/ckeditor/ckeditor5-react/blob/21d889d95f503ded5c0aa78d42453e15b2af7a5f/LICENSE.md"
+        },
+        {
+          "path": "README.md",
+          "sha256": "f9a7d4e086f22e69e30710c5efa75d3c4de066e6d938cb2ffd8ad6cfb1c3420f",
+          "bytes": 3948,
+          "url": "https://github.com/ckeditor/ckeditor5-react/blob/21d889d95f503ded5c0aa78d42453e15b2af7a5f/README.md"
+        },
+        {
+          "path": "package.json",
+          "sha256": "942e80a443ac723a20a8b1f83b952f9835dea2c668fdcec37639514a05575e5a",
+          "bytes": 5099,
+          "url": "https://github.com/ckeditor/ckeditor5-react/blob/21d889d95f503ded5c0aa78d42453e15b2af7a5f/package.json"
+        }
+      ]
+    },
+    {
+      "repository": "hvlads/django-ckeditor-5",
+      "ref": "v0.2.20",
+      "commit": "5ed45a80b81d322f0551646703729c59b23d156f",
+      "commitDate": "2026-02-21T20:36:29Z",
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "fa0a308122a736b2029060dac8212f1779138c71ddff0133a6c09b5047a1856b",
+          "bytes": 1492,
+          "url": "https://github.com/hvlads/django-ckeditor-5/blob/5ed45a80b81d322f0551646703729c59b23d156f/LICENSE"
+        },
+        {
+          "path": "README.rst",
+          "sha256": "b525c4575607e5727a591e1ad9bfb530d8a5abd38141fe1299c49cc512bcda9a",
+          "bytes": 15254,
+          "url": "https://github.com/hvlads/django-ckeditor-5/blob/5ed45a80b81d322f0551646703729c59b23d156f/README.rst"
+        },
+        {
+          "path": "pyproject.toml",
+          "sha256": "219650cec2813b48a0ca660ab4c5c2d0fc46a2c1190c06cb8f397613716a7de0",
+          "bytes": 5031,
+          "url": "https://github.com/hvlads/django-ckeditor-5/blob/5ed45a80b81d322f0551646703729c59b23d156f/pyproject.toml"
+        },
+        {
+          "path": "MANIFEST.in",
+          "sha256": "1b05a5e8770f82205864b42f42e565bad9bd580fdba4865b4012db12e9a47b6a",
+          "bytes": 219,
+          "url": "https://github.com/hvlads/django-ckeditor-5/blob/5ed45a80b81d322f0551646703729c59b23d156f/MANIFEST.in"
+        },
+        {
+          "path": "django_ckeditor_5/package.json",
+          "sha256": "92621f767d92c2804023b1a4952a9b68886feb9f77760fc25458c3895442479a",
+          "bytes": 2691,
+          "url": "https://github.com/hvlads/django-ckeditor-5/blob/5ed45a80b81d322f0551646703729c59b23d156f/django_ckeditor_5/package.json"
+        }
+      ]
+    },
+    {
+      "repository": "drupal/drupal",
+      "ref": "11.3.0",
+      "commit": "ac5da07ad88571dbb31dfb52f055bb0d4063f598",
+      "commitDate": "2025-12-17T11:28:09Z",
+      "files": [
+        {
+          "path": "core/LICENSE.txt",
+          "sha256": "87d7c32e09f941ff3815cd9eb6989506a652c18fd9620cb0e7e3ef7c979592ed",
+          "bytes": 18002,
+          "url": "https://github.com/drupal/drupal/blob/ac5da07ad88571dbb31dfb52f055bb0d4063f598/core/LICENSE.txt"
+        },
+        {
+          "path": "core/package.json",
+          "sha256": "52408bd0315f92be5ddce7b1619b85a3835bbf80a166e921694c21e92ecf77f5",
+          "bytes": 5767,
+          "url": "https://github.com/drupal/drupal/blob/ac5da07ad88571dbb31dfb52f055bb0d4063f598/core/package.json"
+        },
+        {
+          "path": "core/modules/ckeditor5/webpack.config.js",
+          "sha256": "6a106e481e306c17fd994bfc035337cb1ada98e615dfa56ed61af25310790ccf",
+          "bytes": 2106,
+          "url": "https://github.com/drupal/drupal/blob/ac5da07ad88571dbb31dfb52f055bb0d4063f598/core/modules/ckeditor5/webpack.config.js"
+        },
+        {
+          "path": "core/scripts/js/vendor-update.js",
+          "sha256": "9bedfb8883211efda3f8f0b0effdeac7813f11282d8104be6986df382d6c95ff",
+          "bytes": 9730,
+          "url": "https://github.com/drupal/drupal/blob/ac5da07ad88571dbb31dfb52f055bb0d4063f598/core/scripts/js/vendor-update.js"
+        },
+        {
+          "path": "core/modules/ckeditor5/js/ckeditor5.js",
+          "sha256": "d2ad0d99131530370ad3f630f9af628104f8d2137b864e7b0a47bfce6264cd85",
+          "bytes": 22728,
+          "url": "https://github.com/drupal/drupal/blob/ac5da07ad88571dbb31dfb52f055bb0d4063f598/core/modules/ckeditor5/js/ckeditor5.js"
+        },
+        {
+          "path": "core/modules/ckeditor5/ckeditor5.libraries.yml",
+          "sha256": "6fb70b18dd5d93b98cf31553742d0e676793f1139784816102373cd447ad5230",
+          "bytes": 5046,
+          "url": "https://github.com/drupal/drupal/blob/ac5da07ad88571dbb31dfb52f055bb0d4063f598/core/modules/ckeditor5/ckeditor5.libraries.yml"
+        }
+      ]
+    },
+    {
+      "repository": "dfdgsdfg/flutter_ckeditor5",
+      "ref": "main",
+      "commit": "b1fb87e4964efff223fcc4efff01f53a0a4b232b",
+      "commitDate": "2024-01-16T15:38:40Z",
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "422e0de8e3275febf5c41a5ccf891f68f16bc40e1b5dca26e50913b307ef794e",
+          "bytes": 29,
+          "url": "https://github.com/dfdgsdfg/flutter_ckeditor5/blob/b1fb87e4964efff223fcc4efff01f53a0a4b232b/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "sha256": "e8f9fe0eeb21defde3b02be9d4ff77b5556c9030016039222765da0dcaeae08a",
+          "bytes": 19,
+          "url": "https://github.com/dfdgsdfg/flutter_ckeditor5/blob/b1fb87e4964efff223fcc4efff01f53a0a4b232b/README.md"
+        },
+        {
+          "path": "pubspec.yaml",
+          "sha256": "26c6edaa2be3f5ab296d3b38313df1f840b36e2af2a7cacbf1b2c02e16c0b26e",
+          "bytes": 1718,
+          "url": "https://github.com/dfdgsdfg/flutter_ckeditor5/blob/b1fb87e4964efff223fcc4efff01f53a0a4b232b/pubspec.yaml"
+        },
+        {
+          "path": "assets/classic/index.html",
+          "sha256": "7f08997ce97eac6a26349a3c8b3c3c793eb24146fed44f3acd0061be84bcabf5",
+          "bytes": 5595,
+          "url": "https://github.com/dfdgsdfg/flutter_ckeditor5/blob/b1fb87e4964efff223fcc4efff01f53a0a4b232b/assets/classic/index.html"
+        },
+        {
+          "path": "lib/src/index_html.dart",
+          "sha256": "f3da091f3d0ce8732e926bb42d8ab846c72ca0e9e03d39b4230f04965d78775e",
+          "bytes": 1516,
+          "url": "https://github.com/dfdgsdfg/flutter_ckeditor5/blob/b1fb87e4964efff223fcc4efff01f53a0a4b232b/lib/src/index_html.dart"
+        },
+        {
+          "path": "lib/src/editor_js.dart",
+          "sha256": "a887e4d3d36de9f513c14b49524488529d9818faaf47d465467ef704170a023d",
+          "bytes": 812,
+          "url": "https://github.com/dfdgsdfg/flutter_ckeditor5/blob/b1fb87e4964efff223fcc4efff01f53a0a4b232b/lib/src/editor_js.dart"
+        }
+      ]
+    },
+    {
+      "repository": "maxcorrads/flutter_ckeditor",
+      "ref": "master",
+      "commit": "1968ddba2692466f330f7d1d44979367f6a673d8",
+      "commitDate": "2020-11-08T10:23:14Z",
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "422e0de8e3275febf5c41a5ccf891f68f16bc40e1b5dca26e50913b307ef794e",
+          "bytes": 29,
+          "url": "https://github.com/maxcorrads/flutter_ckeditor/blob/1968ddba2692466f330f7d1d44979367f6a673d8/LICENSE"
+        },
+        {
+          "path": "README.md",
+          "sha256": "9030072276dc312593aac448e67de7e25312f317d25c51f155b750809ea72401",
+          "bytes": 1037,
+          "url": "https://github.com/maxcorrads/flutter_ckeditor/blob/1968ddba2692466f330f7d1d44979367f6a673d8/README.md"
+        },
+        {
+          "path": "pubspec.yaml",
+          "sha256": "c1f82319c2b7a31e663fddbb9ebd24e7a61de93adff12c5373bd9d0f32cb315a",
+          "bytes": 1652,
+          "url": "https://github.com/maxcorrads/flutter_ckeditor/blob/1968ddba2692466f330f7d1d44979367f6a673d8/pubspec.yaml"
+        },
+        {
+          "path": "lib/mob_ckeditor.dart",
+          "sha256": "d666efe653824a38337d43ad5cab4718f69d67b96dd231552fec63337c8d366e",
+          "bytes": 3546,
+          "url": "https://github.com/maxcorrads/flutter_ckeditor/blob/1968ddba2692466f330f7d1d44979367f6a673d8/lib/mob_ckeditor.dart"
+        },
+        {
+          "path": "lib/web_ckeditor.dart",
+          "sha256": "10670f6924f5272599a4be4f9d5047734b1d9d0b34dd95dbb7ce313ae31a7322",
+          "bytes": 2957,
+          "url": "https://github.com/maxcorrads/flutter_ckeditor/blob/1968ddba2692466f330f7d1d44979367f6a673d8/lib/web_ckeditor.dart"
+        }
+      ]
+    }
+  ],
+  "officialReferences": [
+    {
+      "url": "https://ckeditor.com/legal/ckeditor-licensing-options/",
+      "purpose": "CKEditor GPL/commercial terms"
+    },
+    {
+      "url": "https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/license-and-legal.html",
+      "purpose": "Version/channel/LTS licensing scope"
+    },
+    {
+      "url": "https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/license-key-and-activation.html",
+      "purpose": "GPL and commercial activation; self-hosted versus cloud"
+    },
+    {
+      "url": "https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/managing-ckeditor-logo.html",
+      "purpose": "Upstream branding guidance"
+    },
+    {
+      "url": "https://support.ckeditor.com/hc/en-us/articles/360000540469-What-am-I-entitled-to-while-on-active-subscription",
+      "purpose": "Commercial use and distribution rights depend on the contract"
+    },
+    {
+      "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+      "purpose": "GPL v2 source and notice requirements"
+    },
+    {
+      "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.html#SourceAndBinaryOnDifferentSites",
+      "purpose": "Retained source access alongside binary downloads"
+    },
+    {
+      "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.html#NonFreeTools",
+      "purpose": "Compiler/tool licensing is distinct from output licensing"
+    },
+    {
+      "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0-faq.html#CanIUseGPLToolsForNF",
+      "purpose": "Copied generator output requires its own review"
+    },
+    {
+      "url": "https://dart.dev/tools/pub/publishing",
+      "purpose": "Publisher redistribution rights and dry-run scope"
+    }
+  ]
+}

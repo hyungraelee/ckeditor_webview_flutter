@@ -32,6 +32,46 @@
     'horizontalLine', 'showBlocks', 'specialCharacters', '|',
     'alignment', 'outdent', 'indent'
   ]);
+  const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo']);
+  // Only configure features already included in both engine build recipes.
+  const SUPPORTED_CONFIG_KEYS = new Set([
+    'heading', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
+    'highlight', 'alignment', 'indentBlock', 'specialCharacters', 'placeholder'
+  ]);
+
+  function getFeatureConfig(value) {
+    if (value == null) return {};
+    if (typeof value !== 'object' || Array.isArray(value)) {
+      throw bridgeError('invalid_editor_config', 'Config must be a JSON object.');
+    }
+    const unsupported = Object.keys(value).filter(key => !SUPPORTED_CONFIG_KEYS.has(key));
+    if (unsupported.length) {
+      throw bridgeError('invalid_editor_config',
+        `Unsupported config keys: ${unsupported.join(', ')}. Use the widget options for toolbar, initial HTML, and license activation.`);
+    }
+    validateConfigValue(value, new Set());
+    return value;
+  }
+
+  function validateConfigValue(value, ancestors) {
+    if (value === null || typeof value === 'string' || typeof value === 'boolean' ||
+        (typeof value === 'number' && Number.isFinite(value))) return;
+    if (typeof value !== 'object' || ancestors.has(value) ||
+        (!Array.isArray(value) && Object.getPrototypeOf(value) !== Object.prototype)) {
+      throw bridgeError('invalid_editor_config', 'Config must contain only acyclic JSON values and finite numbers.');
+    }
+    ancestors.add(value);
+    try {
+      for (const key of Object.keys(value)) {
+        if (key.includes('.') || ['__proto__', 'prototype', 'constructor'].includes(key)) {
+          throw bridgeError('invalid_editor_config', 'Config keys cannot contain dots or prototype keys.');
+        }
+        validateConfigValue(value[key], ancestors);
+      }
+    } finally {
+      ancestors.delete(value);
+    }
+  }
 
   let editor = null;
   let state = 'notInitialized';
@@ -46,6 +86,26 @@
   let resizeObserver = null;
   let mutationObserver = null;
   let lastLayout = '';
+  let customStyle = null;
+
+  function removeCustomStyle() {
+    if (customStyle) customStyle.remove();
+    customStyle = null;
+  }
+
+  function applyCustomCss(css) {
+    if (css != null && typeof css !== 'string') {
+      throw bridgeError('invalid_custom_css', 'customCss must be a string or null.');
+    }
+    removeCustomStyle();
+    if (css == null || css === '') return;
+    customStyle = document.createElement('style');
+    customStyle.id = 'ckeditor-flutter-custom-css';
+    // Keep CSS as text, including quotes and closing-tag-like sequences.
+    // The stylesheet is outside the editable data and is never serialized.
+    customStyle.textContent = css;
+    document.head.appendChild(customStyle);
+  }
 
   function scheduleLayout() {
     if (!autoHeight || state !== 'ready' || layoutFrame !== null) return;
@@ -120,8 +180,10 @@
 
   function errorData(error, fallbackCode) {
     return {
-      code: error.bridgeCode || fallbackCode,
-      message: error.message || String(error)
+      code: typeof error?.bridgeCode === 'string' && error.bridgeCode
+        ? error.bridgeCode : fallbackCode,
+      message: typeof error?.message === 'string' && error.message
+        ? error.message : String(error)
     };
   }
 
@@ -139,6 +201,20 @@
         `Editor is ${state}.`);
     }
     return editor;
+  }
+
+  function getToolbarItems(items) {
+    if (items == null) return [...TOOLBAR];
+    if (!Array.isArray(items)) {
+      throw bridgeError('invalid_toolbar_items', 'toolbarItems must be an array or null.');
+    }
+    const unsupported = items.filter(item =>
+      typeof item !== 'string' || !SUPPORTED_TOOLBAR_ITEMS.has(item));
+    if (unsupported.length) {
+      throw bridgeError('invalid_toolbar_items',
+        `Unsupported toolbar items: ${JSON.stringify(unsupported)}.`);
+    }
+    return [...items];
   }
 
   function cancelChange() {
@@ -212,24 +288,45 @@
       const debounceMs = options.changeDebounceMs ?? DEFAULT_CHANGE_DEBOUNCE_MS;
       const expand = options.autoHeight ?? false;
       const minHeight = options.minHeight ?? 300;
+      const uiLanguage = options.uiLanguage ?? 'en';
+      const licenseKey = options.licenseKey;
+      const toolbarItems = getToolbarItems(options.toolbarItems);
+      const featureConfig = getFeatureConfig(options.config);
       if (typeof initialHtml !== 'string' || typeof readOnly !== 'boolean' ||
           !Number.isInteger(debounceMs) || debounceMs < 0 ||
-          typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0) {
+          typeof expand !== 'boolean' || !Number.isFinite(minHeight) || minHeight <= 0 ||
+          typeof uiLanguage !== 'string') {
         throw bridgeError('invalid_argument', 'Invalid editor initialization options.');
+      }
+      if (licenseKey != null &&
+          (typeof licenseKey !== 'string' || !licenseKey.trim())) {
+        throw bridgeError('invalid_license_key', 'Supply a non-empty CKEditor license key.');
       }
       changeDebounceMs = debounceMs;
       autoHeight = expand;
       document.documentElement.classList.toggle('editor-auto-height', expand);
       document.documentElement.style.setProperty('--editor-min-height', `${minHeight}px`);
-      // Feature options intentionally remain at CKEditor defaults.
       // HTML goes through the CKEditor model; never assign it to innerHTML.
       const config = {
+        ...featureConfig,
         initialData: initialHtml,
-        language: 'ko',
+        language: { ui: uiLanguage, content: 'en' },
         plugins: PLUGINS.map(name => bundle[name]),
-        toolbar: { items: [...TOOLBAR], shouldNotGroupWhenFull: false }
+        toolbar: { items: toolbarItems, shouldNotGroupWhenFull: false }
       };
-      // 41.x does not require the licenseKey initialization option added in 44.x.
+      // Modern installations receive translation objects through configuration.
+      // The legacy default bundle continues using its global translation lookup.
+      if (window.CKEDITOR_BUNDLE_INFO?.translationFormat === 'umd' &&
+          window.CKEDITOR_TRANSLATIONS?.[uiLanguage]) {
+        config.translations = {
+          [uiLanguage]: window.CKEDITOR_TRANSLATIONS[uiLanguage]
+        };
+      }
+      // Flutter supplies activation at runtime; generated assets store no key.
+      if (licenseKey != null) {
+        config.licenseKey = licenseKey;
+      }
+      applyCustomCss(options.customCss);
       const instance = await bundle.ClassicEditor.create(
         document.getElementById('editor'), config
       );
@@ -259,6 +356,7 @@
       state = 'error';
       cancelChange();
       stopLayout();
+      removeCustomStyle();
       const failedEditor = editor;
       editor = null;
       if (failedEditor) {
@@ -302,6 +400,7 @@
     state = 'disposed';
     cancelChange();
     stopLayout();
+    removeCustomStyle();
     if (editorElement) editorElement.removeEventListener('input', onSourceInput);
     editorElement = null;
     const instance = editor;

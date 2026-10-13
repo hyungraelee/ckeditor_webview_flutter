@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "status": "scoped source-form evidence; exhaustive build-tool review pending",
+  "sourceGroups": [
+    {
+      "id": "typescript-5-source",
+      "upstreamId": "typescript-5-source",
+      "prefixes": [
+        "src/",
+        "scripts/"
+      ],
+      "requiredPaths": [
+        "src/compiler/checker.ts",
+        "package.json",
+        "package-lock.json",
+        "LICENSE.txt",
+        "ThirdPartyNoticeText.txt",
+        "Herebyfile.mjs"
+      ],
+      "status": "release-tag modification sources retained; compiler bootstrap not reproduced"
+    },
+    {
+      "id": "typescript-4-source",
+      "upstreamId": "typescript-4-source",
+      "prefixes": [
+        "src/",
+        "scripts/"
+      ],
+      "requiredPaths": [
+        "src/compiler/checker.ts",
+        "package.json",
+        "package-lock.json",
+        "LICENSE.txt",
+        "ThirdPartyNoticeText.txt",
+        "Gulpfile.js",
+        "CopyrightNotice.txt"
+      ],
+      "status": "release-tag modification sources retained; compiler bootstrap not reproduced"
+    },
+    {
+      "id": "webpack-cli-source",
+      "upstreamId": "webpack-cli-source",
+      "prefixes": [
+        "packages/webpack-cli/src/",
+        "packages/configtest/src/",
+        "packages/info/src/",
+        "packages/serve/src/"
+      ],
+      "requiredPaths": [
+        "LICENSE",
+        "package.json",
+        "yarn.lock",
+        "tsconfig.json",
+        "packages/webpack-cli/tsconfig.json",
+        "packages/configtest/tsconfig.json",
+        "packages/info/tsconfig.json",
+        "packages/serve/tsconfig.json"
+      ],
+      "status": "npm gitHead TypeScript sources retained; selected JavaScript generation verified"
+    },
+    {
+      "id": "webpack-npm-source",
+      "npmUrl": "https://registry.npmjs.org/webpack/-/webpack-5.91.0.tgz",
+      "prefixes": [
+        "package/lib/"
+      ],
+      "requiredPaths": [
+        "package/LICENSE",
+        "package/package.json"
+      ],
+      "status": "npm JavaScript modification sources inspected; complete upstream generation not reproduced"
+    },
+    {
+      "id": "terser-npm-source",
+      "npmUrl": "https://registry.npmjs.org/terser/-/terser-5.51.2.tgz",
+      "prefixes": [
+        "package/lib/"
+      ],
+      "requiredPaths": [
+        "package/LICENSE",
+        "package/package.json",
+        "package/main.js",
+        "package/tools/props.html",
+        "package/tools/domprops.js"
+      ],
+      "status": "npm JavaScript modification sources inspected; complete upstream generation not reproduced"
+    },
+    {
+      "id": "csso-npm-source",
+      "npmUrl": "https://registry.npmjs.org/csso/-/csso-5.0.5.tgz",
+      "prefixes": [
+        "package/lib/"
+      ],
+      "requiredPaths": [
+        "package/LICENSE",
+        "package/package.json"
+      ],
+      "status": "npm JavaScript modification sources inspected; complete upstream generation not reproduced"
+    },
+    {
+      "id": "acorn-later-notice-reference",
+      "upstreamId": "acorn-later-notice",
+      "prefixes": [
+        "src/"
+      ],
+      "requiredPaths": [
+        "LICENSE",
+        "package.json"
+      ],
+      "status": "later renamed project; reference notice only, 1.9.0 applicability unresolved"
+    },
+    {
+      "id": "ckeditor5-dev-gpl-source",
+      "upstreamId": "ckeditor5-dev-source",
+      "prefixes": [
+        "packages/ckeditor5-dev-translations/lib/",
+        "packages/ckeditor5-dev-utils/lib/"
+      ],
+      "requiredPaths": [
+        "LICENSE.md",
+        "package.json",
+        "packages/ckeditor5-dev-translations/package.json",
+        "packages/ckeditor5-dev-utils/package.json"
+      ],
+      "status": "official release source; all 29 distributed library JavaScript inputs compared with npm"
+    }
+  ],
+  "cliGeneration": {
+    "upstreamId": "webpack-cli-source",
+    "compilerPackage": "typescript-vanilla",
+    "compilerVersion": "4.8.4",
+    "configPath": "tsconfig.json",
+    "files": [
+      {
+        "source": "packages/webpack-cli/src/bootstrap.ts",
+        "npmUrl": "https://registry.npmjs.org/webpack-cli/-/webpack-cli-5.1.4.tgz",
+        "npmPath": "package/lib/bootstrap.js"
+      },
+      {
+        "source": "packages/webpack-cli/src/index.ts",
+        "npmUrl": "https://registry.npmjs.org/webpack-cli/-/webpack-cli-5.1.4.tgz",
+        "npmPath": "package/lib/index.js"
+      },
+      {
+        "source": "packages/webpack-cli/src/plugins/cli-plugin.ts",
+        "npmUrl": "https://registry.npmjs.org/webpack-cli/-/webpack-cli-5.1.4.tgz",
+        "npmPath": "package/lib/plugins/cli-plugin.js"
+      },
+      {
+        "source": "packages/webpack-cli/src/types.ts",
+        "npmUrl": "https://registry.npmjs.org/webpack-cli/-/webpack-cli-5.1.4.tgz",
+        "npmPath": "package/lib/types.js"
+      },
+      {
+        "source": "packages/webpack-cli/src/utils/dynamic-import-loader.ts",
+        "npmUrl": "https://registry.npmjs.org/webpack-cli/-/webpack-cli-5.1.4.tgz",
+        "npmPath": "package/lib/utils/dynamic-import-loader.js"
+      },
+      {
+        "source": "packages/webpack-cli/src/webpack-cli.ts",
+        "npmUrl": "https://registry.npmjs.org/webpack-cli/-/webpack-cli-5.1.4.tgz",
+        "npmPath": "package/lib/webpack-cli.js"
+      },
+      {
+        "source": "packages/configtest/src/index.ts",
+        "npmUrl": "https://registry.npmjs.org/@webpack-cli/configtest/-/configtest-2.1.1.tgz",
+        "npmPath": "package/lib/index.js"
+      },
+      {
+        "source": "packages/info/src/index.ts",
+        "npmUrl": "https://registry.npmjs.org/@webpack-cli/info/-/info-2.0.2.tgz",
+        "npmPath": "package/lib/index.js"
+      },
+      {
+        "source": "packages/serve/src/index.ts",
+        "npmUrl": "https://registry.npmjs.org/@webpack-cli/serve/-/serve-2.0.5.tgz",
+        "npmPath": "package/lib/index.js"
+      }
+    ]
+  }
+}

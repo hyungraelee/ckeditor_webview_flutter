@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "status": "source candidate; not approved for publication",
+  "upstreamArchives": [
+    {
+      "id": "ckeditor5",
+      "tag": "v41.4.1",
+      "commit": "c3319030d8d3d0291b794f24d40c0970c99c9628",
+      "url": "https://codeload.github.com/ckeditor/ckeditor5/tar.gz/c3319030d8d3d0291b794f24d40c0970c99c9628",
+      "sha256": "d1ee0711f14ee6a7684d45fe48e3e430d0a5cd8c587c6d7876b4be369ba38f13",
+      "size": 73563874,
+      "provenance": "exact release commit",
+      "excludeDirectories": [
+        "docs",
+        "tests",
+        "packages/*/build",
+        "packages/*/docs",
+        "packages/*/tests",
+        "packages/*/sample"
+      ]
+    },
+    {
+      "id": "vanilla-colorful",
+      "version": "0.7.2",
+      "commit": "d227133e466cc0be720ae0fda775a0d3a927679e",
+      "url": "https://codeload.github.com/web-padawan/vanilla-colorful/tar.gz/d227133e466cc0be720ae0fda775a0d3a927679e",
+      "sha256": "43a12e5913e15b92f5170d34bb9bc4949171a2a9b04206db890ebdc2bfd32e78",
+      "size": 528899,
+      "provenance": "exact release commit"
+    },
+    {
+      "id": "lodash-es",
+      "repository": "lodash/lodash",
+      "commit": "11eb817cdfacf56c02d7005cbe520ffbeb0fe59a",
+      "url": "https://codeload.github.com/lodash/lodash/tar.gz/11eb817cdfacf56c02d7005cbe520ffbeb0fe59a",
+      "sha256": "c496d6585d13f61adb4469e7cab6b2022ce4526d776d05e10734449c7d5f0639",
+      "size": 151599,
+      "provenance": "exact npm gitHead"
+    },
+    {
+      "id": "lodash",
+      "repository": "lodash/lodash",
+      "commit": "c6e281b878b315c7a10d90f9c2af4cdb112d9625",
+      "url": "https://codeload.github.com/lodash/lodash/tar.gz/c6e281b878b315c7a10d90f9c2af4cdb112d9625",
+      "sha256": "7392a9b96a7333e2b2e750fe285b026c4a2c8d128cefb67714c7e63b85ebddc6",
+      "size": 312377,
+      "provenance": "exact npm gitHead"
+    },
+    {
+      "id": "color-fns-reference",
+      "repository": "swiftcarrot/color-fns",
+      "commit": "57ade16e13411abdc16b43926fa144e73332b1e4",
+      "url": "https://codeload.github.com/swiftcarrot/color-fns/tar.gz/57ade16e13411abdc16b43926fa144e73332b1e4",
+      "sha256": "37ecbb6bab476a3f511ad394f8e054d24fec1592a53fa46b5e71511c628001d9",
+      "size": 87794,
+      "provenance": "reference only; copied revision unresolved"
+    },
+    {
+      "id": "saxes",
+      "repository": "lddubeau/saxes",
+      "commit": "6ef6a275b20f19cb67808daf0d8f64e06aaf5b0e",
+      "url": "https://codeload.github.com/lddubeau/saxes/tar.gz/6ef6a275b20f19cb67808daf0d8f64e06aaf5b0e",
+      "sha256": "ee9f4ac16a5f209a71b0546b286e3c037dcac03ad7fe28e4d36569e8bc476945",
+      "size": 171941,
+      "provenance": "v5.0.1 tag; package version and source review",
+      "excludeDirectories": [
+        "test",
+        "examples"
+      ],
+      "version": "5.0.1"
+    },
+    {
+      "id": "blurhash",
+      "repository": "woltapp/blurhash",
+      "commit": "cb151cab5b7d9cd3eef624e12e30381c6d292f0d",
+      "url": "https://codeload.github.com/woltapp/blurhash/tar.gz/cb151cab5b7d9cd3eef624e12e30381c6d292f0d",
+      "sha256": "9c06a53f30b1f840063fcbe31006fa2e4d6076514db04de08906e8f68dd5c5f4",
+      "size": 10720719,
+      "provenance": "2.0.5 version-bump commit; source-map content comparison",
+      "excludeDirectories": [
+        "C",
+        "Swift",
+        "Kotlin",
+        "Media",
+        "Website",
+        "TypeScript/demo"
+      ],
+      "version": "2.0.5"
+    },
+    {
+      "id": "tootallnate-once",
+      "repository": "TooTallNate/once",
+      "commit": "3948afcb5803013e184861943e0018e37830fcfe",
+      "url": "https://codeload.github.com/TooTallNate/once/tar.gz/3948afcb5803013e184861943e0018e37830fcfe",
+      "sha256": "490fd91d1e4b8dec7502ffe7653a5e9d257be4b862553bc7a403adf96e585d6e",
+      "size": 2777,
+      "provenance": "exact npm gitHead; MIT declaration only",
+      "version": "1.1.2"
+    },
+    {
+      "id": "acorn-import-assertions",
+      "repository": "xtuc/acorn-import-assertions",
+      "commit": "809f1c58c699fd084b6db8096963d916fc69d4c7",
+      "url": "https://codeload.github.com/xtuc/acorn-import-assertions/tar.gz/809f1c58c699fd084b6db8096963d916fc69d4c7",
+      "sha256": "02253ebaccd4df578b6f46c3bd4b10bedf6f89257694cedb7251d081e15591d5",
+      "size": 13465,
+      "provenance": "exact npm gitHead; MIT README declaration and maintainer notice clarification preserved",
+      "version": "1.9.0"
+    },
+    {
+      "id": "react-colorful-reference",
+      "repository": "omgovich/react-colorful",
+      "commit": "7dd80f931f914f8bea09b38ef98298d364786cb2",
+      "url": "https://codeload.github.com/omgovich/react-colorful/tar.gz/7dd80f931f914f8bea09b38ef98298d364786cb2",
+      "sha256": "cf27febbf8c07f941079a0afa348384324b4c091cec2e852401551f797b42a2e",
+      "size": 261466,
+      "provenance": "TypeScript conversion commit with initializers matching early vanilla-colorful; exact historical selected copy commit not established",
+      "excludeDirectories": [
+        "demo",
+        "tests"
+      ],
+      "version": "2.2.1"
+    },
+    {
+      "id": "lodash-tag-source",
+      "repository": "lodash/lodash",
+      "commit": "f299b52f39486275a9e6483b60a410e06520c538",
+      "url": "https://codeload.github.com/lodash/lodash/tar.gz/f299b52f39486275a9e6483b60a410e06520c538",
+      "sha256": "22c45204816b9d7172f5adf6773598403300d5f62f962c9fc751e868d98c4f75",
+      "size": 919347,
+      "provenance": "v4.17.21 development tag; lodash.js matches npm gitHead",
+      "excludeDirectories": [
+        "doc",
+        "test",
+        "vendor",
+        "dist",
+        "perf"
+      ],
+      "version": "4.17.21"
+    },
+    {
+      "id": "tootallnate-once-license",
+      "repository": "TooTallNate/once",
+      "commit": "de4a704b54936d83c8d6347d28665fe3b66c6de6",
+      "url": "https://codeload.github.com/TooTallNate/once/tar.gz/de4a704b54936d83c8d6347d28665fe3b66c6de6",
+      "sha256": "6c5a419ef2f0ee7268185339527077a64f0a308b33349f80abe02162cc021c0b",
+      "size": 4240,
+      "provenance": "upstream license-addition commit; source compared with npm gitHead",
+      "version": "1.1.2"
+    },
+    {
+      "id": "lodash-cli-generator",
+      "repository": "bnjmnt4n/lodash-cli",
+      "version": "4.17.21",
+      "commit": "37d28f589749c53ac838f1e53126c9f13d815acd",
+      "url": "https://codeload.github.com/bnjmnt4n/lodash-cli/tar.gz/37d28f589749c53ac838f1e53126c9f13d815acd",
+      "sha256": "063eec1f959bd64f72d79a3fbde247de3cc1f0118355d5dd2dd93019ad5b3a8c",
+      "size": 84883,
+      "provenance": "4.17.21 generator; audited ES modules reproduced from development-tag lodash.js",
+      "excludeDirectories": [
+        "test"
+      ]
+    },
+    {
+      "id": "vanilla-colorful-port-source",
+      "repository": "web-padawan/vanilla-colorful",
+      "commit": "261e1c227b8dc04753e8cc04640b934d433c2d91",
+      "url": "https://codeload.github.com/web-padawan/vanilla-colorful/tar.gz/261e1c227b8dc04753e8cc04640b934d433c2d91",
+      "sha256": "6d41a1f63a7d06d695e2c32c1bba598422f91c7c19ee2f47fd06f9f7c7f7ed77",
+      "size": 116854,
+      "version": "0.0.0",
+      "provenance": "early port at original MIT license addition; conversion initializers compared with React TypeScript source",
+      "excludeDirectories": [
+        "test",
+        "demo"
+      ]
+    },
+    {
+      "id": "boolbase-source",
+      "repository": "fb55/boolbase",
+      "commit": "be0bcd8a4e917a0a5895e95b523fbbed05a64871",
+      "url": "https://codeload.github.com/fb55/boolbase/tar.gz/be0bcd8a4e917a0a5895e95b523fbbed05a64871",
+      "sha256": "9cd10a06ef91bbe0ef8b592e2df45fdb6822c22b695fff2abc5b976c8a4e6f68",
+      "size": 1538,
+      "version": "1.0.0",
+      "provenance": "original ISC license-addition commit; index.js matches locked npm 1.0.0"
+    },
+    {
+      "id": "acorn-later-notice",
+      "repository": "xtuc/acorn-import-attributes",
+      "commit": "2c7059709cc529d81194c2d7057c181f4000e375",
+      "url": "https://codeload.github.com/xtuc/acorn-import-attributes/tar.gz/2c7059709cc529d81194c2d7057c181f4000e375",
+      "sha256": "6c72ab2d35701bc332385f8fd43e8e9b359a72ed6e323f9b9675e1809bfd51cf",
+      "size": 12399,
+      "version": "1.9.1",
+      "provenance": "original MIT notice; applicability to retained assertions 1.9.0 assessed using pre-release maintainer clarification",
+      "excludeDirectories": [
+        "test",
+        "tests"
+      ]
+    },
+    {
+      "id": "webpack-cli-source",
+      "repository": "webpack/webpack-cli",
+      "commit": "e07f0e58df103011435524d757102534b75a6796",
+      "url": "https://codeload.github.com/webpack/webpack-cli/tar.gz/e07f0e58df103011435524d757102534b75a6796",
+      "sha256": "13693ddd1307931a3b66f3ca1096c194da3e1c23275b453ebd2221f84b96c8f4",
+      "size": 422749,
+      "version": "5.1.4",
+      "provenance": "exact npm gitHead; nine CLI/component JavaScript files reproduced with pinned TypeScript 4.8.4",
+      "excludeDirectories": [
+        "test",
+        "tests",
+        "packages/*/tests",
+        "packages/*/src/__tests__"
+      ]
+    },
+    {
+      "id": "typescript-5-source",
+      "repository": "microsoft/TypeScript",
+      "commit": "3b45f4db12bbae97d10f62ec0e2d94858252c5ab",
+      "version": "5.0.4",
+      "url": "https://codeload.github.com/microsoft/TypeScript/tar.gz/3b45f4db12bbae97d10f62ec0e2d94858252c5ab",
+      "sha256": "51ebdad1d40d8cd993b7115a73babe3a5c829c73f3927cba6c82c6a228e948f4",
+      "size": 29567050,
+      "provenance": "official v5.0.4 release tag; compiler source retained, compiler-to-npm regeneration not verified",
+      "excludeDirectories": [
+        "tests",
+        "doc",
+        "samples"
+      ]
+    },
+    {
+      "id": "typescript-4-source",
+      "repository": "microsoft/TypeScript",
+      "commit": "a614119c1921ca61d549a7eee65c0b8c69c28752",
+      "version": "4.8.4",
+      "url": "https://codeload.github.com/microsoft/TypeScript/tar.gz/a614119c1921ca61d549a7eee65c0b8c69c28752",
+      "sha256": "21f4f7ccb2906adca66501f3721b7e252a9cfeee9b4b380d21cca8c295f6c0e2",
+      "size": 36533185,
+      "provenance": "official v4.8.4 release tag; compiler source retained, compiler-to-npm regeneration not verified",
+      "excludeDirectories": [
+        "tests",
+        "doc",
+        "samples"
+      ]
+    },
+    {
+      "id": "ckeditor5-dev-source",
+      "repository": "ckeditor/ckeditor5-dev",
+      "tag": "v39.7.0",
+      "commit": "15c6c4290c794717f03021bf4cf3ee8a511ca942",
+      "url": "https://codeload.github.com/ckeditor/ckeditor5-dev/tar.gz/15c6c4290c794717f03021bf4cf3ee8a511ca942",
+      "sha256": "8441598cf37355f5400c403ba9683a4e65ffb8c49065cb8e19614907beb8e92d",
+      "size": 372546,
+      "provenance": "official v39.7.0 tag; translation/utils JavaScript sources compared with locked npm inputs",
+      "excludeDirectories": [
+        "docs",
+        "tests",
+        "packages/*/tests",
+        "packages/*/docs"
+      ]
+    }
+  ],
+  "unresolved": [
+    "The verified Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent, so complete historical npm release reproduction remains unverified.",
+    "Thirteen early vanilla-colorful/react-colorful conversion initializers match after documented normalization; color-fns source lineage is retained. Exact selected copying commits and original HSV permission remain unresolved.",
+    "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
+    "Official TypeScript compiler release sources are retained, but compiler-to-npm bootstrap reproduction and exhaustive transitive build-tool source review remain unverified.",
+    "Public source download access has not been provided."
+  ]
+}
