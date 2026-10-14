@@ -47,6 +47,10 @@ in the records below.
 
 ## Prepare and publish
 
+For subsequent releases, use [AUTOMATED_RELEASE.md](AUTOMATED_RELEASE.md) for
+release preparation, merged-PR tagging, source verification, and OIDC publication.
+The original 0.1.0 manual procedure below remains a historical release record.
+
 Use [SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) to prepare, audit, and rebuild a
 candidate. Regenerate the final source artifact from the clean release commit;
 working-tree candidates are for review. Keep the checksum alongside the archive.
