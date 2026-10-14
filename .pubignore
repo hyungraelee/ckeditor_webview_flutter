@@ -13,5 +13,6 @@ pubspec.lock
 .DS_Store
 AGENTS.md
 agents.md
+/.agents/skills/
 .env*
 **/__pycache__/

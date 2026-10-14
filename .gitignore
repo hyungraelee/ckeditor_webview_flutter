@@ -100,9 +100,10 @@ lib/generated_plugin_registrant.dart
 !/assets/editor/*.js
 !/tool/ckeditor_build/*.js
 
-# Local agent instructions are not shared through Git.
+# Local agent instructions and skills are not shared through Git.
 AGENTS.md
 agents.md
+/.agents/skills/
 
 # Build dependencies and local editor/OS files.
 **/node_modules/
