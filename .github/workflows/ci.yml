@@ -1,0 +1,52 @@
+name: Package CI
+
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        flutter: ['3.27.0', '3.44.6']
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          flutter-version: ${{ matrix.flutter }}
+          cache: true
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '23.9.0'
+      - name: Verify release helpers and JavaScript bridge
+        run: |
+          node --test test/*_test.cjs
+          python3 -m unittest discover -s test -p '*_test.py'
+      - name: Analyze and test package
+        run: |
+          flutter pub get
+          flutter analyze
+          flutter test
+      - name: Analyze example
+        working-directory: example
+        run: |
+          flutter pub get
+          flutter analyze
+      - name: Validate release metadata
+        if: github.event_name == 'pull_request' && github.base_ref == 'main' && github.head_ref == 'develop'
+        run: node tool/release/github_release.cjs metadata
+      - name: Check package publication
+        run: flutter pub publish --dry-run
