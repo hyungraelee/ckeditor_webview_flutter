@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "scoped source-form evidence; exhaustive build-tool review pending",
+  "status": "selected build-tool source inventory",
   "sourceGroups": [
     {
       "id": "typescript-5-source",
@@ -107,7 +107,7 @@
         "LICENSE",
         "package.json"
       ],
-      "status": "later renamed project; reference notice only, 1.9.0 applicability unresolved"
+      "status": "upstream MIT notice retained; supplemental notice provenance in acorn-notice-evidence.json"
     },
     {
       "id": "ckeditor5-dev-gpl-source",

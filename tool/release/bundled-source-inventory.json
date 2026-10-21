@@ -412,13 +412,5 @@
       "sha256": "43a12e5913e15b92f5170d34bb9bc4949171a2a9b04206db890ebdc2bfd32e78",
       "size": 528899
     }
-  ],
-  "remainingWork": [
-    "Assemble and distribute the exact release sources; inspected archives are currently local audit inputs only.",
-    "Verify the build path from CKEditor TypeScript sources and vanilla-colorful TypeScript/style inputs to the npm-level files used by this bundle.",
-    "Resolve Lodash ES module generation provenance and include the appropriate modification sources and generation inputs.",
-    "Review copied-code notices in vanilla-colorful ACKNOWLEDGMENTS, including react-colorful, color-fns, and the cited HSV conversion implementation.",
-    "Review and preserve licenses of any build tools or other files included in the final source archive.",
-    "Publish and verify a persistent release source-download location before pub.dev upload."
   ]
 }

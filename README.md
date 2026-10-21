@@ -388,30 +388,15 @@ activity's `windowSoftInputMode="adjustResize"` when input is covered.
 
 ## License
 
-**GPL-2.0-or-later**: GNU General Public License version 2 or, at your option,
-any later version. See `LICENSE` and `THIRD_PARTY_NOTICES.md`. The bundled
-CKEditor is GPL-2.0-or-later; its original notices are preserved.
+This package is licensed under **GPL-2.0-or-later**. See [LICENSE](LICENSE)
+for the full text and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for
+component notices. CKSource commercial agreements apply to the covered CKEditor
+software and do not change this Flutter package's license.
 
-This Flutter integration is offered under GPL-2.0-or-later; it does not include
-a commercial license or exception for the integration code. A CKEditor
-commercial agreement or `licenseKey` applies to the CKSource software covered
-by that agreement and does not replace this package's GPL terms. A closed-source
-app must address the terms of both components; purchasing an editor key alone
-does not grant permission to use this package under different terms.
-
-GPL-compliant use may be commercial; charging a fee does not waive GPL terms.
-The bundled editor and locally generated editors use self-hosted distribution.
-If relying on CKSource commercial terms, the agreement must cover the selected
-engine, features, and deployment or redistribution model; a Cloud/CDN-only plan
-is not a self-hosted entitlement.
-See CKEditor's [licensing guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/license-and-legal.html).
-UI translation downloads do not change the editor's local distribution model.
-
-When distributing GPL-covered code, retain applicable copyright/license notices
-and provide the required corresponding source for the actual distributed version,
-including local changes and build inputs. Preserve source access for distributed
-releases; build recipes and upstream links alone are insufficient. App-specific
-source distribution remains the app distributor's responsibility.
+When redistributing GPL-covered code, preserve the applicable notices and provide
+the corresponding source for the distributed version, including modifications
+and build inputs. App distributors are responsible for their app-specific source
+and notice requirements.
 
 Bundled-editor source downloads for package **0.1.0**:
 

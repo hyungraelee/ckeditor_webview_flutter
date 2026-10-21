@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "maintainer clarification supports supplemental acorn notice; HSV permission unresolved",
+  "status": "supplemental acorn notice provenance",
   "acorn": {
     "name": "acorn-import-assertions",
     "version": "1.9.0",
@@ -39,19 +39,6 @@
       "path": "LICENSE",
       "sha256": "68d38391fb464a7ffdfd27f6f41c46700dc7c8e3a11bd91bc9d75e9e3706badd",
       "packagePath": "tool/release/notices/acorn-import-assertions-LICENSE.txt"
-    },
-    "assessment": "The locked README declares MIT. The maintainer authorized an MIT notice with his name before 1.9.0 and subsequently merged that notice. Preserve the unchanged original text as supplemental notice for the retained 1.9.0 input; this is a documented applicability assessment, not byte equality with the later changed implementation or complete legal certification."
-  },
-  "hsv": {
-    "status": "no explicit original grant recovered",
-    "gistUrl": "https://gist.github.com/mjackson/5311256",
-    "apiUrl": "https://api.github.com/gists/5311256/132d6d1f39bf422e03c8ab86b5329d6f4dfbc383",
-    "owner": "mjackson",
-    "revision": "132d6d1f39bf422e03c8ab86b5329d6f4dfbc383",
-    "committedAt": "2013-04-04T15:17:10Z",
-    "file": "color-conversion-algorithms.js",
-    "sha256": "1aae8efa78a2338ddac9c8c19d0ab067d004f4785728a6713b62287fffb6ea1a",
-    "observation": "The recovered author-account gist contains conversion code without explicit license text. The 30 existing comments retrieved in this review contain no comment by the gist owner. Third-party requests, reposts and ports do not supply an original grant. The gist implementation is not added to the distributed source candidate.",
-    "nextScope": "Obtain an applicable original clarification, or separately review a conversion implementation replacement and regenerate/retest affected outputs."
+    }
   }
 }

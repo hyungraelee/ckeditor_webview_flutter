@@ -1,46 +1,13 @@
-# Scoped build-input notice and source-form review
+# Build-tool sources and CLI generation
 
-This maintainer record covers the remaining standalone-notice gaps and selected
-build tool source forms in the bundled CKEditor 41.4.1 candidate. It does not
-certify the entire dependency tree or complete corresponding-source compliance.
-Runtime Dart, editor assets, original bundle recipes, and project licensing are
-unchanged. No dependency is upgraded and no upstream author is contacted.
+The source archive retains the build-tool sources, original notices, and
+configuration used by the bundled CKEditor 41.4.1 rebuild.
 
-## Boolbase notice recovered
-
-The original [license-addition commit](https://github.com/fb55/boolbase/commit/be0bcd8a4e917a0a5895e95b523fbbed05a64871)
-preserves the ISC text naming Felix Boehm and still declares boolbase 1.0.0.
-Its `index.js` is byte-identical to the locked npm input. The commit is preserved
-in `source-inputs.json`; `notice-review.json` pins the original LICENSE digest
-and the npm/upstream implementation comparison. No owner, year, or permission
-text is invented. The archive retains the original upstream notice, while the
-npm tarball remains intact.
-
-The initial build-input inventory had four targeted upstream notices, six embedded
-notices, 476 inputs with notice files, and one declaration-only input across
-487 distinct npm tarballs. The subsequent permission follow-up adds the fifth
-upstream notice and closes the declaration-only gap. Boolbase's historical npm
-gitHead remains unavailable; the
-same-version implementation comparison does not identify a unique npm release
-commit. It does establish the recorded byte relationship to the preserved
-upstream source and notice.
-
-## Acorn reference and subsequent clarification
-
-The [later notice-addition commit](https://github.com/xtuc/acorn-import-attributes/commit/2c7059709cc529d81194c2d7057c181f4000e375)
-contains an original MIT notice naming Sven Sauleau. It belongs to the renamed
-acorn-import-attributes project at version 1.9.1. Between the locked assertions
-1.9.0 gitHead and that commit, the source changes the keyword, exported parser
-plugin, AST properties, and dynamic-import expression handling.
-
-The later archive and notice were initially retained as references, without
-asserting applicability to the earlier changed implementation.
-Acorn-import-assertions 1.9.0 was initially declaration-only in the inventory.
-The subsequent [permission review](PERMISSION_REVIEW.md) recovered the owner's
-pre-release authorization and owner-merged notice. New candidates preserve the
-original text as a supplemental notice and assess applicability using this
-primary evidence. The earlier changed-source observation remains valid; no
-source equality with the renamed implementation is claimed.
+Boolbase's original ISC notice is pinned to its
+[license-addition commit](https://github.com/fb55/boolbase/commit/be0bcd8a4e917a0a5895e95b523fbbed05a64871).
+Its `index.js` matches the locked 1.0.0 npm input byte for byte.
+The acorn supplemental notice and maintainer statement are recorded in
+[NOTICE_REVIEW.md](NOTICE_REVIEW.md#acorn-supplemental-notice).
 
 ## Source forms inspected
 
@@ -58,13 +25,13 @@ and ties them to the preserved archive bytes.
 | Terser 5.51.2 | npm unbundled `lib/` and `main.js`, property inputs, original BSD notice retained alongside its generated bundle | Historical Rollup output reproduction not performed |
 | CSSO 5.0.5 | npm `lib/` ES module modification sources and original MIT notice retained alongside generated CommonJS/distribution outputs | Full upstream ES-to-CJS/distribution generation not reproduced |
 | CKEditor developer tools 39.7.0 | Official v39.7.0 source commit `15c6c4290c794717f03021bf4cf3ee8a511ca942`, original GPL text, package/build metadata, and translation/utils JavaScript sources | All 29 distributed library JS files match npm inputs; other developer-tool packages are not independently release-rebuilt |
-| Later acorn notice | Original MIT text, changed source, metadata at the pinned later commit; subsequent pre-release owner clarification retained | Supplemental applicability assessed in [PERMISSION_REVIEW.md](PERMISSION_REVIEW.md); changed source is not identical |
+| Later acorn notice | Original MIT text, changed source, metadata at the pinned later commit; subsequent pre-release owner clarification retained | See [notice inventory](NOTICE_REVIEW.md#acorn-supplemental-notice); the renamed implementation differs from 1.9.0 |
 
 Compiler repositories exclude tests, documentation, and samples using recorded
 selection rules with notices preserved. Original `lib/` bootstrap/distribution
 files, compiler modification sources, scripts, and other build inputs remain
-available. The source candidate consequently grows from about 60 MiB to about
-88 MiB; it is separate from Flutter runtime assets and the pub.dev package.
+available. The source archive is approximately 88 MiB and is distributed
+separately from the Flutter package.
 The compilers' own upstream locks are retained as source/build evidence, but
 their additional development dependencies are not a verified offline bootstrap
 recipe. This archive's documented offline build uses the preserved npm compilers.
@@ -91,21 +58,10 @@ scope. Existing CKEditor, vanilla-colorful, Lodash, and color relationship check
 remain in place. Older candidates lacking the new review fields and verifier
 remain compatible with the updated notice auditor/rebuild entry point.
 
-## Remaining release work
+## Verification scope
 
-Original HSV permission and exact copied revisions,
-compiler bootstrap, and exhaustive transitive build-tool source/notice review
-remain open. The selected source groups do not cover all 487 npm inputs or
-establish redistribution terms for every embedded component. Final source
-selection and applicability must be reviewed before publication.
-
-Regenerate from the approved clean release checkout, verify final source/bundle
-checks, and provide persistent anonymous source downloads. Device/SDK/package
-consumption and actual web/app HTML round trips remain separate validation.
-Nothing in this workflow uploads a source archive or publishes to pub.dev.
-
-The [integration licensing review](INTEGRATION_LICENSE_REVIEW.md) distinguishes
-source/notice obligations for distributed components from compiler bootstrap
-reproducibility. A failed or absent bootstrap comparison is not, by itself, a
-finding that the complete distribution is unlicensed. Component terms, copied
-output, and actual source availability require their own review.
+The comparisons cover the listed source groups and selected JavaScript inputs.
+They do not reproduce compiler bootstrap, all transitive tool releases, or
+complete historical npm publications. Release preparation uses the clean release
+checkout and verifies the resulting source archive and generated editor assets.
+See [SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) for the commands and report files.

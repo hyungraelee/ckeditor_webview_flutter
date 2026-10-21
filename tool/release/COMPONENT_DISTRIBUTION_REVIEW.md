@@ -1,11 +1,7 @@
-# Distributed component scope and notice conditions
+# Distributed components and notices
 
-This maintainer review covers the actual bundled-editor inventory and the npm
-inputs retained in the 41.4.1 source candidate. It records component roles,
-notice preservation, and source-presence evidence. It is not complete legal
-approval of every embedded component, and does not resolve original HSV
-permission. The subsequent [permission review](PERMISSION_REVIEW.md) assesses
-acorn supplemental-notice applicability using primary maintainer evidence.
+Component roles, declared licenses, retained notices, and source mappings for
+the bundled editor and its source archive.
 
 ## Two distribution scopes
 
@@ -18,8 +14,7 @@ terms; being archived alongside this GPL project does not relicense them.
 recognized declarations, exact GPL source mappings, and a supplemental notice
 hash. The source auditor binds emitted roles to the JavaScript/CSS and original
 build-lock hashes, confirms emitted names/versions/integrities, and records the
-remaining 457 inputs as retained-archive inputs. That role describes the
-recorded module inventory, not a legal finding about every transformed output.
+remaining 457 inputs as retained-archive inputs.
 
 The report normalizes one historical MIT declaration object while retaining
 the original metadata separately. Current declarations are:
@@ -36,10 +31,9 @@ the original metadata separately. Current declarations are:
 | CC-BY-4.0 | 1 | Retain supplied attribution, license/source links, and modification indications |
 | BlueOak-1.0.0 | 2 | Preserve license/notice or required license reference under the original text |
 
-These are package declarations, not a compatibility certificate or a statement
-that every embedded work shares the package's declared terms. New declarations,
-changed input/emitted scope, missing GPL mappings, and changed supplemental
-attribution fail the reproducible review checks.
+Original component and embedded notices remain authoritative for their terms.
+Changed declarations, input/emitted scope, GPL mappings, or supplemental
+attribution fail the inventory checks.
 
 ## Source evidence for retained GPL inputs
 
@@ -56,12 +50,9 @@ mapped source/lib/theme/language directories. It records file counts and a
 source-list fingerprint; the source manifest separately records archive and
 selected-file hashes.
 
-This proves the recorded sources are present and mapped to the locked inputs.
-It does not reproduce every unused predefined build or certify completeness of
-all source/build obligations. Existing source regeneration verifies the audited
-editor inputs and resulting bundle; source presence is not substituted for that
-comparison. Exact compiler bootstrap and full historical npm publication
-reproduction remain verification limits with the scope documented elsewhere.
+Source regeneration separately verifies the selected editor inputs and resulting
+bundle. Unused predefined builds, compiler bootstrap, and complete historical npm
+publications are outside the reproduced scope.
 
 ## Attribution and embedded notices
 
@@ -72,8 +63,7 @@ Deveria and community contributions and identifies its data license. This npm
 input is not an emitted module, but is redistributed in the source candidate.
 [SOURCE_ATTRIBUTIONS.md](SOURCE_ATTRIBUTIONS.md) accompanies the retained archive
 with project/data credits, exact input/source links, original license location,
-and the unchanged-tarball modification status. No copyright owner/year is
-invented and no dataset is relicensed or modified.
+and the unchanged-tarball modification status.
 
 The original [CC BY 4.0 terms](https://creativecommons.org/licenses/by/4.0/legalcode.en)
 govern supplied attribution, license/source references, and modification
@@ -94,25 +84,9 @@ CC0 files, and the two Blue Oak inputs, retain their original notices. The
 [Blue Oak text](https://blueoakcouncil.org/license/1.0.0) also governs its own
 notice/reference condition. Original tarball bytes remain unchanged.
 
-## Unresolved permissions and release disposition
+## Generated report
 
-The acorn input still declares MIT. The subsequent
-[permission review](PERMISSION_REVIEW.md) preserves the owner's pre-release
-clarification and original notice as supplemental evidence, closing the recorded
-acorn notice gap. The original HSV grant remains unrecovered. The later
-author-account Gist is now accessible but adds no explicit grant in the inspected
-material. No upstream author was contacted; existing runtime notices remain intact.
-
-The classification narrows the previous broad build-input review into explicit
-roles, declaration families, and GPL source evidence. It does not mark the
-candidate approved for publication. Before release, review the actual retained
-component notices and embedded terms, resolve or explicitly assess the recorded
-permission questions, regenerate the approved clean checkout, and provide
-persistent anonymous source access alongside the package's binary distribution.
-No source archive or package is uploaded by these tools.
-
-The report remains in `SOURCE_NOTICE_REPORT.json` under `distributionComponents`.
-Source preparation and fresh rebuilding recompute it from the archived review
-configuration. The supplemental attribution file is included with package
-sources inside the candidate; original input archives remain the notice source
-of record. Runtime editor/Dart code and the project GPL license are unchanged.
+`SOURCE_NOTICE_REPORT.json` records this inventory under `distributionComponents`.
+Source preparation and rebuilding recompute it from the archived configuration.
+[SOURCE_ATTRIBUTIONS.md](SOURCE_ATTRIBUTIONS.md) accompanies the package sources;
+original notices remain inside the retained input archives.
