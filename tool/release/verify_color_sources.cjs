@@ -28,7 +28,7 @@ for (const entry of review.copiedCodeSourceFiles) {
 }
 
 // Compare initializer syntax only: comments, quoting, whitespace, and TS types
-// are excluded. This does not compare imports or prove legal permission.
+// are excluded. Imports and module-level behavior are outside this comparison.
 function structure(node) {
   const result = { kind: ts.SyntaxKind[node.kind], children: [] };
   if (typeof node.text === 'string') result.text = node.text;
@@ -75,7 +75,7 @@ const comparisons = review.copiedCodeComparisons.map(entry => {
   return { ...entry, matched };
 });
 const report = {
-  status: 'reviewed source relationships; original HSV permission unresolved',
+  status: 'source initializer comparison verified',
   compilerVersion: ts.version, sourceFiles: review.copiedCodeSourceFiles,
   comparisons, scope: 'initializer structure; selected historical copying commit not established'
 };

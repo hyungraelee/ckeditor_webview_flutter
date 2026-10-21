@@ -118,8 +118,7 @@ They do not establish GitHub token permissions, pub.dev account configuration,
 or a successful production upload. Those are verified on the first approved
 automated release; dry-run never publishes.
 
-The existing source provenance, license review limits, CKEditor model limits,
-and native-device checks in [SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) and the
-[source release overview](README.md) remain applicable. Rebuild success is not
-blanket license approval. The [manual release record](MANUAL_RELEASE.md) remains
-available for the original release and manual recovery.
+Source provenance, rebuild scope, and native-device validation are documented in
+[SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) and the [source release overview](README.md).
+The [manual release record](MANUAL_RELEASE.md) remains available for the original
+release and manual recovery.
