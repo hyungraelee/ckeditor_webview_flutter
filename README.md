@@ -21,7 +21,7 @@ Requires Flutter **3.27.0+** and Dart **3.6.0+** on Android or iOS.
 
 ```yaml
 dependencies:
-  ckeditor_webview_flutter: ^0.1.0
+  ckeditor_webview_flutter: ^0.2.0
 ```
 
 Run `flutter pub get`. Package assets are registered automatically; there is
@@ -450,10 +450,10 @@ the corresponding source for the distributed version, including modifications
 and build inputs. App distributors are responsible for their app-specific source
 and notice requirements.
 
-Bundled-editor source downloads for package **0.1.0**:
+Bundled-editor source downloads for package **0.2.0**:
 
-- [Source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz)
-- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz.sha256)
+- [Source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.2.0/ckeditor_webview_flutter-0.2.0-sources.tar.gz)
+- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.2.0/ckeditor_webview_flutter-0.2.0-sources.tar.gz.sha256)
 
 The archive contains the package sources, pinned upstream sources, notices, and
 offline rebuild inputs for the bundled 41.4.1 editor. It is a separate download

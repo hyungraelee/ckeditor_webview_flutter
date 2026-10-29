@@ -62,10 +62,10 @@ Those build recipes and upstream links do not by themselves replace any GPL
 obligation to provide complete corresponding source when distributing a
 compiled bundle.
 
-Source downloads for package **0.1.0**, including the bundled CKEditor **41.4.1**:
+Source downloads for package **0.2.0**, including the bundled CKEditor **41.4.1**:
 
-- [Versioned source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz)
-- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz.sha256)
+- [Versioned source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.2.0/ckeditor_webview_flutter-0.2.0-sources.tar.gz)
+- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.2.0/ckeditor_webview_flutter-0.2.0-sources.tar.gz.sha256)
 
 This separate archive preserves package sources, upstream modification sources,
 notices, and pinned build inputs. It covers the bundled editor, not optional
