@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "scope": "Emitted webpack chunk modules for the bundled editor; not a complete corresponding-source archive or a legal compliance certification.",
-  "baselineCommit": "0fd089d",
+  "baselineCommit": "d1b78431d41be8f72b2d42f81608f781aa695512",
   "editorVersion": "41.4.1",
   "buildEnvironment": {
     "node": "23.9.0",
@@ -9,13 +9,13 @@
     "webpack": "5.91.0",
     "mode": "production"
   },
-  "lockfileSha256": "df7f6dea195ade0a4211832bcbebcb5a134c85c901ef82b057863be33255fd48",
+  "lockfileSha256": "35133ad80ba15d94c11d3c552783ab2d3f90a93cc3a2e04238563054e24e1aa8",
   "matchedAssetsSha256": {
-    "ckeditor.js": "1b348eb5c6d2f6b417314526a03ba2df378d9b5fa7eeadb4fb0ed21807a9650d",
-    "ckeditor.css": "c06e50254acc3e3a52195265c7071f5fb0f598c99425548ae5101fec4be40864",
-    "ckeditor.js.LICENSE.txt": "2316da1cd1fec0fc881039ac84bdf390acaab4478ca309046397e03a5f1dc5fd",
+    "ckeditor.js": "048d30981127c088748a3b9227c1ffecc73c68e3de8ae8d178f453b9e14fe1cb",
+    "ckeditor.css": "cf3c8d7ff71849081c4d2b74ece44d73714806b520da80a92bb35fe821ce61d7",
+    "ckeditor.js.LICENSE.txt": "1fc9064e663b7bf397669cc1a1722d864ce9027be8b30d6f02f8826084ca6b42",
     "CKEDITOR-LICENSE.txt": "34deaa6bfca4b72db248f84bbe49e4c0e9df269f6c85ecd4803b73db81cc8641",
-    "build-info.json": "a5e58a2051221df04b63ec3c56de77312ffbdf8a7953bb99af6776f20441f874"
+    "build-info.json": "c60f245003edaae1c90c52317c835281eaa7eba1ab235dd67a84b6b390b32970"
   },
   "runtimePackages": [
     {
@@ -186,6 +186,19 @@
       "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-indent/-/ckeditor5-indent-41.4.1.tgz",
       "npmIntegrity": "sha512-YCKOy3Kby5Uev0HmkcT9cpp2nWPbsKXcywoC9KVapzxtdT8d5100uV8O19NvFu9xinNlnBuOQP8SyiR2DDGVNQ==",
       "moduleIdentifierCount": 7
+    },
+    {
+      "name": "@ckeditor/ckeditor5-list",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-list"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-list/-/ckeditor5-list-41.4.1.tgz",
+      "npmIntegrity": "sha512-AbXCmSYjvXdNF4rMF068ij9Fn5rJsSVW97wvYZ36UZoJcTpdnK0G3SZZCtkPV1kFQRN0J6Nkg9+7QsbznKasTA==",
+      "moduleIdentifierCount": 16
     },
     {
       "name": "@ckeditor/ckeditor5-paragraph",

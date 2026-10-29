@@ -126,6 +126,15 @@ for (const [name, expression] of [
   });
 }
 
+test('list buttons and existing indent controls reach the editor', async t => {
+  const h = createHarness();
+  t.after(() => h.destroy());
+  const items = ['bulletedList', 'numberedList', '|', 'outdent', 'indent'];
+  await h.initialize({ toolbarItems: items });
+  assert.deepEqual(h.config.toolbar.items, items);
+  assert.ok(h.pluginNames.includes('List'));
+});
+
 test('null and empty options preserve default features, toolbar, and CSS', async t => {
   for (const empty of [null, '']) {
     const h = createHarness();
@@ -134,6 +143,9 @@ test('null and empty options preserve default features, toolbar, and CSS', async
     assert.equal(h.head.length, 2);
     assert.equal(Object.hasOwn(h.config, 'fontSize'), false);
     assert.ok(h.config.toolbar.items.includes('fontSize'));
+    assert.equal(h.config.toolbar.items.includes('bulletedList'), false);
+    assert.equal(h.config.toolbar.items.includes('numberedList'), false);
+    assert.ok(h.pluginNames.includes('List'));
     assert.equal(Object.hasOwn(h.config, 'licenseKey'), false);
   }
 });

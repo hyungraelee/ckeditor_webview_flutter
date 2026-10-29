@@ -65,6 +65,7 @@ class CkEditorWebView extends StatefulWidget {
   /// - `'showBlocks'`: show block outlines.
   /// - `'specialCharacters'`: insert special characters.
   /// - `'alignment'`: text alignment dropdown.
+  /// - `'bulletedList'`, `'numberedList'`: toggle bulleted and numbered lists.
   /// - `'outdent'`, `'indent'`: decrease and increase indentation.
   /// - `'undo'`, `'redo'`: undo and redo editing commands.
   /// - `'|'`: group separator; CKEditor cleans up redundant separators.

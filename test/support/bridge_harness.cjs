@@ -16,7 +16,7 @@ const featureNames = [
   'FontFamily', 'FontSize', 'FontColor', 'FontBackgroundColor', 'Highlight',
   'Subscript', 'Superscript', 'HorizontalLine', 'ShowBlocks',
   'SpecialCharacters', 'SpecialCharactersEssentials',
-  'Alignment', 'Indent', 'IndentBlock'
+  'Alignment', 'Indent', 'IndentBlock', 'List'
 ];
 
 function createHarness({ failCreation = false, deferCreation = false,

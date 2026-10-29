@@ -150,6 +150,25 @@ class _EditorPageState extends State<EditorPage> {
               CkEditorWebView(
                 controller: _controller,
                 initialHtml: sampleHtml,
+                toolbarItems: widget.autoHeight
+                    ? const [
+                        'heading',
+                        '|',
+                        'bold',
+                        'italic',
+                        '|',
+                        'bulletedList',
+                        'numberedList',
+                        'outdent',
+                        'indent',
+                        '|',
+                        'fontFamily',
+                        'fontSize',
+                        'fontColor',
+                        '|',
+                        'sourceEditing',
+                      ]
+                    : null,
                 // Fixed height keeps defaults; automatic height shows config.
                 config: widget.autoHeight
                     ? const {

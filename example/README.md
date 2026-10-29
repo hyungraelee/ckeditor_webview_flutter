@@ -55,6 +55,9 @@ device signing.
   borders, a warm content background, and custom default font/line height/padding.
   Fixed height keeps the original appearance. CSS customization works with
   either height mode; it is not written into the HTML output.
+- Automatic height includes bulleted/numbered list buttons and indent/outdent
+  controls. Try switching the list type, nesting an item, and leaving an empty
+  item with Enter. The sample lists remain in the fixed-height HTML as well.
 - Edit the sample document and use **Get HTML** below the editor to read
   `getHtml()`. Selectable HTML appears below the button, including source-editing
   data. Scroll the page to view the full output.
@@ -86,6 +89,8 @@ These checks require manual execution on Android/iOS:
   selection, source editing, long-content growth, and caret visibility after
   styling. HTML output must not contain the custom stylesheet or wrapper UI.
 - HTML retrieval includes the latest edits, including source-editing changes.
+- Create, switch, nest, and remove lists. Check Enter/Backspace behavior, keyboard
+  and parent scrolling in automatic height, and the `<ul>`/`<ol>` output in Get HTML.
 - Fixed height scrolls inside the editor; automatic height grows and the parent
   page scrolls. Add paragraphs and edit near the bottom with the keyboard open
   to check caret visibility.
