@@ -1,6 +1,6 @@
 name: ckeditor_webview_flutter
 description: Embed CKEditor 5 in Flutter using bundled local WebView assets, with an HTML controller, source editing, and optional automatic height.
-version: 0.1.0
+version: 0.2.0
 repository: https://github.com/hyungraelee/ckeditor_webview_flutter
 issue_tracker: https://github.com/hyungraelee/ckeditor_webview_flutter/issues
 

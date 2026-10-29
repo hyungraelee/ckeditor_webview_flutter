@@ -1,3 +1,13 @@
+## 0.2.0
+
+- Add hyperlink insertion, URL editing, and unlinking through the opt-in `link` toolbar item, with JSON `config.link` settings and HTML link preservation.
+- Add opt-in bulleted and numbered lists, including nested list editing with the existing indent/outdent controls and HTML list preservation.
+- Fix gesture handling for open link balloons in automatic-height mode.
+
+The default toolbar is unchanged. Add `link`, `bulletedList`, or `numberedList`
+to `toolbarItems` to show the new controls. Regenerate custom `editorAsset`
+builds after updating the package.
+
 ## 0.1.0
 
 Initial release for Android and iOS, requiring Flutter 3.27.0 and Dart 3.6.0 or later.
