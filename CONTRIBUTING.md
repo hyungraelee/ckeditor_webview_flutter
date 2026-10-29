@@ -35,6 +35,24 @@ does not establish HTML normalization/round-trip compatibility, actual CSS
 rendering, or Android/iOS keyboard, selection, scrolling, and platform-view
 lifecycle behavior. Continue manual device and web/app round-trip checks.
 
+### Real-engine link tests
+
+The optional browser suite loads the shipped editor assets and exercises link
+insert/edit/unlink UI, undo, HTML round trips, source editing, and read-only mode
+with real CKEditor. It uses a local HTTP server and blocks external requests.
+Install Playwright separately from the editor build dependencies:
+
+```sh
+npm install --prefix .dart_tool/browser-tests --no-save --ignore-scripts playwright@1.62.1
+npx --prefix .dart_tool/browser-tests playwright install --only-shell chromium
+NODE_PATH="$PWD/.dart_tool/browser-tests/node_modules" node --test tool/ckeditor_build/test-links.cjs
+```
+
+Set `CKEDITOR_TEST_BROWSER_CHANNEL=chrome` to use an installed Google Chrome
+instead of downloading Chromium. Set `CKEDITOR_TEST_ASSET` to a generated HTML
+asset's absolute path to run the same checks against an optional engine build.
+Browser tests do not replace Android/iOS WebView keyboard and selection checks.
+
 ## Rebuilding the bundled editor
 
 End users do not need Node.js. Maintainers can rebuild with:

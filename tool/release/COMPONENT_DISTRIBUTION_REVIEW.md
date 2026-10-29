@@ -5,7 +5,7 @@ the bundled editor and its source archive.
 
 ## Two distribution scopes
 
-The emitted-module inventory identifies 30 packages: 25 CKEditor GPL packages
+The emitted-module inventory identifies 31 packages: 26 CKEditor GPL packages
 and five MIT packages. The separate source candidate retains 487 npm inputs,
 including packages outside the emitted editor. Those inputs retain their own
 terms; being archived alongside this GPL project does not relicense them.
@@ -14,7 +14,7 @@ terms; being archived alongside this GPL project does not relicense them.
 recognized declarations, exact GPL source mappings, and a supplemental notice
 hash. The source auditor binds emitted roles to the JavaScript/CSS and original
 build-lock hashes, confirms emitted names/versions/integrities, and records the
-remaining 457 inputs as retained-archive inputs.
+remaining 456 inputs as retained-archive inputs.
 
 The report normalizes one historical MIT declaration object while retaining
 the original metadata separately. Current declarations are:
