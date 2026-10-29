@@ -25,3 +25,4 @@ export { default as Alignment } from '@ckeditor/ckeditor5-alignment/src/alignmen
 export { default as Indent } from '@ckeditor/ckeditor5-indent/src/indent';
 export { default as IndentBlock } from '@ckeditor/ckeditor5-indent/src/indentblock';
 export { default as Link } from '@ckeditor/ckeditor5-link/src/link';
+export { default as List } from '@ckeditor/ckeditor5-list/src/list';

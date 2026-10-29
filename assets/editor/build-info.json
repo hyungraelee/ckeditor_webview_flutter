@@ -12,6 +12,7 @@
     "@ckeditor/ckeditor5-horizontal-line": "41.4.1",
     "@ckeditor/ckeditor5-indent": "41.4.1",
     "@ckeditor/ckeditor5-link": "41.4.1",
+    "@ckeditor/ckeditor5-list": "41.4.1",
     "@ckeditor/ckeditor5-paragraph": "41.4.1",
     "@ckeditor/ckeditor5-show-blocks": "41.4.1",
     "@ckeditor/ckeditor5-source-editing": "41.4.1",
@@ -19,7 +20,7 @@
     "@ckeditor/ckeditor5-theme-lark": "41.4.1"
   },
   "sha256": {
-    "ckeditor.js": "df8ae964ceaca236898e1e1fbb1e6e9ec4d2577c303aaa465b1a3edd8ed73e77",
-    "ckeditor.css": "25a17493eccd3f82ce1c550114296a6523942af0cc2ecfd34f991ffde32ad6d8"
+    "ckeditor.js": "63b0f19fbad49cf734d78d534bef2b491e43c7a293d1496a175a07098a87faff",
+    "ckeditor.css": "22f3daec6aeb679538ff25b48a100912689700489746ab6524ad79797fd08381"
   }
 }

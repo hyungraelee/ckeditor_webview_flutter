@@ -136,6 +136,15 @@ test('link toolbar and JSON settings reach the editor', async t => {
   assert.ok(h.pluginNames.includes('Link'));
 });
 
+test('list buttons and existing indent controls reach the editor', async t => {
+  const h = createHarness();
+  t.after(() => h.destroy());
+  const items = ['bulletedList', 'numberedList', '|', 'outdent', 'indent'];
+  await h.initialize({ toolbarItems: items });
+  assert.deepEqual(h.config.toolbar.items, items);
+  assert.ok(h.pluginNames.includes('List'));
+});
+
 test('null and empty options preserve default features, toolbar, and CSS', async t => {
   for (const empty of [null, '']) {
     const h = createHarness();
@@ -145,6 +154,9 @@ test('null and empty options preserve default features, toolbar, and CSS', async
     assert.equal(Object.hasOwn(h.config, 'fontSize'), false);
     assert.ok(h.config.toolbar.items.includes('fontSize'));
     assert.equal(h.config.toolbar.items.includes('link'), false);
+    assert.equal(h.config.toolbar.items.includes('bulletedList'), false);
+    assert.equal(h.config.toolbar.items.includes('numberedList'), false);
+    assert.ok(h.pluginNames.includes('List'));
     assert.ok(h.pluginNames.includes('Link'));
     assert.equal(Object.hasOwn(h.config, 'licenseKey'), false);
   }

@@ -124,7 +124,7 @@ buttons. Supported names are `heading`, `sourceEditing`, `bold`, `italic`,
 `underline`, `strikethrough`, `fontFamily`, `fontSize`, `fontColor`,
 `fontBackgroundColor`, `highlight`, `subscript`, `superscript`, `horizontalLine`,
 `showBlocks`, `specialCharacters`, `alignment`, `outdent`, `indent`, `undo`,
-`redo`, `link`, and the `|` group separator. The `toolbarItems` API documentation
+`redo`, `link`, `bulletedList`, `numberedList`, and the `|` group separator. The `toolbarItems` API documentation
 describes each item. Names are case-sensitive; unsupported names report
 `invalid_toolbar_items` through `onError`.
 
@@ -158,6 +158,33 @@ existing text-entry behavior. Navigation remains subject to the package's WebVie
 
 For generated `editorAsset` builds, update this package, run `flutter clean`,
 and rebuild before using `link` or `config.link`.
+
+### Lists
+
+Add `bulletedList` and `numberedList` to `toolbarItems` to create, switch, or
+remove lists. The default toolbar is unchanged.
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  toolbarItems: const [
+    'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'sourceEditing',
+  ],
+)
+```
+
+Select paragraphs to apply a list, or use the active list button again to return
+to paragraphs. The existing indent/outdent buttons nest and unnest list items.
+Enter continues a list; Enter on an empty item leaves it or reduces its nesting.
+Typed `- ` and `1. ` remain plain text; automatic list formatting is not enabled.
+
+Supported `<ul>`, `<ol>`, and `<li>` content is preserved even when the list buttons
+are hidden. Storage uses CKEditor's HTML output, which may normalize paragraph
+wrappers and list structure. Custom list styles, start numbers, and to-do lists
+are not included. See CKEditor's [list documentation](https://ckeditor.com/docs/ckeditor5/latest/features/lists/lists.html).
+
+For generated `editorAsset` builds, update this package, run `flutter clean`,
+and rebuild before using the list buttons.
 
 ## Feature configuration
 
@@ -382,7 +409,7 @@ assets so they support the current widget options.
 produced by `editor.getData()`, including current source edits. The package does
 not convert it to Markdown, Delta, or a custom document format.
 
-Included features: paragraph, heading, source editing, hyperlinks, bold, italic, underline,
+Included features: paragraph, heading, source editing, hyperlinks, bulleted and numbered lists, bold, italic, underline,
 strikethrough, font family/size/color/background, highlight, subscript,
 superscript, horizontal line, show blocks, special characters, alignment, and
 block indentation. Images, uploads, and General HTML Support are not enabled.

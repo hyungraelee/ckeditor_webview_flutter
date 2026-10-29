@@ -21,7 +21,7 @@
     'FontFamily', 'FontSize', 'FontColor', 'FontBackgroundColor', 'Highlight',
     'Subscript', 'Superscript', 'HorizontalLine', 'ShowBlocks',
     'SpecialCharacters', 'SpecialCharactersEssentials',
-    'Alignment', 'Indent', 'IndentBlock', 'Link'
+    'Alignment', 'Indent', 'IndentBlock', 'Link', 'List'
   ]);
   // Matches the supplied web toolbar. Overflow stays in CKEditor's More menu.
   const TOOLBAR = Object.freeze([
@@ -32,7 +32,7 @@
     'horizontalLine', 'showBlocks', 'specialCharacters', '|',
     'alignment', 'outdent', 'indent'
   ]);
-  const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo', 'link']);
+  const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo', 'link', 'bulletedList', 'numberedList']);
   // Only configure features already included in both engine build recipes.
   const SUPPORTED_CONFIG_KEYS = new Set([
     'heading', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
