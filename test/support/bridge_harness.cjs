@@ -16,7 +16,7 @@ const featureNames = [
   'FontFamily', 'FontSize', 'FontColor', 'FontBackgroundColor', 'Highlight',
   'Subscript', 'Superscript', 'HorizontalLine', 'ShowBlocks',
   'SpecialCharacters', 'SpecialCharactersEssentials',
-  'Alignment', 'Indent', 'IndentBlock', 'List'
+  'Alignment', 'Indent', 'IndentBlock', 'Link', 'List'
 ];
 
 function createHarness({ failCreation = false, deferCreation = false,
@@ -63,7 +63,7 @@ function createHarness({ failCreation = false, deferCreation = false,
     },
     enableReadOnlyMode: key => { locks.add(key); calls.push('readOnly:on'); },
     disableReadOnlyMode: key => { locks.delete(key); calls.push('readOnly:off'); },
-    plugins: { get: name => {
+    plugins: { has: name => name === 'SourceEditing', get: name => {
       if (name !== 'SourceEditing') throw new Error(`Unknown fixture plugin: ${name}`);
       return sourceEditing;
     } },

@@ -11,11 +11,11 @@ from the Flutter package and runtime assets.
 
 - 507 pinned inputs, including 487 npm tarballs; 22 optional platform inputs are
   omitted from the verified offline build.
-- 31 npm packages emitted in the editor and 456 additional retained npm inputs.
+- 32 npm packages emitted in the editor and 455 additional retained npm inputs.
 - All 66 retained GPL npm inputs have source-presence mappings.
 - Notice inventory: 476 inputs with notice files, six with embedded notices,
   and five with preserved upstream notices.
-- Regeneration verifies 452 CKEditor, 12 vanilla-colorful, and 191 Lodash
+- Regeneration verifies 467 CKEditor, 12 vanilla-colorful, and 198 Lodash
   JavaScript inputs; 2,416 CKEditor style/icon/translation resources; and nine
   webpack CLI/component JavaScript inputs. The offline bundle rebuild compares
   seven generated editor assets byte for byte.

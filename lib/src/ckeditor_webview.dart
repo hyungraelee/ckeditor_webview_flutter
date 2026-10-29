@@ -68,6 +68,7 @@ class CkEditorWebView extends StatefulWidget {
   /// - `'bulletedList'`, `'numberedList'`: toggle bulleted and numbered lists.
   /// - `'outdent'`, `'indent'`: decrease and increase indentation.
   /// - `'undo'`, `'redo'`: undo and redo editing commands.
+  /// - `'link'`: insert, edit, or remove a hyperlink using CKEditor's link UI.
   /// - `'|'`: group separator; CKEditor cleans up redundant separators.
   ///
   /// For example: `const ['heading', '|', 'bold', 'italic', '|', 'sourceEditing']`.
@@ -94,6 +95,7 @@ class CkEditorWebView extends StatefulWidget {
   /// - `'indentBlock'`: offset/unit or configured indentation classes.
   /// - `'specialCharacters'`: order of the included character groups.
   /// - `'placeholder'`: empty-editor placeholder text.
+  /// - `'link'`: link settings such as defaultProtocol and decorators.
   ///
   /// For example: `const {'fontSize': {'options': [12, 16, 20, 'default'],
   /// 'supportAllValues': true}, 'placeholder': 'Write here...'}`.

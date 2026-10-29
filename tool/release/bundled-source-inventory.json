@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "scope": "Emitted webpack chunk modules for the bundled editor; not a complete corresponding-source archive or a legal compliance certification.",
-  "baselineCommit": "d1b78431d41be8f72b2d42f81608f781aa695512",
+  "baselineCommit": "d175772d1201b1ccb4aa17d33935bd49477242f1",
   "editorVersion": "41.4.1",
   "buildEnvironment": {
     "node": "23.9.0",
@@ -9,13 +9,13 @@
     "webpack": "5.91.0",
     "mode": "production"
   },
-  "lockfileSha256": "35133ad80ba15d94c11d3c552783ab2d3f90a93cc3a2e04238563054e24e1aa8",
+  "lockfileSha256": "a0d01100929a99fde6452cceb48b24a8269bf6c40adfdced409cecf6cbbfa3d1",
   "matchedAssetsSha256": {
-    "ckeditor.js": "048d30981127c088748a3b9227c1ffecc73c68e3de8ae8d178f453b9e14fe1cb",
-    "ckeditor.css": "cf3c8d7ff71849081c4d2b74ece44d73714806b520da80a92bb35fe821ce61d7",
+    "ckeditor.js": "63b0f19fbad49cf734d78d534bef2b491e43c7a293d1496a175a07098a87faff",
+    "ckeditor.css": "22f3daec6aeb679538ff25b48a100912689700489746ab6524ad79797fd08381",
     "ckeditor.js.LICENSE.txt": "1fc9064e663b7bf397669cc1a1722d864ce9027be8b30d6f02f8826084ca6b42",
     "CKEDITOR-LICENSE.txt": "34deaa6bfca4b72db248f84bbe49e4c0e9df269f6c85ecd4803b73db81cc8641",
-    "build-info.json": "c60f245003edaae1c90c52317c835281eaa7eba1ab235dd67a84b6b390b32970"
+    "build-info.json": "51acc31b53191f7e2bbf536c2c566fba45d061482f5d844272c7b3c7c9c111a9"
   },
   "runtimePackages": [
     {
@@ -188,6 +188,19 @@
       "moduleIdentifierCount": 7
     },
     {
+      "name": "@ckeditor/ckeditor5-link",
+      "version": "41.4.1",
+      "license": "GPL-2.0-or-later",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ckeditor/ckeditor5.git",
+        "directory": "packages/ckeditor5-link"
+      },
+      "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-link/-/ckeditor5-link-41.4.1.tgz",
+      "npmIntegrity": "sha512-PozxaOrgoBKKfDaU/2722x+DOhSxprH4KGjj7rdpE8EMXoibHckAKGgzIqQYJgJt3NSAgWHYl03xQFFtr2Vhig==",
+      "moduleIdentifierCount": 16
+    },
+    {
       "name": "@ckeditor/ckeditor5-list",
       "version": "41.4.1",
       "license": "GPL-2.0-or-later",
@@ -276,7 +289,7 @@
       },
       "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-typing/-/ckeditor5-typing-41.4.1.tgz",
       "npmIntegrity": "sha512-K6wHZvDJBWqHa7b+FCV+nNg2B1TZqb/zhki+xxP484M3ro7kHUoJJ7zSEhH9OjUckKs1jBo9NvJfkMnuFWEx4g==",
-      "moduleIdentifierCount": 13
+      "moduleIdentifierCount": 15
     },
     {
       "name": "@ckeditor/ckeditor5-ui",
@@ -289,7 +302,7 @@
       },
       "npmTarball": "https://registry.npmjs.org/@ckeditor/ckeditor5-ui/-/ckeditor5-ui-41.4.1.tgz",
       "npmIntegrity": "sha512-NuLa45LD2XYbBgE4VVBccggQ0FVy1OXtngr4grh9LWHf1EQNiFRZEm+bHc4kLnM6JmVsSHZraYuCm/7KjRMmKw==",
-      "moduleIdentifierCount": 131
+      "moduleIdentifierCount": 134
     },
     {
       "name": "@ckeditor/ckeditor5-undo",
@@ -395,7 +408,7 @@
       "repository": "lodash/lodash",
       "npmTarball": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.21.tgz",
       "npmIntegrity": "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==",
-      "moduleIdentifierCount": 191
+      "moduleIdentifierCount": 198
     },
     {
       "name": "vanilla-colorful",

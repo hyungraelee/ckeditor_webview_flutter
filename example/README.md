@@ -55,6 +55,10 @@ device signing.
   borders, a warm content background, and custom default font/line height/padding.
   Fixed height keeps the original appearance. CSS customization works with
   either height mode; it is not written into the HTML output.
+- Automatic height includes a link button and `https://` as the default URL
+  protocol. Select text to add a link, or place the caret in the sample link to
+  edit its URL or remove it. Fixed height keeps the package's default toolbar;
+  the sample link remains preserved in its HTML.
 - Automatic height includes bulleted/numbered list buttons and indent/outdent
   controls. Try switching the list type, nesting an item, and leaving an empty
   item with Enter. The sample lists remain in the fixed-height HTML as well.
@@ -89,6 +93,8 @@ These checks require manual execution on Android/iOS:
   selection, source editing, long-content growth, and caret visibility after
   styling. HTML output must not contain the custom stylesheet or wrapper UI.
 - HTML retrieval includes the latest edits, including source-editing changes.
+- Add, edit, and remove links in automatic-height mode. Verify the link balloon
+  stays usable with the keyboard open and that Get HTML contains the current URL.
 - Create, switch, nest, and remove lists. Check Enter/Backspace behavior, keyboard
   and parent scrolling in automatic height, and the `<ul>`/`<ol>` output in Get HTML.
 - Fixed height scrolls inside the editor; automatic height grows and the parent

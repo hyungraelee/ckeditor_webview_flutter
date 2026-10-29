@@ -113,7 +113,7 @@ for (const id of ids) {
   fs.writeFileSync(destination, result.outputText);
   counts[count]++;
 }
-if (counts.ckeditor !== 452 || counts.vanillaColorful !== 12 || counts.lodashEs !== 191) {
+if (counts.ckeditor !== 467 || counts.vanillaColorful !== 12 || counts.lodashEs !== 198) {
   throw new Error('Source coverage differs from the audited bundle; repeat the inventory audit');
 }
 // Report the rest of the publication too, without claiming a full npm rebuild.

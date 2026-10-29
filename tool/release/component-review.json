@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "status": "component roles, license declarations, and GPL source mappings",
   "expectedNpmInputs": 487,
-  "expectedEmittedInputs": 31,
+  "expectedEmittedInputs": 32,
   "licenseFamilies": [
     "GPL-2.0-or-later",
     "MIT",

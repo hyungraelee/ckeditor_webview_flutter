@@ -117,11 +117,11 @@ The source regeneration step:
 
 1. Restores original CKEditor CSS, SVG icons, and PO translation inputs from
    upstream, including theme importer resources outside the emitted JS list.
-2. Generates the 452 audited CKEditor JavaScript inputs with TypeScript 5.0.4
+2. Generates the 467 audited CKEditor JavaScript inputs with TypeScript 5.0.4
    and upstream compiler options.
 3. Runs vanilla-colorful's upstream CSS generation script, then generates its
    12 audited JavaScript inputs with TypeScript 4.8.4 and upstream options.
-4. Generates the 191 audited Lodash ES modules from the 4.17.21 development
+4. Generates the 198 audited Lodash ES modules from the 4.17.21 development
    source using the pinned generator and verifies them against the exact
    publication commit and installed npm inputs.
 5. Requires every restored/generated input to equal the locked npm input,

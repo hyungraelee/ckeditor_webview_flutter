@@ -45,7 +45,7 @@ Preparation preserves the generator and exact helper tarballs. Rebuilding
 installs from those tarballs with lifecycle hooks disabled and a fresh npm cache,
 then invokes the generator before rebuilding the editor.
 
-The observed output contains 640 JavaScript modules. All 191 modules in
+The observed output contains 640 JavaScript modules. All 198 modules in
 `bundled-module-identifiers.json` match both preserved publication sources and
 the locked npm inputs byte for byte. The rebuild installs these regenerated
 modules into the disposable editor build and rejects any audited difference

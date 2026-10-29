@@ -156,6 +156,7 @@ class _EditorPageState extends State<EditorPage> {
                         '|',
                         'bold',
                         'italic',
+                        'link',
                         '|',
                         'bulletedList',
                         'numberedList',
@@ -172,6 +173,7 @@ class _EditorPageState extends State<EditorPage> {
                 // Fixed height keeps defaults; automatic height shows config.
                 config: widget.autoHeight
                     ? const {
+                        'link': {'defaultProtocol': 'https://'},
                         'fontFamily': {
                           'options': [
                             'default',

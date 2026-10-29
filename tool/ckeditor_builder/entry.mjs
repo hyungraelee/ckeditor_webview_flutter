@@ -6,6 +6,6 @@ export {
   Bold, Italic, Underline, Strikethrough, Subscript, Superscript,
   FontFamily, FontSize, FontColor, FontBackgroundColor, Highlight,
   HorizontalLine, ShowBlocks, SpecialCharacters, SpecialCharactersEssentials,
-  Alignment, Indent, IndentBlock, List
+  Alignment, Indent, IndentBlock, Link, List
 } from 'ckeditor5';
 import 'ckeditor5/ckeditor5.css';
