@@ -1,70 +1,62 @@
 # Bundled editor source release
 
-Maintainer tools and evidence for the CKEditor **41.4.1** bundle distributed in
+Maintainer tools for the CKEditor **41.4.1** bundle distributed in
 `ckeditor_webview_flutter`. Consumer setup belongs in the root [README](../../README.md).
 
-## Current source candidate
+## Source archive
 
-The candidate preserves package sources, upstream modification sources, notices,
-and exact npm build inputs. It is approximately **88 MiB**, separate from the
-Flutter package and runtime assets. A repository snapshot alone does not contain
-these third-party inputs. No versioned source release has been uploaded yet.
+The source archive preserves package sources, upstream modification sources,
+notices, and exact npm build inputs. It is approximately **88 MiB**, separate
+from the Flutter package and runtime assets.
 
 - 507 pinned inputs, including 487 npm tarballs; 22 optional platform inputs are
   omitted from the verified offline build.
-- 30 npm packages emitted in the editor and 457 additional retained npm inputs.
+- 32 npm packages emitted in the editor and 455 additional retained npm inputs.
 - All 66 retained GPL npm inputs have source-presence mappings.
 - Notice inventory: 476 inputs with notice files, six with embedded notices,
-  and five with preserved upstream notices. The acorn 1.9.0 notice assessment
-  includes the owner's pre-release authorization and unchanged MIT notice.
-- Scoped regeneration verifies 438 CKEditor, 12 vanilla-colorful, and 191 Lodash
+  and five with preserved upstream notices.
+- Regeneration verifies 467 CKEditor, 12 vanilla-colorful, and 198 Lodash
   JavaScript inputs; 2,416 CKEditor style/icon/translation resources; and nine
   webpack CLI/component JavaScript inputs. The offline bundle rebuild compares
   seven generated editor assets byte for byte.
 
-These checks establish the documented generation path and evidence scope, not
-complete historical npm release reproduction or blanket license approval.
-The original HSV grant was not recovered in the inspected source material;
-retain the existing provenance record and upstream notices. The scoped Lodash
-comparison does not reproduce six other publication modules, and compiler
-bootstrap reproduction remains unverified. Detailed evidence and limits remain
-in the records below.
+The rebuild covers the selected editor inputs. Six other Lodash publication
+modules are outside the reproduced output, and TypeScript compiler bootstrap
+reproduction is outside the build scope.
 
-## Evidence
+## Reference
 
 | Record | Scope |
 | --- | --- |
-| [Bundled inventory](bundled-source-inventory.json) | Emitted packages, module inputs, exact bundle/CSS and lock hashes |
-| [Source inputs](source-inputs.json) | Pinned archives, provenance, source selection, and review limits |
-| [Notice review](NOTICE_REVIEW.md) | Preserved notices and source comparisons |
-| [Lodash generation](LODASH_GENERATION.md) | Preferred sources and scoped ES-module regeneration |
-| [Color source review](COLOR_SOURCE_REVIEW.md) | Historical copied-code relationships and limits |
-| [Build-tool source review](BUILD_TOOL_SOURCE_REVIEW.md) | Compiler/tool sources and CLI generation |
-| [Component distribution review](COMPONENT_DISTRIBUTION_REVIEW.md) | Emitted versus retained inputs, license families, and GPL source mappings |
-| [Permission review](PERMISSION_REVIEW.md) | Acorn owner evidence and inspected HSV source material |
-| [Integration licensing review](INTEGRATION_LICENSE_REVIEW.md) | Pinned official/community comparisons and distribution guidance |
+| [Bundled inventory](bundled-source-inventory.json) | Emitted packages, module inputs, bundle/CSS and lock hashes |
+| [Source inputs](source-inputs.json) | Pinned archives, provenance, source selection, and build scope |
+| [Notice inventory](NOTICE_REVIEW.md) | Preserved notices and source comparisons |
+| [Lodash generation](LODASH_GENERATION.md) | Scoped ES-module regeneration |
+| [Color source comparison](COLOR_SOURCE_REVIEW.md) | Pinned reference sources and initializer comparison |
+| [Build-tool sources](BUILD_TOOL_SOURCE_REVIEW.md) | Compiler/tool sources and CLI generation |
+| [Distributed components](COMPONENT_DISTRIBUTION_REVIEW.md) | Component roles, license declarations, and GPL source mappings |
 | [Source attributions](SOURCE_ATTRIBUTIONS.md) | Supplemental attribution for source-archive inputs |
 
 ## Prepare and publish
 
 Use [SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) to prepare, audit, and rebuild a
-candidate. Regenerate the final source artifact from the clean release commit;
-working-tree candidates are for review. Keep the checksum alongside the archive.
+candidate. Generate the final source artifact from the clean release commit
+and keep the checksum alongside the archive.
 
-Follow [MANUAL_RELEASE.md](MANUAL_RELEASE.md) for the 0.1.0 artifact names,
-versioned source URLs, anonymous download verification, and manual pub.dev upload.
-The links staged in the root README and third-party notices become usable only
-after the GitHub release assets are published. Verify them before pub.dev upload.
-Retain source access for every distributed release.
+Use [AUTOMATED_RELEASE.md](AUTOMATED_RELEASE.md) for release preparation,
+merged-PR tagging, source verification, and OIDC publication.
+[MANUAL_RELEASE.md](MANUAL_RELEASE.md) documents the original 0.1.0 procedure
+and manual recovery. Source archive and checksum links are listed in the root
+README and third-party notices. Verify anonymous access before pub.dev upload
+and retain source access for every distributed release.
 
-Run `fvm flutter pub publish --dry-run` and inspect its actual file list.
-`.pubignore` overrides the corresponding `.gitignore`; keep required JavaScript,
-licenses, optional builder inputs, and documentation while excluding local
+Run `fvm flutter pub publish --dry-run` and inspect its file list.
+`.pubignore` overrides the corresponding `.gitignore`; include required
+JavaScript, licenses, builder inputs, and documentation. Exclude local
 instructions, credentials, installed dependencies, caches, and generated source
-archives. The large source archive must not become a Flutter asset or pub upload.
+archives. The large source archive is a separate release download.
 
-Tests and package dry-runs do not establish native WebView behavior or HTML
-compatibility with a web custom build. Native checks and repeated Web → App → Web
-round trips remain separate. This inventory covers the bundled 41.4.1 editor;
-optional engines generated by consuming applications require their own source
-and notice arrangements.
+Native WebView behavior and Web → App → Web HTML round trips require device
+validation. This inventory covers the bundled 41.4.1 editor; optional engines
+generated by consuming applications require their own source and notice
+arrangements.

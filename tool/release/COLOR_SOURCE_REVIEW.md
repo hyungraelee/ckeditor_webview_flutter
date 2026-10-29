@@ -1,10 +1,7 @@
-# Copied color UI source relationships
+# Color UI source comparison
 
-This maintainer review narrows the source relationships acknowledged by
-vanilla-colorful 0.7.2. It preserves historical modification sources and
-recomputable comparisons without changing the distributed editor. It does
-not establish permission for the original HSV conversion implementation or
-identify a unique historical commit selected by the person who copied it.
+Pinned reference sources and reproducible initializer comparisons for
+vanilla-colorful 0.7.2.
 
 ## Preserved source chain
 
@@ -21,14 +18,6 @@ the editor distribution. The earlier vanilla-colorful source adds no runtime
 dependency. Its declared package version is 0.0.0; it is a development commit,
 not an additional engine release. Source URLs, original hashes, and selections
 are pinned in [source-inputs.json](source-inputs.json).
-
-Vanilla-colorful's initial color helpers were added on 2020-08-27. Its
-acknowledgments explicitly credit react-colorful, the TypeScript rewrite by
-Ryan Christian, color-fns, and the HSV repost. The
-[React TypeScript conversion commit](https://github.com/omgovich/react-colorful/commit/7dd80f931f914f8bea09b38ef98298d364786cb2)
-and [early MIT-licensed port](https://github.com/web-padawan/vanilla-colorful/commit/261e1c227b8dc04753e8cc04640b934d433c2d91)
-provide source snapshots for comparison. They do not uniquely establish which
-earlier React branch/revision was copied before those commits.
 
 ## Recomputable comparison
 
@@ -66,42 +55,3 @@ names/signatures, short-hex handling, and concatenation rather than array joinin
 These are documented relationships, not byte equality or a claim that the
 unchanged 3.2.0 functions were copied verbatim. Exact selected copying commits
 remain unestablished. Complete reference sources remain available for review.
-
-## HSV permission remains unresolved
-
-Both libraries cite the [Axon Flux HSV repost](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c),
-which credits an earlier implementation at mjijackson.com and contains conversion
-code without an explicit license. The original site link and the related author
-repository/gist could not be recovered during the initial review. The subsequent
-[permission follow-up](PERMISSION_REVIEW.md) recovered an author-account Gist,
-but found no explicit grant in the inspected code or existing comments. The React
-and port functions use adapted scaling, indexing, and rounding; this relationship and
-their own MIT notices do not independently establish the original author's grant.
-
-No new copyright year, permission text, or license is inferred from the repost,
-code similarity, an unrelated implementation, or a downstream package license.
-Retain the existing notices and acknowledgments. Before publication, recover
-an applicable original grant or obtain clarification from the relevant author
-or maintainer. Any replacement of the distributed conversion code requires a
-separate reviewed change and renewed bundle/device verification.
-
-The remaining build-tool source-form review, final
-release-checkout regeneration, and persistent public source downloads remain
-separate release work. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
-
-## Validation
-
-On the previously documented macOS/Python/Node/npm environment, the source
-review verified eleven file digests and all thirteen initializer structures.
-Manual rejection checks caught changed source bytes and changed initializer
-structure even when the expected file digest was updated in an isolated review.
-Presentation-only comment changes retained the structural match. An older
-candidate's notice report remains recomputable by the updated auditor.
-
-Offline preparation reproduced an identical candidate from verified cache
-inputs. A fresh offline source rebuild matched all seven generated editor
-outputs. The color-review candidate contained 501 pinned inputs and 120 package files,
-approximately 60 MiB compressed, separate from the Flutter runtime package.
-Python/Node/JSON syntax, documentation, and diff checks passed. Package snapshot
-publish dry-run passed with zero warnings, approximately 397 KB compressed;
-archives, caches, dependencies, bytecode, and local instructions were absent.

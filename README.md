@@ -21,7 +21,7 @@ Requires Flutter **3.27.0+** and Dart **3.6.0+** on Android or iOS.
 
 ```yaml
 dependencies:
-  ckeditor_webview_flutter: ^0.1.0
+  ckeditor_webview_flutter: ^0.2.0
 ```
 
 Run `flutter pub get`. Package assets are registered automatically; there is
@@ -124,7 +124,7 @@ buttons. Supported names are `heading`, `sourceEditing`, `bold`, `italic`,
 `underline`, `strikethrough`, `fontFamily`, `fontSize`, `fontColor`,
 `fontBackgroundColor`, `highlight`, `subscript`, `superscript`, `horizontalLine`,
 `showBlocks`, `specialCharacters`, `alignment`, `outdent`, `indent`, `undo`,
-`redo`, and the `|` group separator. The `toolbarItems` API documentation
+`redo`, `link`, `bulletedList`, `numberedList`, and the `|` group separator. The `toolbarItems` API documentation
 describes each item. Names are case-sensitive; unsupported names report
 `invalid_toolbar_items` through `onError`.
 
@@ -134,6 +134,57 @@ Hiding buttons does not remove plugins or strip their supported HTML. The
 option is applied when the editor is created, including recreation/retry.
 Changes after initialization take effect on the next editor creation. Treat
 supplied lists as immutable.
+
+### Links
+
+Add `link` to `toolbarItems` to insert, edit, and remove hyperlinks using
+CKEditor's link UI. It is opt-in; the default toolbar is unchanged.
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  toolbarItems: const ['bold', 'italic', '|', 'link', '|', 'sourceEditing'],
+  config: const {'link': {'defaultProtocol': 'https://'}},
+)
+```
+
+Select text and use the link button, or place the caret in an existing link to
+edit its URL or remove it. Links are stored as HTML `<a href="…">` elements and
+are preserved even when the link button is hidden. Link settings follow the
+selected engine's [link configuration](https://ckeditor.com/docs/ckeditor5/latest/features/link.html).
+JSON settings such as `defaultProtocol` and declarative decorators are supported;
+function callbacks are not. Automatic URL conversion is disabled to preserve
+existing text-entry behavior. Navigation remains subject to the package's WebView policy.
+
+For generated `editorAsset` builds, update this package, run `flutter clean`,
+and rebuild before using `link` or `config.link`.
+
+### Lists
+
+Add `bulletedList` and `numberedList` to `toolbarItems` to create, switch, or
+remove lists. The default toolbar is unchanged.
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  toolbarItems: const [
+    'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'sourceEditing',
+  ],
+)
+```
+
+Select paragraphs to apply a list, or use the active list button again to return
+to paragraphs. The existing indent/outdent buttons nest and unnest list items.
+Enter continues a list; Enter on an empty item leaves it or reduces its nesting.
+Typed `- ` and `1. ` remain plain text; automatic list formatting is not enabled.
+
+Supported `<ul>`, `<ol>`, and `<li>` content is preserved even when the list buttons
+are hidden. Storage uses CKEditor's HTML output, which may normalize paragraph
+wrappers and list structure. Custom list styles, start numbers, and to-do lists
+are not included. See CKEditor's [list documentation](https://ckeditor.com/docs/ckeditor5/latest/features/lists/lists.html).
+
+For generated `editorAsset` builds, update this package, run `flutter clean`,
+and rebuild before using the list buttons.
 
 ## Feature configuration
 
@@ -179,6 +230,7 @@ Supported top-level keys:
 | `indentBlock` | Indentation offset/unit or configured classes |
 | `specialCharacters` | Order of included character groups |
 | `placeholder` | Empty-editor placeholder text |
+| `link` | Default URL protocol and declarative link decorators |
 
 Null or an empty map retains defaults. Omitted settings remain at CKEditor
 defaults. Feature sections are passed directly to CKEditor, which handles their
@@ -357,7 +409,7 @@ assets so they support the current widget options.
 produced by `editor.getData()`, including current source edits. The package does
 not convert it to Markdown, Delta, or a custom document format.
 
-Included features: paragraph, heading, source editing, bold, italic, underline,
+Included features: paragraph, heading, source editing, hyperlinks, bulleted and numbered lists, bold, italic, underline,
 strikethrough, font family/size/color/background, highlight, subscript,
 superscript, horizontal line, show blocks, special characters, alignment, and
 block indentation. Images, uploads, and General HTML Support are not enabled.
@@ -388,35 +440,20 @@ activity's `windowSoftInputMode="adjustResize"` when input is covered.
 
 ## License
 
-**GPL-2.0-or-later**: GNU General Public License version 2 or, at your option,
-any later version. See `LICENSE` and `THIRD_PARTY_NOTICES.md`. The bundled
-CKEditor is GPL-2.0-or-later; its original notices are preserved.
+This package is licensed under **GPL-2.0-or-later**. See [LICENSE](LICENSE)
+for the full text and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for
+component notices. CKSource commercial agreements apply to the covered CKEditor
+software and do not change this Flutter package's license.
 
-This Flutter integration is offered under GPL-2.0-or-later; it does not include
-a commercial license or exception for the integration code. A CKEditor
-commercial agreement or `licenseKey` applies to the CKSource software covered
-by that agreement and does not replace this package's GPL terms. A closed-source
-app must address the terms of both components; purchasing an editor key alone
-does not grant permission to use this package under different terms.
+When redistributing GPL-covered code, preserve the applicable notices and provide
+the corresponding source for the distributed version, including modifications
+and build inputs. App distributors are responsible for their app-specific source
+and notice requirements.
 
-GPL-compliant use may be commercial; charging a fee does not waive GPL terms.
-The bundled editor and locally generated editors use self-hosted distribution.
-If relying on CKSource commercial terms, the agreement must cover the selected
-engine, features, and deployment or redistribution model; a Cloud/CDN-only plan
-is not a self-hosted entitlement.
-See CKEditor's [licensing guide](https://ckeditor.com/docs/ckeditor5/latest/getting-started/licensing/license-and-legal.html).
-UI translation downloads do not change the editor's local distribution model.
+Bundled-editor source downloads for package **0.2.0**:
 
-When distributing GPL-covered code, retain applicable copyright/license notices
-and provide the required corresponding source for the actual distributed version,
-including local changes and build inputs. Preserve source access for distributed
-releases; build recipes and upstream links alone are insufficient. App-specific
-source distribution remains the app distributor's responsibility.
-
-Bundled-editor source downloads for package **0.1.0**:
-
-- [Source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz)
-- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.1.0/ckeditor_webview_flutter-0.1.0-sources.tar.gz.sha256)
+- [Source archive](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.2.0/ckeditor_webview_flutter-0.2.0-sources.tar.gz)
+- [SHA-256 checksum](https://github.com/hyungraelee/ckeditor_webview_flutter/releases/download/v0.2.0/ckeditor_webview_flutter-0.2.0-sources.tar.gz.sha256)
 
 The archive contains the package sources, pinned upstream sources, notices, and
 offline rebuild inputs for the bundled 41.4.1 editor. It is a separate download

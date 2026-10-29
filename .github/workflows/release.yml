@@ -1,0 +1,91 @@
+name: Publish release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: macos-14
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      id-token: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '23.9.0'
+      - name: Use the verified npm rebuild version
+        run: npm install --global npm@10.9.2
+      - name: Verify tag, release PR, and source links
+        id: metadata
+        run: node tool/release/github_release.cjs validate-tag
+      - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2 # v2
+        with:
+          flutter-version: '3.27.0'
+          cache: true
+      - name: Analyze and test release checkout
+        run: |
+          node --test test/*_test.cjs
+          python3 -m unittest discover -s test -p '*_test.py'
+          flutter pub get
+          flutter analyze
+          flutter test
+          cd example
+          flutter pub get
+          flutter analyze
+      - name: Check publication without uploading
+        run: flutter pub publish --dry-run
+      - name: Prepare and audit bundled-editor sources
+        env:
+          SOURCE_ARCHIVE: ${{ steps.metadata.outputs.archive }}
+          RELEASE_COMMIT: ${{ steps.metadata.outputs.commit }}
+        run: |
+          python3 tool/release/prepare_sources.py --output ".dart_tool/release/$SOURCE_ARCHIVE"
+          python3 tool/release/audit_source_notices.py ".dart_tool/release/$SOURCE_ARCHIVE"
+          python3 tool/release/verify_release.py sources
+      - name: Rebuild editor from the prepared sources offline
+        env:
+          SOURCE_ARCHIVE: ${{ steps.metadata.outputs.archive }}
+        run: |
+          python3 tool/release/rebuild_sources.py ".dart_tool/release/$SOURCE_ARCHIVE" --work "$RUNNER_TEMP/source-rebuild"
+          cp "$RUNNER_TEMP/source-rebuild/REBUILD_REPORT.json" .dart_tool/release/REBUILD_REPORT.json
+      - name: Publish sources and verify anonymous downloads
+        run: node tool/release/github_release.cjs publish-sources
+      - name: Check whether this version is already published
+        id: hosted
+        run: python3 tool/release/verify_release.py published
+      - name: Configure temporary pub.dev OIDC credentials
+        if: steps.hosted.outputs.published == 'false'
+        uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d # v1
+        with:
+          sdk: '3.6.0'
+      - name: Publish package to pub.dev
+        if: steps.hosted.outputs.published == 'false'
+        run: flutter pub publish --force
+      - name: Verify hosted package against the release checkout
+        run: python3 tool/release/verify_release.py hosted
+      - name: Retain release verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: .dart_tool/release/*.json
+          if-no-files-found: ignore
+          retention-days: 90

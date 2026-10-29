@@ -45,7 +45,7 @@ Preparation preserves the generator and exact helper tarballs. Rebuilding
 installs from those tarballs with lifecycle hooks disabled and a fresh npm cache,
 then invokes the generator before rebuilding the editor.
 
-The observed output contains 640 JavaScript modules. All 191 modules in
+The observed output contains 640 JavaScript modules. All 198 modules in
 `bundled-module-identifiers.json` match both preserved publication sources and
 the locked npm inputs byte for byte. The rebuild installs these regenerated
 modules into the disposable editor build and rejects any audited difference
@@ -65,7 +65,6 @@ the distributed bundle's inputs and does not establish complete reproduction
 of all published Lodash files. Repeat the inventory and source comparison if
 the editor build begins using other Lodash modules.
 
-The source candidate remains a local artifact. Copied-code permission/notice
-questions, complete notices for two build inputs, build-tool source forms,
-approved release-checkout regeneration, and persistent public source access
-remain separate publication work; see [NOTICE_REVIEW.md](NOTICE_REVIEW.md).
+Generate and verify the final archive from the clean release checkout. Follow
+[SOURCE_ARCHIVE.md](SOURCE_ARCHIVE.md) for source preparation and
+[AUTOMATED_RELEASE.md](AUTOMATED_RELEASE.md) for publication.

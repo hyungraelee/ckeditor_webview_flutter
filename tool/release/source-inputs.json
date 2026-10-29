@@ -263,10 +263,8 @@
     }
   ],
   "unresolved": [
-    "The verified Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent, so complete historical npm release reproduction remains unverified.",
-    "Thirteen early vanilla-colorful/react-colorful conversion initializers match after documented normalization; color-fns source lineage is retained. Exact selected copying commits and original HSV permission remain unresolved.",
-    "Included build-tool source forms and notice applicability require final release review; automated notice inventory is not legal approval.",
-    "Official TypeScript compiler release sources are retained, but compiler-to-npm bootstrap reproduction and exhaustive transitive build-tool source review remain unverified.",
-    "Public source download access has not been provided."
+    "The Lodash generator reproduces all 198 audited ES modules; six other published modules differ or are absent. Complete historical npm release reproduction is outside the verified scope.",
+    "The historical color source comparison covers initializer structure only; exact selected copying commits and general behavioral equivalence are not established.",
+    "Official TypeScript compiler release sources are retained; compiler bootstrap and complete upstream build-tool release reproduction are outside the verified scope."
   ]
 }

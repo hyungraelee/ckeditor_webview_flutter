@@ -73,7 +73,7 @@ The archive contains:
   lockfiles, tests/example sources, and source preparation/rebuild scripts.
 - `inputs/`: original, integrity-verified npm tarballs and selected upstream sources.
 - `SOURCE_MANIFEST.json`: source provenance, installation mapping, package file
-  checksums, working-tree status, and unresolved release review items. Selected
+  checksums, working-tree status, and build verification limits. Selected
   archives record the original upstream SHA-256/size, exclusion rules, retained
   file paths/digests/sizes, excluded file count, and selected archive SHA-256/size.
   Omitted optional npm inputs are listed separately; original lockfiles remain
@@ -81,7 +81,7 @@ The archive contains:
 - `SOURCE_NOTICE_REPORT.json`: recomputable evidence for the 487 npm inputs,
   targeted embedded/upstream notices, copied-code reference notices, source
   comparisons, component roles/GPL source-presence mappings, supplemental source
-  attribution, and remaining review. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md) and
+  attribution, and source mappings. See [NOTICE_REVIEW.md](NOTICE_REVIEW.md) and
   [COMPONENT_DISTRIBUTION_REVIEW.md](COMPONENT_DISTRIBUTION_REVIEW.md).
 
 ## Rebuild in a fresh environment
@@ -108,9 +108,8 @@ with a new cache; lifecycle hooks are disabled. No dependency downloads are
 needed for the verified build path.
 
 Before generation, the rebuild checks eleven copied-code source/notice files
-and compares thirteen early React/port conversion initializers. The original HSV
-permission remains unresolved; the comparison is not license approval. The
-rebuild also regenerates nine webpack CLI/component JavaScript inputs with
+and compares thirteen early React/port conversion initializers. The rebuild also
+regenerates nine webpack CLI/component JavaScript inputs with
 TypeScript 4.8.4 and requires byte equality before using them in the bundle build.
 This does not rebuild the TypeScript compilers themselves.
 
@@ -118,11 +117,11 @@ The source regeneration step:
 
 1. Restores original CKEditor CSS, SVG icons, and PO translation inputs from
    upstream, including theme importer resources outside the emitted JS list.
-2. Generates the 438 audited CKEditor JavaScript inputs with TypeScript 5.0.4
+2. Generates the 467 audited CKEditor JavaScript inputs with TypeScript 5.0.4
    and upstream compiler options.
 3. Runs vanilla-colorful's upstream CSS generation script, then generates its
    12 audited JavaScript inputs with TypeScript 4.8.4 and upstream options.
-4. Generates the 191 audited Lodash ES modules from the 4.17.21 development
+4. Generates the 198 audited Lodash ES modules from the 4.17.21 development
    source using the pinned generator and verifies them against the exact
    publication commit and installed npm inputs.
 5. Requires every restored/generated input to equal the locked npm input,
@@ -143,32 +142,22 @@ The workspace retains `SOURCE_GENERATION_REPORT.json`,
 `LODASH_GENERATION_REPORT.json`, `COLOR_SOURCE_REVIEW_REPORT.json`,
 `BUILD_TOOL_SOURCE_REPORT.json`, and `REBUILD_REPORT.json`
 with generation counts, environment, asset hashes, archive checksum, and
-remaining review items. Treat a failed comparison as a release preparation
+build verification limits. Treat a failed comparison as a release preparation
 failure; do not replace the distributed bundle merely to obtain matching hashes.
 `matchedAssets` records the seven regenerated outputs; `preservedAssets` records
 the three hand-authored editor files checked unchanged during rebuilding.
 
-## Review limits and final publication checks
+## Verification scope and publication
 
-The candidate proves a scoped source-to-bundle rebuild path, not completion of
-all redistribution or corresponding-source obligations. Recorded limits:
-
-- The exact copied revisions of vanilla-colorful's color-fns and react-colorful
-  code and the original HSV grant remain unconfirmed. Upstream acknowledgments
-  and additional reference MIT notices are included. The preserved early React/port
-  relationship is verified as described in [COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md). The cited
-  [HSV conversion page](https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c)
-  is a repost and does not establish an explicit license for the copied code.
-- The verified Lodash generator reproduces all audited ES inputs. Six other
-  publication modules differ or are absent; do not claim a complete historical
-  npm release rebuild. See [the scoped comparison](LODASH_GENERATION.md).
-- Review notices and source forms of included build tools and dependency files.
-  Of the eleven retained inputs without standalone notice filenames, six have
-  complete embedded notices and five have pinned upstream notices preserved.
-  The [permission review](PERMISSION_REVIEW.md) records acorn's pre-release owner
-  authorization and original MIT notice. The inventory does not approve source forms or notice applicability
-  for every included file. See [the targeted review](NOTICE_REVIEW.md).
-  No generated candidate is automatically approved for publication.
+The build reproduces the selected editor inputs and resulting bundle. The
+historical color source comparison covers initializer structure; it does not
+identify the exact copied revisions or establish general behavioral equivalence.
+The Lodash recipe reproduces all audited ES inputs, while six other publication
+modules differ or are absent. The TypeScript compilers themselves and complete
+upstream tool releases are outside the reproduced scope. See
+[COLOR_SOURCE_REVIEW.md](COLOR_SOURCE_REVIEW.md),
+[LODASH_GENERATION.md](LODASH_GENERATION.md), and
+[BUILD_TOOL_SOURCE_REVIEW.md](BUILD_TOOL_SOURCE_REVIEW.md).
 
 Before uploading the package, follow [MANUAL_RELEASE.md](MANUAL_RELEASE.md):
 

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "status": "component-role and source-presence evidence; final applicability review pending",
+  "status": "component roles, license declarations, and GPL source mappings",
   "expectedNpmInputs": 487,
-  "expectedEmittedInputs": 30,
+  "expectedEmittedInputs": 32,
   "licenseFamilies": [
     "GPL-2.0-or-later",
     "MIT",
