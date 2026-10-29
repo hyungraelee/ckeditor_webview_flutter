@@ -263,7 +263,7 @@
     }
   ],
   "unresolved": [
-    "The Lodash generator reproduces all 191 audited ES modules; six other published modules differ or are absent. Complete historical npm release reproduction is outside the verified scope.",
+    "The Lodash generator reproduces all 198 audited ES modules; six other published modules differ or are absent. Complete historical npm release reproduction is outside the verified scope.",
     "The historical color source comparison covers initializer structure only; exact selected copying commits and general behavioral equivalence are not established.",
     "Official TypeScript compiler release sources are retained; compiler bootstrap and complete upstream build-tool release reproduction are outside the verified scope."
   ]

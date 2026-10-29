@@ -73,6 +73,7 @@ void main() {
         'supportAllValues': true
       },
       'placeholder': 'Write "here"\n한국어',
+      'link': {'defaultProtocol': 'https://'},
     };
     session.attach(initialHtml: html);
     await session.initialize(config: config, customCss: css);

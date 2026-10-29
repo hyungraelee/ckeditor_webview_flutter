@@ -124,7 +124,7 @@ buttons. Supported names are `heading`, `sourceEditing`, `bold`, `italic`,
 `underline`, `strikethrough`, `fontFamily`, `fontSize`, `fontColor`,
 `fontBackgroundColor`, `highlight`, `subscript`, `superscript`, `horizontalLine`,
 `showBlocks`, `specialCharacters`, `alignment`, `outdent`, `indent`, `undo`,
-`redo`, and the `|` group separator. The `toolbarItems` API documentation
+`redo`, `link`, and the `|` group separator. The `toolbarItems` API documentation
 describes each item. Names are case-sensitive; unsupported names report
 `invalid_toolbar_items` through `onError`.
 
@@ -134,6 +134,30 @@ Hiding buttons does not remove plugins or strip their supported HTML. The
 option is applied when the editor is created, including recreation/retry.
 Changes after initialization take effect on the next editor creation. Treat
 supplied lists as immutable.
+
+### Links
+
+Add `link` to `toolbarItems` to insert, edit, and remove hyperlinks using
+CKEditor's link UI. It is opt-in; the default toolbar is unchanged.
+
+```dart
+CkEditorWebView(
+  controller: editorController,
+  toolbarItems: const ['bold', 'italic', '|', 'link', '|', 'sourceEditing'],
+  config: const {'link': {'defaultProtocol': 'https://'}},
+)
+```
+
+Select text and use the link button, or place the caret in an existing link to
+edit its URL or remove it. Links are stored as HTML `<a href="…">` elements and
+are preserved even when the link button is hidden. Link settings follow the
+selected engine's [link configuration](https://ckeditor.com/docs/ckeditor5/latest/features/link.html).
+JSON settings such as `defaultProtocol` and declarative decorators are supported;
+function callbacks are not. Automatic URL conversion is disabled to preserve
+existing text-entry behavior. Navigation remains subject to the package's WebView policy.
+
+For generated `editorAsset` builds, update this package, run `flutter clean`,
+and rebuild before using `link` or `config.link`.
 
 ## Feature configuration
 
@@ -179,6 +203,7 @@ Supported top-level keys:
 | `indentBlock` | Indentation offset/unit or configured classes |
 | `specialCharacters` | Order of included character groups |
 | `placeholder` | Empty-editor placeholder text |
+| `link` | Default URL protocol and declarative link decorators |
 
 Null or an empty map retains defaults. Omitted settings remain at CKEditor
 defaults. Feature sections are passed directly to CKEditor, which handles their
@@ -357,7 +382,7 @@ assets so they support the current widget options.
 produced by `editor.getData()`, including current source edits. The package does
 not convert it to Markdown, Delta, or a custom document format.
 
-Included features: paragraph, heading, source editing, bold, italic, underline,
+Included features: paragraph, heading, source editing, hyperlinks, bold, italic, underline,
 strikethrough, font family/size/color/background, highlight, subscript,
 superscript, horizontal line, show blocks, special characters, alignment, and
 block indentation. Images, uploads, and General HTML Support are not enabled.

@@ -21,7 +21,7 @@
     'FontFamily', 'FontSize', 'FontColor', 'FontBackgroundColor', 'Highlight',
     'Subscript', 'Superscript', 'HorizontalLine', 'ShowBlocks',
     'SpecialCharacters', 'SpecialCharactersEssentials',
-    'Alignment', 'Indent', 'IndentBlock'
+    'Alignment', 'Indent', 'IndentBlock', 'Link'
   ]);
   // Matches the supplied web toolbar. Overflow stays in CKEditor's More menu.
   const TOOLBAR = Object.freeze([
@@ -32,11 +32,11 @@
     'horizontalLine', 'showBlocks', 'specialCharacters', '|',
     'alignment', 'outdent', 'indent'
   ]);
-  const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo']);
+  const SUPPORTED_TOOLBAR_ITEMS = new Set([...TOOLBAR, 'undo', 'redo', 'link']);
   // Only configure features already included in both engine build recipes.
   const SUPPORTED_CONFIG_KEYS = new Set([
     'heading', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
-    'highlight', 'alignment', 'indentBlock', 'specialCharacters', 'placeholder'
+    'highlight', 'alignment', 'indentBlock', 'specialCharacters', 'placeholder', 'link'
   ]);
 
   function getFeatureConfig(value) {
@@ -134,7 +134,9 @@
         caretTop = Math.round(rect.top);
         caretBottom = Math.round(rect.bottom);
       }
-      const captureGestures = !!editorElement.querySelector('[aria-expanded="true"]') ||
+      // Contextual balloons live outside editorElement, unlike toolbar menus.
+      const captureGestures = !!editor.plugins.get('ContextualBalloon').visibleView ||
+        !!editorElement.querySelector('[aria-expanded="true"]') ||
         !!(inEditor && !selection.isCollapsed);
       const data = {
         height: Math.ceil(editorElement.getBoundingClientRect().height),
@@ -153,6 +155,9 @@
     layoutFrame = null;
     if (resizeObserver) resizeObserver.disconnect();
     if (mutationObserver) mutationObserver.disconnect();
+    if (autoHeight && editor) {
+      editor.plugins.get('ContextualBalloon').off('change:visibleView', scheduleLayout);
+    }
     document.removeEventListener('selectionchange', scheduleLayout);
     window.removeEventListener('resize', scheduleLayout);
   }
@@ -167,6 +172,7 @@
       attributeFilter: ['aria-expanded']
     });
     editor.ui.on('update', scheduleLayout);
+    editor.plugins.get('ContextualBalloon').on('change:visibleView', scheduleLayout);
     document.addEventListener('selectionchange', scheduleLayout);
     window.addEventListener('resize', scheduleLayout);
     scheduleLayout();
@@ -337,6 +343,11 @@
         return;
       }
       editor = instance;
+      // Link includes AutoLink upstream. Keep URL typing/paste behavior unchanged;
+      // this integration exposes manual link editing through the link UI.
+      if (instance.plugins.has('AutoLink')) {
+        instance.plugins.get('AutoLink').forceDisabled('flutter-manual-links');
+      }
       if (readOnly) instance.enableReadOnlyMode(READ_ONLY_LOCK);
       lastEmittedHtml = instance.getData();
       instance.model.document.on('change:data', scheduleChange);

@@ -40,6 +40,12 @@ jobs:
           flutter pub get
           flutter analyze
           flutter test
+      - name: Test real editor links
+        if: matrix.flutter == '3.27.0'
+        run: |
+          npm install --prefix "$RUNNER_TEMP/editor-browser-tests" --no-save --ignore-scripts playwright@1.62.1
+          "$RUNNER_TEMP/editor-browser-tests/node_modules/.bin/playwright" install --with-deps --only-shell chromium
+          NODE_PATH="$RUNNER_TEMP/editor-browser-tests/node_modules" node --test tool/ckeditor_build/test-links.cjs
       - name: Analyze example
         working-directory: example
         run: |
